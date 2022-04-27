@@ -1,0 +1,176 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="PR_GetProcessingDataDatatable" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:al="clr-namespace:ARL_Framework.Logging_and_Reporting;assembly=ARL_Framework" xmlns:aq="clr-namespace:ARL_Orchestrator.Queues_and_Transactions;assembly=ARL_Orchestrator" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="DictConfig" Type="InArgument(scg:Dictionary(x:String, x:String))">
+      <x:Property.Attributes>
+        <RequiredArgumentAttribute />
+      </x:Property.Attributes>
+    </x:Property>
+    <x:Property Name="DtProcessingData" Type="OutArgument(sd:DataTable)" />
+    <x:Property Name="QueueName" Type="InArgument(x:String)">
+      <x:Property.Attributes>
+        <RequiredArgumentAttribute />
+      </x:Property.Attributes>
+    </x:Property>
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1229,2972</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>PR_GetProcessingData_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="22">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>UiPath.Core.Activities.Orchestrator</x:String>
+      <x:String>ARL_Orchestrator.Queues_and_Transactions</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>ARL_Framework.Logging_and_Reporting</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="32">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>ARL_Orchestrator</AssemblyReference>
+      <AssemblyReference>ARL_Orchestrator_Expressions_29624074</AssemblyReference>
+      <AssemblyReference>ARL_Orchestrator_Expressions_30742799</AssemblyReference>
+      <AssemblyReference>ARL_Orchestrator_Expressions_39052167</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>System.Linq.Async.Queryable</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>ARL_Framework</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="PR_GetProcessingDataDatatable" sap:VirtualizedContainerService.HintSize="494,2907" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="pathInputFile" />
+      <Variable x:TypeArguments="x:String" Name="sheetNameInputFile" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:Comment DisplayName="Comment-Clear queue" sap:VirtualizedContainerService.HintSize="452,74" sap2010:WorkflowViewState.IdRef="Comment_9" Text="// Clearing queue from new items for QB is necessary to avoid transaction misusage" />
+    <aq:ClearQueue DeletedQueueItems="{x:Null}" DisplayName="Clear queue from any 'New' items" sap:VirtualizedContainerService.HintSize="452,79" sap2010:WorkflowViewState.IdRef="ClearQueue_1" QueueName="[QueueName]" />
+    <ui:Comment DisplayName="Comment-Get datatable" sap:VirtualizedContainerService.HintSize="452,188" sap2010:WorkflowViewState.IdRef="Comment_2" Text="// Datatable is being loaded from source - for example Excel file, webpage, application table etc. Build your own loading datatable logic. Later on each row is being added to the queue. Feel free to add more info to queue item specific content fields. By default only row nr is being added to the queue because it is necessary for fetching data logic" />
+    <Sequence DisplayName="Loading datatable" sap:VirtualizedContainerService.HintSize="452,607" sap2010:WorkflowViewState.IdRef="Sequence_3">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:Comment DisplayName="Comment-Loading datatable" sap:VirtualizedContainerService.HintSize="334,74" sap2010:WorkflowViewState.IdRef="Comment_3" Text="// Build loading datatable logic here. Example logic below" />
+      <Assign DisplayName="Assign input file path" sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[pathInputFile]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">[DictConfig("")]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign DisplayName="Assign input sheet name" sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_3">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[sheetNameInputFile]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">Sheet1</InArgument>
+        </Assign.Value>
+      </Assign>
+      <ui:Comment DisplayName="Comment-Read datatable from file" sap:VirtualizedContainerService.HintSize="334,74" sap2010:WorkflowViewState.IdRef="Comment_8" Text="// If any input filtering criteria is necessary it is recommended to build it here." />
+      <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[DtProcessingData]" DisplayName="Read datatable from file" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ReadRange_1" SheetName="[sheetNameInputFile]" WorkbookPath="[pathInputFile]" />
+    </Sequence>
+    <Sequence DisplayName="Populate queue with all rows from datatable" sap:VirtualizedContainerService.HintSize="452,1707" sap2010:WorkflowViewState.IdRef="Sequence_2">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="x:Int32" Name="indexRow" />
+        <Variable x:TypeArguments="sd:DataTable" Name="dtProcessingDataToUpload" />
+        <Variable x:TypeArguments="sd:DataTable" Name="dtProcessingDatatUploaded" />
+      </Sequence.Variables>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:Comment DisplayName="Comment-populate queue datatable" sap:VirtualizedContainerService.HintSize="410,188" sap2010:WorkflowViewState.IdRef="Comment_6" Text="// Recommended way to upload data from datatable is to use 'Bulk add queue item'. By default only 2 below columns are set. Feel free to add any - according to your needs. Remember to follow columns mapping rules: https://docs.uipath.com/orchestrator/docs/about-queues-and-transactions#section-column-mapping" />
+      <ui:BuildDataTable DataTable="[dtProcessingDataToUpload]" DisplayName="Build datatable to upload" sap:VirtualizedContainerService.HintSize="410,59" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;Index&quot; msdata:Caption=&quot;&quot; type=&quot;xs:int&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Reference&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; default=&quot;128&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;" />
+      <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[DtProcessingData]" DisplayName="For each row" sap:VirtualizedContainerService.HintSize="410,807" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+        <ui:ForEachRow.Body>
+          <ActivityAction x:TypeArguments="sd:DataRow">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="Build datatable to upload" sap:VirtualizedContainerService.HintSize="376,687" sap2010:WorkflowViewState.IdRef="Sequence_4">
+              <Sequence.Variables>
+                <Variable x:TypeArguments="x:String" Name="itemReference" />
+              </Sequence.Variables>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:Comment DisplayName="Comment-Build datatable to upload" sap:VirtualizedContainerService.HintSize="334,170" sap2010:WorkflowViewState.IdRef="Comment_4" Text="// Queue item reference (ItemId) should be as unique as possible to enable item tracking easy. For Excel range it can be for example file name+sheet name+row number.&#xA;&#xA;Remember about Reference limit to 128 characters." />
+              <Assign DisplayName="Assign queue reference (ItemId)" sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[itemReference]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[LEFT(indexRow.ToString &amp; "+" &amp; sheetNameInputFile &amp; "+" &amp; Path.GetFileName(pathInputFile),128)]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Assign DisplayName="Assign row index from datatable" sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_4">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:Int32">[indexRow]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:Int32">[DtProcessingData.Rows.IndexOf(row)]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{indexRow,itemReference}]" DataTable="[dtProcessingDataToUpload]" DisplayName="Populate table to upload" sap:VirtualizedContainerService.HintSize="334,185" sap2010:WorkflowViewState.IdRef="AddDataRow_1" />
+            </Sequence>
+          </ActivityAction>
+        </ui:ForEachRow.Body>
+      </ui:ForEachRow>
+      <ui:Comment DisplayName="Comment-bulk add" sap:VirtualizedContainerService.HintSize="410,207" sap2010:WorkflowViewState.IdRef="Comment_7" Text="// By default 'commit type' property is set to 'AllOrNothing'. Feel free to build yor own according to business needs. NOTICE: This activity does not automatically throw an exception in case of failure. If an exception needs to be thrown at this point, please verify the Result parameter and throw an exception manually (utilizing the ARL's CreateThrowCustomException activity)." />
+      <ui:BulkAddQueueItems TimeoutMS="{x:Null}" DisplayName="Bulk Add Queue Items (datatable)" sap:VirtualizedContainerService.HintSize="410,132" sap2010:WorkflowViewState.IdRef="BulkAddQueueItems_1" QueueItemsDataTable="[dtProcessingDataToUpload]" QueueName="[QueueName]" Result="[dtProcessingDatatUploaded]" />
+      <al:Logging ErrorCode="{x:Null}" ErrorDescription="{x:Null}" ExceptionObject="{x:Null}" FlagInfo="{x:Null}" DisplayName="Log amount of data" sap:VirtualizedContainerService.HintSize="410,22" sap2010:WorkflowViewState.IdRef="Logging_1" LogMessage="[dtProcessingDatatUploaded.Rows.Count.ToString &amp; &quot; added to queue '&quot; &amp; QueueName &amp; &quot;' out of &quot; &amp; dtProcessingDataToUpload.Rows.Count.ToString]" />
+    </Sequence>
+  </Sequence>
+</Activity>

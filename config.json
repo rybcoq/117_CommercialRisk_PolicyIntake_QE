@@ -1,0 +1,39 @@
+{
+	"ProcessName": "<placeholder>",
+
+	"QueueName": "REQ-117_CommercialRisk_PolicyIntake_AttachQueue",
+	"QueueNameSecond": "",
+	
+	"Asset_RobotSupportMail": "REQ-117_RobotSupportMail",
+	"Asset_BusinessMail": "REQ-117_RobotSupportMail",
+	
+	"CredName_ApplicationCredentialName": "",
+
+	"PathTemp": "<placeholder>",
+	
+	"ErrorsInRowLimit": "-1",
+	"FlagSummaryReport": "True",
+	"FlagCheckIfNewItems": "False",
+	
+	"PathMailFolderOutlook": "Inbox\\TEST",
+	"TimeoutMSOutlook": "90000",
+	"TopMailAmountOutlook": "1",
+	"MailAccountOutlook": "tomasz.rybka@aon.com",
+	
+	"PolicyLengthTreshold": "5",
+	"PathPoliciesFile": "C:\\Users\\A0796649\\OneDrive - Aon\\Documents\\UiPath\\REQ-117_PolicyIntake\\Policy Receipt Pilot Test Data.xlsx",
+	"PoliciesFileSheetName": "Broker Reviewed List",
+	"PoliciesFileHeaderName": "Policy Number",
+	
+	"IndicatorWeightMailBody": "0.05",
+	"IndicatorWeightMailSubject": "0.15",
+	"IndicatorWeightMailAttachmentName": "0.20",
+	"IndicatorWeightMailAttachmentContent": "0.40",
+	"PdfPagesRangeLimit": "20",
+	"IndicatorWeightMailAttachmentVicinityContent": "0.20",
+	"RegexVicinityKeyword": "PolicyNr|PolicyNumber|PolicyNo|PolicyNbr",
+	"RegexVicinityContent": "(?<FrontVicinity>[\\S\\s]{0,30})(?<PolicyNr>{0})(?<BackVicinity>[\\S\\s]{0,30})",
+	
+	"PathOutputReport": "C:\\Users\\A0796649\\OneDrive - Aon\\Documents\\UiPath\\REQ-117_PolicyIntake\\ReportSummary.xlsx"
+	
+}

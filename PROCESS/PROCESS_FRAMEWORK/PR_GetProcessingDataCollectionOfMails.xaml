@@ -1,0 +1,135 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="PR_GetProcessingDataCollectionOfMails" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:al="clr-namespace:ARL_Framework.Logging_and_Reporting;assembly=ARL_Framework" xmlns:aq="clr-namespace:ARL_Orchestrator.Queues_and_Transactions;assembly=ARL_Orchestrator" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:snm="clr-namespace:System.Net.Mail;assembly=System" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="DictConfig" Type="InArgument(scg:Dictionary(x:String, x:String))">
+      <x:Property.Attributes>
+        <RequiredArgumentAttribute />
+      </x:Property.Attributes>
+    </x:Property>
+    <x:Property Name="QueueName" Type="InArgument(x:String)">
+      <x:Property.Attributes>
+        <RequiredArgumentAttribute />
+      </x:Property.Attributes>
+    </x:Property>
+    <x:Property Name="ColMailMessages" Type="OutArgument(scg:List(snm:MailMessage))" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1874,1607</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>PR_GetProcessingData_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="21">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>ARL_Orchestrator.Queues_and_Transactions</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>ARL_Framework.Logging_and_Reporting</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="48">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>ARL_Orchestrator</AssemblyReference>
+      <AssemblyReference>ARL_Orchestrator_Expressions_29624074</AssemblyReference>
+      <AssemblyReference>ARL_Orchestrator_Expressions_30742799</AssemblyReference>
+      <AssemblyReference>ARL_Orchestrator_Expressions_39052167</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>System.Linq.Async.Queryable</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>ARL_Framework</AssemblyReference>
+      <AssemblyReference>UiPath.MicrosoftOffice365.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="PR_GetProcessingDataCollectionOfMails" sap:VirtualizedContainerService.HintSize="518,1542" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:Comment DisplayName="Comment-Clear queue" sap:VirtualizedContainerService.HintSize="476,74" sap2010:WorkflowViewState.IdRef="Comment_3" Text="// Clearing queue from new items for QB is necessary to avoid transaction misusage" />
+    <aq:ClearQueue DeletedQueueItems="{x:Null}" DisplayName="Clear queue from any 'New' items" sap:VirtualizedContainerService.HintSize="476,79" sap2010:WorkflowViewState.IdRef="ClearQueue_1" QueueName="[QueueName]" />
+    <ui:Comment DisplayName="Comment-Get collection of mails" sap:VirtualizedContainerService.HintSize="476,169" sap2010:WorkflowViewState.IdRef="Comment_1" Text="// Collection of mails is being loaded from Outlook. Later on each collection item is being added to the queue. Feel free to add more info to queue item specific content fields. By default only collection item index is being added to the queue because it is necessary for fetching data mechanism" />
+    <Sequence DisplayName="Load mails" sap:VirtualizedContainerService.HintSize="476,266" sap2010:WorkflowViewState.IdRef="Sequence_2">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:Comment sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="Comment_4" Text="// Put here fetching emails logic. You can use 'DownloadMailAttachments' component as a template. File located here: https://confluence.ie.aon.bz/display/AC/XAML+files" />
+      <ui:GetOutlookMailMessages Account="{x:Null}" Filter="{x:Null}" FilterByMessageIds="{x:Null}" TimeoutMS="{x:Null}" Top="{x:Null}" DisplayName="Get Outlook Mails" GetAttachements="False" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="GetOutlookMailMessages_1" MailFolder="Inbox" MarkAsRead="False" Messages="[ColMailMessages]" OnlyUnreadMessages="False" OrderByDate="NewestFirst" />
+    </Sequence>
+    <Sequence DisplayName="Populate queue with all loaded mails" sap:VirtualizedContainerService.HintSize="476,702" sap2010:WorkflowViewState.IdRef="Sequence_3">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="x:Int32" Name="indexItem" />
+      </Sequence.Variables>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:ForEach x:TypeArguments="snm:MailMessage" CurrentIndex="[indexItem]" DisplayName="For each mail" sap:VirtualizedContainerService.HintSize="434,548" sap2010:WorkflowViewState.IdRef="ForEach`1_3" Values="[ColMailMessages]">
+        <ui:ForEach.Body>
+          <ActivityAction x:TypeArguments="snm:MailMessage">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="snm:MailMessage" Name="item" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="Add to queue" sap:VirtualizedContainerService.HintSize="376,424" sap2010:WorkflowViewState.IdRef="Sequence_4">
+              <Sequence.Variables>
+                <Variable x:TypeArguments="x:String" Name="itemReference" />
+              </Sequence.Variables>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:Comment DisplayName="Comment-add to queue" sap:VirtualizedContainerService.HintSize="334,170" sap2010:WorkflowViewState.IdRef="Comment_2" Text="// Queue item reference (ItemId) should be as unique as possible to enable item tracking easy. For mail message object it should me 'Message-ID key' from headers collection&#xA;&#xA;Remember about Reference limit to 128 characters" />
+              <Assign DisplayName="Assign queue reference (ItemId)" sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[itemReference]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[RIGHT(item.Headers("Message-ID"),128)]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <ui:AddQueueItem ServiceBaseAddress="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Add queue item (array item)" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="AddQueueItem_1" Priority="Normal" QueueType="[QueueName]" Reference="[itemReference]">
+                <ui:AddQueueItem.ItemInformation>
+                  <InArgument x:TypeArguments="x:Int32" x:Key="Index">[indexItem]</InArgument>
+                </ui:AddQueueItem.ItemInformation>
+              </ui:AddQueueItem>
+            </Sequence>
+          </ActivityAction>
+        </ui:ForEach.Body>
+      </ui:ForEach>
+      <al:Logging ErrorCode="{x:Null}" ErrorDescription="{x:Null}" ExceptionObject="{x:Null}" FlagInfo="{x:Null}" DisplayName="Log amount of data" sap:VirtualizedContainerService.HintSize="434,22" sap2010:WorkflowViewState.IdRef="Logging_1" LogMessage="[ColMailMessages.Count.ToString &amp; &quot; mail(s) found and added to queue '&quot; &amp; QueueName &amp; &quot;'&quot;]" />
+    </Sequence>
+  </Sequence>
+</Activity>
