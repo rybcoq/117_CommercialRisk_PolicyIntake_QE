@@ -1,17 +1,17 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="TEST_SU_GetListOfPolicies" this:TEST_SU_GetListOfPolicies.PathPoliciesFile="TEST\SU_GetListOfPolicies\TC_1.xlsx" this:TEST_SU_GetListOfPolicies.SheetNamePoliciesFile="Data" this:TEST_SU_GetListOfPolicies.HeaderNamePoliciesFile="Policy Nbr" this:TEST_SU_GetListOfPolicies.ValidPoliciesAmount="258" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:ac="clr-namespace:ARL_Framework.Configuration;assembly=ARL_Framework" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="TEST_PR_CheckVicinityContent" this:TEST_PR_CheckVicinityContent.IndicatorKey="123456" this:TEST_PR_CheckVicinityContent.MailAttachmentVicinityContentCleared="dfbdafbfdbgfdsbgfsnbgfngfnhgfdnhgnhgdmngfhm67jn6n76nb764ivvberi123456jtyjfmdgn56he56jy56jeyt5je75je76j" this:TEST_PR_CheckVicinityContent.WeightMailAttachmentVicinityContent="0.4" this:TEST_PR_CheckVicinityContent.ExpectedResult="0" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:ac="clr-namespace:ARL_Framework.Configuration;assembly=ARL_Framework" xmlns:maes="clr-namespace:Microsoft.Activities.Extensions.Statements;assembly=Microsoft.Activities.Extensions" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="PathPoliciesFile" Type="InArgument(x:String)" />
-    <x:Property Name="SheetNamePoliciesFile" Type="InArgument(x:String)" />
-    <x:Property Name="HeaderNamePoliciesFile" Type="InArgument(x:String)" />
-    <x:Property Name="ValidPoliciesAmount" Type="InArgument(x:String)" />
+    <x:Property Name="IndicatorKey" Type="InArgument(x:String)" />
+    <x:Property Name="MailAttachmentVicinityContentCleared" Type="InArgument(x:String)" />
+    <x:Property Name="WeightMailAttachmentVicinityContent" Type="InArgument(x:String)" />
+    <x:Property Name="ExpectedResult" Type="InArgument(x:String)" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1684,1655</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1684,2133</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>TEST_Template_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="30">
+    <scg:List x:TypeArguments="x:String" Capacity="60">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -42,6 +42,7 @@
       <x:String>System.Runtime.InteropServices</x:String>
       <x:String>Microsoft.Activities.Expressions</x:String>
       <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>Microsoft.Activities.Extensions.Statements</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -77,14 +78,16 @@
       <AssemblyReference>UiPath.MicrosoftOffice365.Activities.Design</AssemblyReference>
       <AssemblyReference>System.Linq.Async</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
-      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
-      <AssemblyReference>System.Linq.Async.Queryable</AssemblyReference>
+      <AssemblyReference>Microsoft.Activities.Extensions</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="TEST_SU_GetListOfPolicies" sap:VirtualizedContainerService.HintSize="515,1590" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="TEST_PR_CheckVicinityContent" sap:VirtualizedContainerService.HintSize="515,2068" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="scg:Dictionary(x:String, x:String)" Name="dictConfig" />
-      <Variable x:TypeArguments="s:String[]" Name="arrPolicies" />
+      <Variable x:TypeArguments="scg:Dictionary(x:String, x:Decimal)" Name="dictIndicator" />
+      <Variable x:TypeArguments="x:String" Name="regPatternVicinityKeywords" />
+      <Variable x:TypeArguments="x:String" Name="regPatternVicinityContent" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -92,7 +95,7 @@
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <ui:Comment DisplayName="Comment-TEST_Template" sap:VirtualizedContainerService.HintSize="473,189" sap2010:WorkflowViewState.IdRef="Comment_4" Text="// You can create test data lot by right clicking on this xaml and choosing 'Add Test Data' or 'Update Test Data'. Thank to this - all testing scenarios are easily achievable in Test Explorer. More info here:&#xA;&#xA;https://docs.uipath.com/studio/docs/data-driven-testing" />
-    <Sequence DisplayName="Given" sap:VirtualizedContainerService.HintSize="473,559" sap2010:WorkflowViewState.IdRef="Sequence_2">
+    <Sequence DisplayName="Given" sap:VirtualizedContainerService.HintSize="473,1037" sap2010:WorkflowViewState.IdRef="Sequence_2">
       <Sequence.Variables>
         <Variable x:TypeArguments="x:String" Name="processName" />
         <Variable x:TypeArguments="x:String" Name="assetNameConfigPath" />
@@ -135,6 +138,31 @@
         </ui:MultipleAssign.AssignOperations>
       </ui:MultipleAssign>
       <ac:GetJsonConfig AssetNameConfigPath="[assetNameConfigPath]" DictConfig="[dictConfig]" DisplayName="Get config from json file" sap:VirtualizedContainerService.HintSize="431,132" sap2010:WorkflowViewState.IdRef="GetJsonConfig_1" MailRobotSupport="[mailRobotSupport]" PathBotCurrentDirectory="[Directory.GetCurrentDirectory]" ProcessName="[processName]" />
+      <Assign sap:VirtualizedContainerService.HintSize="431,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+        <Assign.To>
+          <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:Decimal)">[DictIndicator]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Decimal)">[New Dictionary(Of String, Decimal)]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <maes:AddToDictionary x:TypeArguments="x:String, x:Decimal" Dictionary="[DictIndicator]" DisplayName="Add to dictionary" sap:VirtualizedContainerService.HintSize="431,138" sap2010:WorkflowViewState.IdRef="AddToDictionary`2_1" Key="[IndicatorKey]" Value="[cdec(0)]" />
+      <Assign sap:VirtualizedContainerService.HintSize="431,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[regPatternVicinityKeywords]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">[dictConfig("RegexVicinityKeyword")]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign DisplayName="Assign vicinity regex" sap:VirtualizedContainerService.HintSize="431,60" sap2010:WorkflowViewState.IdRef="Assign_4">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[regPatternVicinityContent]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">["(?&lt;FrontVicinity&gt;[\S\s]{0," &amp; DictConfig("VicinityTreshold") &amp; "})(?&lt;PolicyNr&gt;" &amp; IndicatorKey &amp; ")(?&lt;BackVicinity&gt;[\S\s]{0," &amp; DictConfig("VicinityTreshold") &amp; "})"]</InArgument>
+        </Assign.Value>
+      </Assign>
     </Sequence>
     <Sequence DisplayName="When" sap:VirtualizedContainerService.HintSize="473,337" sap2010:WorkflowViewState.IdRef="Sequence_3">
       <sap:WorkflowViewStateService.ViewState>
@@ -143,13 +171,26 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <ui:Comment DisplayName="Comment-When" sap:VirtualizedContainerService.HintSize="334,93" sap2010:WorkflowViewState.IdRef="Comment_2" Text="// Put in this section invoking component that is being tested using prepared input and evironment in Given section." />
-      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke SU_GetListOfPolicies workflow" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="SUPPORT\SU_GetListOfPolicies.xaml">
+      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke PR_CheckVicinityContent workflow" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="PROCESS\PR_CheckVicinityContent.xaml">
         <ui:InvokeWorkflowFile.Arguments>
-          <OutArgument x:TypeArguments="s:String[]" x:Key="ArrPolicies">[arrPolicies]</OutArgument>
-          <InArgument x:TypeArguments="x:String" x:Key="PathPoliciesFile">[PathPoliciesFile]</InArgument>
-          <InArgument x:TypeArguments="x:Int32" x:Key="PolicyLengthTreshold">[CINT(dictConfig("PolicyLengthTreshold"))]</InArgument>
-          <InArgument x:TypeArguments="x:String" x:Key="SheetNamePoliciesFile">[SheetNamePoliciesFile]</InArgument>
-          <InArgument x:TypeArguments="x:String" x:Key="HeaderNamePoliciesFile">[HeaderNamePoliciesFile]</InArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="IndicatorKey">
+            <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="IndicatorKey" />
+          </InArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="RegPatternVicinityContent">
+            <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="regPatternVicinityContent" />
+          </InArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="MailAttachmentVicinityContentCleared">
+            <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="MailAttachmentVicinityContentCleared" />
+          </InArgument>
+          <InArgument x:TypeArguments="x:Decimal" x:Key="WeightMailAttachmentVicinityContent">
+            <mva:VisualBasicValue x:TypeArguments="x:Decimal" ExpressionText="CDEC(WeightMailAttachmentVicinityContent)" />
+          </InArgument>
+          <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Decimal)" x:Key="DictIndicator">
+            <mva:VisualBasicReference x:TypeArguments="scg:Dictionary(x:String, x:Decimal)" ExpressionText="dictIndicator" />
+          </InOutArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="RegPatternVicinityKeywords">
+            <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="regPatternVicinityKeywords" />
+          </InArgument>
         </ui:InvokeWorkflowFile.Arguments>
       </ui:InvokeWorkflowFile>
     </Sequence>
@@ -160,7 +201,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <ui:Comment DisplayName="Comment-Then" sap:VirtualizedContainerService.HintSize="334,74" sap2010:WorkflowViewState.IdRef="Comment_3" Text="// Put in this section determining if test have passed or not. " />
-      <ui:CheckTrue DisplayName="Check True" ErrorMessage="Test failed" Expression="[arrPolicies.Count= CINT(ValidPoliciesAmount)]" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="CheckTrue_1" />
+      <ui:CheckTrue DisplayName="Check True" ErrorMessage="Test failed" Expression="[dictIndicator(IndicatorKey)=CDEC(ExpectedResult)]" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="CheckTrue_1" />
     </Sequence>
   </Sequence>
 </Activity>

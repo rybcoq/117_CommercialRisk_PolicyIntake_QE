@@ -10,11 +10,12 @@
         <RequiredArgumentAttribute />
       </x:Property.Attributes>
     </x:Property>
+    <x:Property Name="IndicatorJsonString" Type="InArgument(x:String)" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1205,730</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1129,730</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>SU_SetTransactionStatus_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="26">
@@ -31,6 +32,7 @@
       <x:String>ARL_Framework.Error_Handling</x:String>
       <x:String>System.Activities.DynamicUpdate</x:String>
       <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Reflection</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -53,6 +55,7 @@
       <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
       <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
       <AssemblyReference>ARL_Framework</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
   <Flowchart DisplayName="PR_SetTransactionStatus" sap:VirtualizedContainerService.HintSize="779,665" sap2010:WorkflowViewState.IdRef="Flowchart_1">
@@ -90,15 +93,17 @@
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <av:Point x:Key="ShapeLocation">0,289</av:Point>
-              <av:Size x:Key="ShapeSize">200,22</av:Size>
+              <av:Size x:Key="ShapeSize">200,51</av:Size>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:SetTransactionStatus ContinueOnError="{x:Null}" Reason="{x:Null}" ServiceBaseAddress="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Set status success" ErrorType="Business" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="SetTransactionStatus_5" Status="Successful" TransactionItem="[TransactionItem]">
+          <ui:SetTransactionStatus ContinueOnError="{x:Null}" Reason="{x:Null}" ServiceBaseAddress="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Set status success" ErrorType="Business" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="SetTransactionStatus_5" Status="Successful" TransactionItem="[TransactionItem]">
             <ui:SetTransactionStatus.Analytics>
               <scg:Dictionary x:TypeArguments="x:String, InArgument" />
             </ui:SetTransactionStatus.Analytics>
             <ui:SetTransactionStatus.Output>
-              <scg:Dictionary x:TypeArguments="x:String, InArgument" />
+              <InArgument x:TypeArguments="x:String" x:Key="IndicatorValues">
+                <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="IndicatorJsonString" />
+              </InArgument>
             </ui:SetTransactionStatus.Output>
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -113,11 +118,11 @@
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <av:Point x:Key="ShapeLocation">410,279</av:Point>
-              <av:Size x:Key="ShapeSize">200,22</av:Size>
-              <av:PointCollection x:Key="ConnectorLocation">510,301 510,367</av:PointCollection>
+              <av:Size x:Key="ShapeSize">200,51</av:Size>
+              <av:PointCollection x:Key="ConnectorLocation">510,330 510,367</av:PointCollection>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ae:IdentifyExceptionType DefaultErrorCode="S0010" DisplayName="Identify exception type" ErrorCategory="[errorCategory]" ErrorCode="[errorCode]" ErrorDescription="[errorMessage]" ErrorType="[errorType]" ExceptionObject="[ExceptionArgument]" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="IdentifyExceptionType_1" />
+          <ae:IdentifyExceptionType DefaultErrorCode="S0010" DisplayName="Identify exception type" ErrorCategory="[errorCategory]" ErrorCode="[errorCode]" ErrorDescription="[errorMessage]" ErrorType="[errorType]" ExceptionObject="[ExceptionArgument]" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="IdentifyExceptionType_1" />
           <FlowStep.Next>
             <FlowStep x:Name="__ReferenceID0" sap2010:WorkflowViewState.IdRef="FlowStep_4">
               <sap:WorkflowViewStateService.ViewState>

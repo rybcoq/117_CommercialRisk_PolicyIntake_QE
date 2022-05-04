@@ -15,10 +15,8 @@
 	"FlagSummaryReport": "True",
 	"FlagCheckIfNewItems": "False",
 	
-	"PathMailFolderOutlook": "Inbox\\TEST",
 	"TimeoutMSOutlook": "90000",
 	"TopMailAmountOutlook": "1",
-	"MailAccountOutlook": "tomasz.rybka@aon.com",
 	
 	"PolicyLengthTreshold": "5",
 	"PathPoliciesFile": "C:\\Users\\A0796649\\OneDrive - Aon\\Documents\\UiPath\\REQ-117_PolicyIntake\\Policy Receipt Pilot Test Data.xlsx",
@@ -32,7 +30,8 @@
 	"PdfPagesRangeLimit": "20",
 	"IndicatorWeightMailAttachmentVicinityContent": "0.20",
 	"RegexVicinityKeyword": "PolicyNr|PolicyNumber|PolicyNo|PolicyNbr",
-	"RegexVicinityContent": "(?<FrontVicinity>[\\S\\s]{0,30})(?<PolicyNr>{0})(?<BackVicinity>[\\S\\s]{0,30})",
+	"VicinityTreshold": "30",
+	"IndicatorForwardTreshold": "0.60",
 	
 	"PathOutputReport": "C:\\Users\\A0796649\\OneDrive - Aon\\Documents\\UiPath\\REQ-117_PolicyIntake\\ReportSummary.xlsx"
 	

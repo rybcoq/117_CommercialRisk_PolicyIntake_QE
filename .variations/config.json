@@ -1,11 +1,19 @@
 {
   "dataVariationFileInfo": [
     {
+      "filePath": ".variations\\TEST_SU_ClearStringSpecChars_TestCases_Sheet1.json",
+      "dataVariationType": "File"
+    },
+    {
+      "filePath": ".variations\\TEST_PR_CheckVicinityContent_TestCases_Sheet1.json",
+      "dataVariationType": "File"
+    },
+    {
       "filePath": ".variations\\TEST_SU_GetListOfPolicies_TestCases_Sheet1.json",
       "dataVariationType": "File"
     },
     {
-      "filePath": ".variations\\TEST_SU_ClearStringSpecChars_TestCases_Sheet1.json",
+      "filePath": ".variations\\TEST_PR_GetMailByMessageId_TestCases_Sheet1.json",
       "dataVariationType": "File"
     }
   ]

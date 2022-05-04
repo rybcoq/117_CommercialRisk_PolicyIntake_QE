@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="TEST_Generic" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1129,650" sap2010:WorkflowViewState.IdRef="TEST_Generic_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sg="clr-namespace:System.Globalization;assembly=mscorlib" xmlns:snm="clr-namespace:System.Net.Mail;assembly=System" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="TEST_Generic" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1684,833" sap2010:WorkflowViewState.IdRef="TEST_Generic_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:maes="clr-namespace:Microsoft.Activities.Extensions.Statements;assembly=Microsoft.Activities.Extensions" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="68">
       <x:String>System.Activities</x:String>
@@ -36,6 +36,8 @@
       <x:String>UiPath.Mail.Outlook.Activities</x:String>
       <x:String>UiPath.Mail.Activities</x:String>
       <x:String>System.Globalization</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>Microsoft.Activities.Extensions.Statements</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -70,63 +72,53 @@
       <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
       <AssemblyReference>UiPath.Mail</AssemblyReference>
       <AssemblyReference>UiPath.Mail.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
       <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>Microsoft.Activities.Extensions</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="TEST_Generic" sap:VirtualizedContainerService.HintSize="304,578" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="TEST_Generic" sap:VirtualizedContainerService.HintSize="440,684" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
-      <Variable x:TypeArguments="x:String" Name="filterOutlook" />
-      <Variable x:TypeArguments="scg:List(snm:MailMessage)" Name="ColMailMessages" />
-      <Variable x:TypeArguments="sg:CultureInfo" Name="cultInfo" />
+      <Variable x:TypeArguments="scg:Dictionary(x:String, x:Decimal)" Name="DictIndicator" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="262,22" sap2010:WorkflowViewState.IdRef="CommentOut_2">
-      <ui:CommentOut.Body>
-        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="304,152" sap2010:WorkflowViewState.IdRef="Sequence_3">
-          <sap:WorkflowViewStateService.ViewState>
-            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            </scg:Dictionary>
-          </sap:WorkflowViewStateService.ViewState>
-          <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_4">
-            <Assign.To>
-              <OutArgument x:TypeArguments="sg:CultureInfo">[cultInfo]</OutArgument>
-            </Assign.To>
-            <Assign.Value>
-              <InArgument x:TypeArguments="sg:CultureInfo">[New CultureInfo("en-US")]</InArgument>
-            </Assign.Value>
-          </Assign>
-        </Sequence>
-      </ui:CommentOut.Body>
-      <sap:WorkflowViewStateService.ViewState>
-        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-          <x:Boolean x:Key="IsPinned">False</x:Boolean>
-        </scg:Dictionary>
-      </sap:WorkflowViewStateService.ViewState>
-    </ui:CommentOut>
-    <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_3">
+    <Assign sap:VirtualizedContainerService.HintSize="398,60" sap2010:WorkflowViewState.IdRef="Assign_8">
       <Assign.To>
-        <OutArgument x:TypeArguments="x:String">[filterOutlook]</OutArgument>
+        <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:Decimal)">[DictIndicator]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="x:String">["[receivedtime] &gt; '" &amp; Now.AddDays(-1).ToString(CultureInfo.CurrentCulture) &amp; "'"]</InArgument>
+        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Decimal)">[New Dictionary(Of String, Decimal)]</InArgument>
       </Assign.Value>
     </Assign>
-    <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_7">
-      <Assign.To>
-        <OutArgument x:TypeArguments="x:String">[filterOutlook]</OutArgument>
-      </Assign.To>
-      <Assign.Value>
-        <InArgument x:TypeArguments="x:String">["[receivedtime] &gt; '" &amp; Now.AddDays(-3).ToString("M/dd/yyyy h:mm tt") &amp; "'"]</InArgument>
-      </Assign.Value>
-    </Assign>
-    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="262,61" sap2010:WorkflowViewState.IdRef="WriteLine_2" Text="[filterOutlook]" />
-    <ui:GetOutlookMailMessages FilterByMessageIds="{x:Null}" TimeoutMS="{x:Null}" Account="tomasz.rybka@aon.com" DisplayName="Get Outlook Mails-filter" Filter="[filterOutlook]" GetAttachements="False" sap:VirtualizedContainerService.HintSize="262,22" sap2010:WorkflowViewState.IdRef="GetOutlookMailMessages_1" MailFolder="Inbox" MarkAsRead="False" Messages="[ColMailMessages]" OnlyUnreadMessages="False" OrderByDate="OldestFirst" Top="10" />
-    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="262,61" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="[ColMailMessages.count.ToString]" />
+    <maes:AddToDictionary x:TypeArguments="x:String, x:Decimal" Dictionary="[DictIndicator]" DisplayName="Add to dictionary" sap:VirtualizedContainerService.HintSize="398,138" sap2010:WorkflowViewState.IdRef="AddToDictionary`2_1" Key="106239291" Value="[cdec(0.4)]" />
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke PR_CheckVicinityContent workflow" sap:VirtualizedContainerService.HintSize="398,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="PROCESS\PR_CheckVicinityContent.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="IndicatorKey">
+          <Literal x:TypeArguments="x:String">106239291</Literal>
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="RegPatternVicinityContent">
+          <Literal x:TypeArguments="x:String">(?&lt;FrontVicinity&gt;[\S\s]{0,30})(?&lt;PolicyNr&gt;106239291)(?&lt;BackVicinity&gt;[\S\s]{0,30})</Literal>
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="MailAttachmentVicinityContentCleared">
+          <Literal x:TypeArguments="x:String">POBox2950HartfordCT061042950January262022BOCARATONPOLICEFOUNDATION6800BROKENSOUNDPARKWAYSUITE200BOCARATONFL33487ReImportantInformationaboutClaimsInformationLineDearBOCARATONPOLICEFOUNDATIONTravelersBondSpecialtyInsuranceispleasedtoannounceits18008428496ClaimsInformationLineThislineisdesignedtoprovideinsuredswithanadditionalresourceonhowtoreportclaimsorthosecircumstancesoreventswhichmaybecomeclaimsPolicyholderswillbeabletoobtainassistanceonthefollowingtopicsfromtheClaimsInformationLineTheinformationthatneedstobeincludedwiththeclaimnoticeTheaddresselectronicmailaddressandorfacsimilenumbertowhichthepolicyholdercansendclaimsrelatedinformationGetquestionsontheclaimprocessansweredTheDeclarationsPageofyourpolicysetsforthwhereyoushouldreportclaimsandclaimsrelatedinformationYoushouldalsoreviewthepolicysreportingrequirementstobeawareofhowmuchtimeyouhavetoreportaclaimtoTravelersThesoonerTravelersisnotifiedthesoonerwecanbecomeinvolvedintheprocessandofferassistancetoourpolicyholderAdelayinreportingmayresultinallorpartofamattertofalloutsideofthecoverageprovidedTheClaimsInformationLineshouldstreamlinetheclaimreportingprocessandallowpolicyholderstoaskquestionsonwhatinformationisneededaswellasotherquestionswhichwillassisttheminworkingwithTravelersWhiletheClaimsInformationLineprovidespolicyholdersavaluableresourcebyansweringquestionsandprovidinginformationthelinedoesnotreplacethereportingrequirementscontainedinthePolicyWehopethisimprovementtocustomerserviceissomethingourpolicyholderswillfindhelpsthemunderstandtheclaimprocessandprovidesthemaresourceforreportingLTR4035Ed06092009TheTravelersIndemnityCompanyAllrightsreservedPage1of1POBox2950HartfordCT06104295001262022BOCARATONPOLICEFOUNDATION6800BROKENSOUNDPARKWAYSUITE200BOCARATONFL33487RERiskManagementPLUSOnlinefromTravelersBondSpecialtyInsurancewwwrmplusonlinecomAsaTravelersBondSpecialtyInsuredyoureceiveriskmanagementservicesatnoadditionalcosttohelpprotectyouandyourbusinessRiskManagementPLUSOnlineisarobustwebsitetoassistyouinthemitigationofriskrelativetoemploymentpracticesdirectorsandofficersfiduciaryliabilitycybercrimekidnapransomandidentityfraudexposuresHighlightsofRiskManagementPLUSOnlineincludeThousandsofarticlesonavarietyofriskmanagementtopicsTopicalwebinarsandpodcastsoncurrentissuesCheckliststoassistinmanagingriskWebbasedtrainingModelEmployeeHandbookincludingpoliciesandformsfordownloadingorprintingthatreducerisksintheworkplaceThefollowingRiskManagementPLUSOnlineRegistrationInstructionscontaineasystepbystepinstructionstoregisterforthisvaluabletoolFormoreinformationcall18887127667andaskforyourRiskManagementPLUSOnlinerepresentativeItsthatsimpleThankyouforchoosingTravelersBondSpecialtyInsuranceforyourinsuranceneedsTravelersisamarketleaderinprovidingmanagementliabilityandcrimecoveragesthatarespecificallycustomizedforyourorganizationInstructionsforRegistrationOrientationtoRiskManagementPLUSOnlineRegistrationforSiteAdministratorsTheSiteAdministratoristhepersoninyourorganizationwhowilloverseeRiskManagementPLUSOnlinefortheorganizationTheSiteAdministratoristypicallyapersonwholeadshumanresourcesandorfinancialfunctionsorisresponsibleforlegalmatterspertainingtopersonnelTheSiteAdministratormayaddotherSiteAdministratorslatertoassistwiththeirresponsibilitiesToregister1Gotowwwrmplusonlinecom2IntheSignInboxclickRegister3EnterthepasswordpasscodeTRVP1200004FillintheRegistrationInformationandclickSubmit5YourorganizationisregisteredandyouareregisteredasSiteAdministratorLearningtoNavigatetheSite1GotowwwrmplusonlinecomOneachpageyouwillseeaboxoutlinedinbluethatcontainstheinstructionsforuseofthatpage2IfyouhaveanyquestionsjustclickonContactUsonthefrontpageEnteryourquestionintheformprovidedandtheSystemAdministratorwillgetbacktoyouquicklywiththeanswer3YoucanalsoschedulealivewalkthroughofthesitebysendingarequestforawalkthroughviathecontactlinkonthefrontpageLTR4027Rev10172017TheTravelersIndemnityCompanyAllrightsreservedPage1of1ThisnoticeprovidesnocoveragenordoesitchangeanypolicytermsTodeterminethescopeofcoverageandtheinsuredsrightsanddutiesunderthepolicyreadtheentirepolicycarefullyFormoreinformationaboutthecontentofthisnoticetheinsuredshouldcontacttheiragentorbrokerIfthereisanyconflictbetweenthepolicyandthisnoticethetermsofthepolicyprevailPrivacyPolicyNoticeThankyouforselectingTravelersCasualtyandSuretyCompanyofAmericaasyourIdentityFraudExpenseReimbursementinsurerAtTravelersCasualtyandSuretyCompanyofAmericaasubsidiaryofTravelerswerecognizethatprivacyisimportanttoyouThatiswhywearecommittedtoprotectingyourprivacythroughadoptionofthefollowingprivacyprinciplesCollectionOfInformationWecollectretainanduseinformationaboutyouoraboutparticipantsbeneficiariesorclaimantsunderyourIdentifyFraudExpenseReimbursementcoverageonlywherewebelievethatitwillhelporisnecessarytoprovideyouproductsandservicesorotherwiseconductourbusinessWecollectnonpublicpersonalfinancialinformationaboutyouoraboutparticipantsbeneficiariesorclaimantsunderyourIdentifyFraudExpenseReimbursementcoveragefromthefollowingsources1informationwereceivefromyouorthroughyouragentorbrokeronapplicationsorotherforms2informationwereceivefromoraboutyouintheprocessofadjustingclaims3informationaboutyourothertransactionsincludingriskcontrolandotherconsultingserviceswithusouraffiliatesorotherthirdparties4informationaboutyourcoveragesandlossactivitywithothercarriersand5informationwereceivefromaconsumerreportingagencySuchinformationincludesidentifyinginformationsuchaspolicyholderparticipantbeneficiaryorclaimantnameaddressandsocialsecuritynumberfinancialinformationsuchasincomepaymenthistoryorcredithistoryandundercertaincircumstanceshealthinformationsuchasinformationaboutanillnessdisabilityorinjuryItcouldalsoincludeinformationonclaimswithotherinsurancecompaniesandusandtheconditionandmaintenanceofyourpropertyDisclosureOfInformationWeusuallydonotdisclosenonpublicpersonalinformationaboutyouoraboutparticipantsbeneficiariesorclaimantsunderyourIdentifyFraudExpenseReimbursementcoveragewithoutyourconsentHoweverinsomecircumstanceswemaydiscloseinformationtootherswithoutyourpriorauthorizationThemostcommondisclosuresaretothefollowingpersons1ouraffiliatedpropertyandcasualtyinsurancecompanies2stateinsurancedepartmentsfortheirregulationofourbusiness3othergovernmentauthorities4ouragentsandbrokersasnecessarytoconductourbusiness5organizationsthatperformunderwritingandclaimsinvestigations6anotherinsurancecompanytowhichyouhaveappliedforapolicyorsubmittedaclaim7insurancesupportagencieslawenforcementagenciesandourreinsurersand8anyotherthirdpartyaspermittedorrequiredbylawConfidentialityAndSecurityWerestrictaccesstononpublicpersonalinformationaboutyouoraboutparticipantsbeneficiariesorclaimantsunderyourIdentifyFraudExpenseReimbursementcoveragetothosewhoneedittoserveyourinsuranceneedsandtomaintainandimprovecustomerserviceWemaintainphysicalelectronicandproceduralsafeguardsthatcomplywithfederalandstatelawsandregulationstoguardyournonpublicpersonalinformationDisclosureAndProtectionOfFormerCustomersInformationWemaydiscloseallthepersonalinformationwehavecollectedasdescribedaboveHoweverevenifyounolongerhaveacustomerrelationshipwithuswewillcontinuetofollowourprivacypoliciesandpracticestoprotectyourinformationMostimportantlyTravelersCasualtyandSuretyCompanyofAmericadoesnotandwillnotdiscloseorsellnonpublicpersonalinformationaboutyouoraboutparticipantsbeneficiariesorclaimantsunderyourIdentifyFraudExpenseReimbursementcoveragetoanyoneformarketingpurposesNTC19081Ed08182018TheTravelersIndemnityCompanyAllrightsreservedPage1of2ChangesInPrivacyPolicyWemaychoosetomodifyourpolicyregardingthetreatmentofpersonalinformationatanytimeBeforewedosowewillnotifyyouandprovideanupdatedprivacynoticeNTC19081Ed08182018TheTravelersIndemnityCompanyAllrightsreservedPage2of2ThisnoticeprovidesnocoveragenordoesitchangeanypolicytermsTodeterminethescopeofcoverageandtheinsuredsrightsanddutiesunderthepolicyreadtheentirepolicycarefullyFormoreinformationaboutthecontentofthisnoticetheinsuredshouldcontacttheiragentorbrokerIfthereisanyconflictbetweenthepolicyandthisnoticethetermsofthepolicyprevailIndependentAgentAndBrokerCompensationNoticeForinformationonhowTravelerscompensatesindependentagentsbrokersorotherinsuranceproducerspleasevisitthiswebsitewwwtravelerscomw3clegalProducerCompensationDisclosurehtmlOrwriteorcallTravelersAgencyCompensationPOBox2950HartfordConnecticut0610429508669048348NTC19036Rev01192019TheTravelersIndemnityCompanyAllrightsreservedPage1of1IdentityFraudExpenseReimbursementCoverageandIdentityFraudResolutionServicesThisdocumentisasummaryonlyandisintendedtoprovideimportantinformationabouttheprotectionavailabletoanInsuredPersonundertheIdentityFraudExpenseReimbursementPolicythePolicyKeepthiscoveragedescriptionforyourrecordsThissummaryisnotaninsurancepolicyanddoesnotamendextendoralterthecoverageaffordedbythePolicydescribedhereinBOCARATONPOLICEFOUNDATIONhaspurchasedtheIdentityFraudExpenseReimbursementpolicyfromTravelersCasualtyandSuretyCompanyofAmericainordertoprovideyouyourspousequalifieddomesticpartnerchildrenunder18andparentswiththisvaluablecoverageYourPolicyNumberis106239291YourCoverageLimitis25000YourDeductibleis0IfyouareavictimofIdentityFraudpleasecallTravelerstoreportyourclaim8008428496oremailBSIclaimstravelerscomThecoveragereimbursesidentityfraudvictimsforthefollowingLostwagesasaresultoftimetakenofffromworktomeetwithortalktolawenforcementagenciescreditagenciesandorlegalcounseltocompletefraudaffidavitsorduetowrongfulincarcerationarisingsolelyfromsomeonehavingcommittedacrimeintheinsuredpersonsnameupto1000perweekforfiveweeksuptothepolicylimitNotaryandcertifiedmailchargesforcompletinganddeliveringfraudaffidavitsFeestoreapplyforloansthatweredeniedbecauseoferroneouscreditinformationduetotheidentityfraudLongdistancetelephonechargesforcallingmerchantslawenforcementagenciesorcreditgrantorstodiscussanactualidentityfraudAttorneyfeesincurredwithTravelerspriorconsentforDefendingsuitsbroughtincorrectlybymerchantsortheircollectionagenciesRemovingcriminalorciviljudgmentswronglyenteredagainstthevictimChallenginginformationinacreditreportRel...</Literal>
+        </InArgument>
+        <InArgument x:TypeArguments="x:Decimal" x:Key="WeightMailAttachmentVicinityContent">
+          <mva:VisualBasicValue x:TypeArguments="x:Decimal" ExpressionText="CDec(0.4)" />
+        </InArgument>
+        <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Decimal)" x:Key="DictIndicator">
+          <mva:VisualBasicReference x:TypeArguments="scg:Dictionary(x:String, x:Decimal)" ExpressionText="DictIndicator" />
+        </InOutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="RegPatternVicinityKeywords">
+          <Literal x:TypeArguments="x:String">PolicyNr|PolicyNumber|PolicyNo|PolicyNbr</Literal>
+        </InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="398,61" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="[DictIndicator.Keys.count.ToString]" />
+    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="398,61" sap2010:WorkflowViewState.IdRef="WriteLine_3" Text="[DictIndicator(&quot;106239291&quot;).ToString]" />
   </Sequence>
 </Activity>

@@ -45,7 +45,7 @@
       {
         "editingStatus": "InProgress",
         "testCaseId": "5e8160ce-1930-457c-8437-43d8fefeee1e",
-        "dataVariationFilePath": ".variations\\TEST_SU_GetListOfPolicies_TestCases_Sheet1.json",
+        "dataVariationFilePath": ".variations\\TEST_PR_GetMailByMessageId_TestCases_Sheet1.json",
         "fileName": "TEST\\PR_GetMailByMessageId\\TEST_PR_GetMailByMessageId.xaml"
       },
       {
@@ -59,6 +59,18 @@
         "testCaseId": "bf6cbf01-31b0-4a5d-bf76-ac6f6653f928",
         "dataVariationFilePath": ".variations\\TEST_SU_ClearStringSpecChars_TestCases_Sheet1.json",
         "fileName": "TEST\\SU_ClearStringSpecChars\\TEST_SU_ClearStringSpecChars.xaml"
+      },
+      {
+        "editingStatus": "InProgress",
+        "testCaseId": "eac15649-a79d-4bca-b055-9c9e6826a590",
+        "dataVariationFilePath": ".variations\\TEST_PR_GetMailByMessageId_TestCases_Sheet1.json",
+        "fileName": "TEST\\PR_SaveMailAttachment\\TEST_PR_SaveMailAttachment.xaml"
+      },
+      {
+        "editingStatus": "InProgress",
+        "testCaseId": "9a61f703-cab4-4578-9bef-1e32c26a8732",
+        "dataVariationFilePath": ".variations\\TEST_PR_CheckVicinityContent_TestCases_Sheet1.json",
+        "fileName": "TEST\\PR_CheckVicinityContent\\TEST_PR_CheckVicinityContent.xaml"
       }
     ],
     "modernBehavior": true

@@ -2,12 +2,12 @@
   <x:Members>
     <x:Property Name="IndicatorKey" Type="InArgument(x:String)" />
     <x:Property Name="RegPatternVicinityContent" Type="InArgument(x:String)" />
-    <x:Property Name="RegrexPatternVicinityKeywords" Type="InArgument(x:String)" />
     <x:Property Name="MailAttachmentVicinityContentCleared" Type="InArgument(x:String)" />
     <x:Property Name="WeightMailAttachmentVicinityContent" Type="InArgument(x:Decimal)" />
     <x:Property Name="DictIndicator" Type="InOutArgument(scg:Dictionary(x:String, x:Decimal))" />
+    <x:Property Name="RegPatternVicinityKeywords" Type="InArgument(x:String)" />
   </x:Members>
-  <sap:VirtualizedContainerService.HintSize>1129,833</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1684,974</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="32">
@@ -98,22 +98,28 @@
         <x:Boolean x:Key="IsPinned">False</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:Matches sap:VirtualizedContainerService.HintSize="520,59" sap2010:WorkflowViewState.IdRef="Matches_1" Input="[mailAttachmentVicinityContentCleared]" IsBuilderTabModified="False" Pattern="[RegPatternVicinityContent]" RegexOption="IgnoreCase, Multiline" Result="[colMatches]" />
+    <ui:Matches sap:VirtualizedContainerService.HintSize="520,59" sap2010:WorkflowViewState.IdRef="Matches_1" Input="[mailAttachmentVicinityContentCleared]" IsBuilderTabModified="False" Pattern="[RegPatternVicinityContent]" RegexOption="IgnoreCase" Result="[colMatches]" />
     <ui:ForEach x:TypeArguments="str:Match" CurrentIndex="{x:Null}" DisplayName="For each match" sap:VirtualizedContainerService.HintSize="520,577" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[colMatches]">
       <ui:ForEach.Body>
         <ActivityAction x:TypeArguments="str:Match">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="str:Match" Name="match" />
           </ActivityAction.Argument>
-          <If Condition="[System.Text.RegularExpressions.Regex.IsMatch(match.Groups(&quot;FrontVicinity&quot;).ToString,regrexPatternVicinityKeywords,RegexOptions.IgnoreCase) or System.Text.RegularExpressions.Regex.IsMatch(match.Groups(&quot;BackVicinity&quot;).ToString,regrexPatternVicinityKeywords,RegexOptions.IgnoreCase)]" DisplayName="If vicinity match" sap:VirtualizedContainerService.HintSize="484,453" sap2010:WorkflowViewState.IdRef="If_1">
+          <If Condition="[System.Text.RegularExpressions.Regex.IsMatch(match.Groups(&quot;FrontVicinity&quot;).ToString,RegPatternVicinityKeywords,RegexOptions.IgnoreCase) or System.Text.RegularExpressions.Regex.IsMatch(match.Groups(&quot;BackVicinity&quot;).ToString,RegPatternVicinityKeywords,RegexOptions.IgnoreCase)]" DisplayName="If vicinity match" sap:VirtualizedContainerService.HintSize="484,453" sap2010:WorkflowViewState.IdRef="If_2">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
             <If.Then>
-              <Sequence DisplayName="Increment indicator" sap:VirtualizedContainerService.HintSize="304,276" sap2010:WorkflowViewState.IdRef="Sequence_10">
+              <Sequence DisplayName="Increment indicator" sap:VirtualizedContainerService.HintSize="304,276" sap2010:WorkflowViewState.IdRef="Sequence_15">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <Assign DisplayName="Increment indicator" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_18">
+                <Assign DisplayName="Increment indicator" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_19">
                   <Assign.To>
                     <OutArgument x:TypeArguments="x:Decimal">[DictIndicator(IndicatorKey)]</OutArgument>
                   </Assign.To>
@@ -121,12 +127,12 @@
                     <InArgument x:TypeArguments="x:Decimal">[DictIndicator(IndicatorKey)+weightMailAttachmentVicinityContent]</InArgument>
                   </Assign.Value>
                 </Assign>
-                <al:Logging ErrorCode="{x:Null}" ErrorDescription="{x:Null}" ExceptionObject="{x:Null}" FlagInfo="{x:Null}" DisplayName="Log incremented indicator" sap:VirtualizedContainerService.HintSize="262,22" sap2010:WorkflowViewState.IdRef="Logging_11" LogMessage="[&quot;Matched policy: &quot; &amp; IndicatorKey &amp; &quot;, Indicator incremented with: &quot; &amp; weightMailAttachmentVicinityContent.ToString]" />
-                <ui:Break sap:VirtualizedContainerService.HintSize="262,22" sap2010:WorkflowViewState.IdRef="Break_1" />
+                <al:Logging ErrorCode="{x:Null}" ErrorDescription="{x:Null}" ExceptionObject="{x:Null}" FlagInfo="{x:Null}" DisplayName="Log incremented indicator" sap:VirtualizedContainerService.HintSize="262,22" sap2010:WorkflowViewState.IdRef="Logging_12" LogMessage="[&quot;Matched policy: &quot; &amp; IndicatorKey &amp; &quot;, Indicator incremented with: &quot; &amp; weightMailAttachmentVicinityContent.ToString]" />
+                <ui:Break sap:VirtualizedContainerService.HintSize="262,22" sap2010:WorkflowViewState.IdRef="Break_2" />
               </Sequence>
             </If.Then>
             <If.Else>
-              <Sequence sap2010:WorkflowViewState.IdRef="Sequence_11">
+              <Sequence sap:VirtualizedContainerService.HintSize="200,83" sap2010:WorkflowViewState.IdRef="Sequence_16">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>

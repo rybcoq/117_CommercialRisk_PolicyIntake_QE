@@ -3,11 +3,13 @@
     <x:Property Name="DictConfig" Type="InArgument(scg:Dictionary(x:String, x:String))" />
     <x:Property Name="MessageId" Type="InArgument(x:String)" />
     <x:Property Name="MailMessage" Type="OutArgument(snm:MailMessage)" />
+    <x:Property Name="MailAccount" Type="InArgument(x:String)" />
+    <x:Property Name="MailFolder" Type="InArgument(x:String)" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1129,650</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1730,974</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>PR_FilterMailByMessageId_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="56">
@@ -76,7 +78,6 @@
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>UiPath.MicrosoftOffice365.Activities.Design</AssemblyReference>
       <AssemblyReference>ARL_Framework</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
   <Sequence DisplayName="PR_GetMailByMessageId" sap:VirtualizedContainerService.HintSize="526,472" sap2010:WorkflowViewState.IdRef="Sequence_1">
@@ -88,7 +89,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:GetOutlookMailMessages Filter="{x:Null}" Account="[DictConfig(&quot;MailAccountOutlook&quot;)]" DisplayName="Get Outlook Mail by message ID" FilterByMessageIds="[{MessageId}]" GetAttachements="False" sap:VirtualizedContainerService.HintSize="484,22" sap2010:WorkflowViewState.IdRef="GetOutlookMailMessages_1" MailFolder="[DictConfig(&quot;PathMailFolderOutlook&quot;)]" MarkAsRead="False" Messages="[colMailMessages]" OnlyUnreadMessages="False" OrderByDate="NewestFirst" TimeoutMS="[CINT(DictConfig(&quot;TimeoutMSOutlook&quot;))]" Top="[CINT(DictConfig(&quot;TopMailAmountOutlook&quot;))]" />
+    <ui:GetOutlookMailMessages Filter="{x:Null}" Account="[MailAccount]" DisplayName="Get Outlook Mail by message ID" FilterByMessageIds="[{MessageId}]" GetAttachements="False" sap:VirtualizedContainerService.HintSize="484,22" sap2010:WorkflowViewState.IdRef="GetOutlookMailMessages_1" MailFolder="[MailFolder]" MarkAsRead="False" Messages="[colMailMessages]" OnlyUnreadMessages="False" OrderByDate="NewestFirst" TimeoutMS="[CINT(DictConfig(&quot;TimeoutMSOutlook&quot;))]" Top="[CINT(DictConfig(&quot;TopMailAmountOutlook&quot;))]" />
     <If Condition="[colMailMessages.Count=1]" DisplayName="If found" sap:VirtualizedContainerService.HintSize="484,218" sap2010:WorkflowViewState.IdRef="If_1">
       <If.Then>
         <al:Logging ErrorCode="{x:Null}" ErrorDescription="{x:Null}" ExceptionObject="{x:Null}" FlagInfo="{x:Null}" DisplayName="Log attachments amount" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Logging_2" LogMessage="[&quot;Mail with ID:&quot; &amp; MessageId &amp; &quot; found&quot;]" />

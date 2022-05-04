@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="PR_SaveMailAttachment" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:ae="clr-namespace:ARL_Framework.Error_Handling;assembly=ARL_Framework" xmlns:al="clr-namespace:ARL_Framework.Logging_and_Reporting;assembly=ARL_Framework" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:snm="clr-namespace:System.Net.Mail;assembly=System" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="PR_SaveMailAttachment" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:ae="clr-namespace:ARL_Framework.Error_Handling;assembly=ARL_Framework" xmlns:al="clr-namespace:ARL_Framework.Logging_and_Reporting;assembly=ARL_Framework" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:snm="clr-namespace:System.Net.Mail;assembly=System" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="MailMessage" Type="InArgument(snm:MailMessage)" />
     <x:Property Name="AttachmentName" Type="InArgument(x:String)" />
@@ -8,7 +8,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1129,1058</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1684,1383</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>PR_FilterMailByMessageId_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="32">
@@ -84,13 +84,11 @@
       <AssemblyReference>UiPath.MicrosoftOffice365.Activities</AssemblyReference>
       <AssemblyReference>System.Collections.Immutable</AssemblyReference>
       <AssemblyReference>System.Linq.Async.Queryable</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="PR_SaveMailAttachment" sap:VirtualizedContainerService.HintSize="771,993" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="PR_SaveMailAttachment" sap:VirtualizedContainerService.HintSize="771,1318" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
-      <Variable x:TypeArguments="scg:List(snm:MailMessage)" Name="colMailMessages" />
-      <Variable x:TypeArguments="scg:IEnumerable(x:String)" Name="colAttachments" />
+      <Variable x:TypeArguments="s:String[]" Name="arrAttachment" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -111,13 +109,32 @@
         </Sequence>
       </If.Else>
     </If>
-    <ui:SaveMailAttachments Attachments="[colAttachments]" DisplayName="Save Attachment" Filter="[AttachmentName]" FolderPath="[PathAttachmentFolder]" sap:VirtualizedContainerService.HintSize="729,89" sap2010:WorkflowViewState.IdRef="SaveMailAttachments_1" Message="[MailMessage]" OverwriteExisting="False" />
-    <If Condition="[colAttachments.Count=1]" DisplayName="If found" sap:VirtualizedContainerService.HintSize="729,376" sap2010:WorkflowViewState.IdRef="If_1">
+    <Sequence DisplayName="Get attachment" sap:VirtualizedContainerService.HintSize="729,414" sap2010:WorkflowViewState.IdRef="Sequence_3">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="scg:IEnumerable(x:String)" Name="colAttachments" />
+      </Sequence.Variables>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:Comment sap:VirtualizedContainerService.HintSize="334,93" sap2010:WorkflowViewState.IdRef="Comment_1" Text="// All attachments are being saved (instead of one) due to possible regex keywords in file name" />
+      <ui:SaveMailAttachments Attachments="[colAttachments]" DisplayName="Save all pdf attachments" Filter=".pdf|.PDF" FolderPath="[PathAttachmentFolder]" sap:VirtualizedContainerService.HintSize="334,89" sap2010:WorkflowViewState.IdRef="SaveMailAttachments_1" Message="[MailMessage]" OverwriteExisting="True" />
+      <Assign DisplayName="Get single attachment" sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+        <Assign.To>
+          <OutArgument x:TypeArguments="s:String[]">[arrAttachment]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="s:String[]">[colAttachments.Where(Function(s) s.Contains(AttachmentName)).ToArray()]</InArgument>
+        </Assign.Value>
+      </Assign>
+    </Sequence>
+    <If Condition="[arrAttachment.Count=1]" DisplayName="If found" sap:VirtualizedContainerService.HintSize="729,376" sap2010:WorkflowViewState.IdRef="If_1">
       <If.Then>
         <al:Logging ErrorCode="{x:Null}" ErrorDescription="{x:Null}" ExceptionObject="{x:Null}" FlagInfo="{x:Null}" DisplayName="Log attachments amount" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Logging_2" LogMessage="[&quot;One attachment '&quot; &amp; AttachmentName &amp; &quot;' found&quot;]" />
       </If.Then>
       <If.Else>
-        <If Condition="[colAttachments.Count=0]" DisplayName="If no or too many attachments" sap:VirtualizedContainerService.HintSize="484,218" sap2010:WorkflowViewState.IdRef="If_2">
+        <If Condition="[arrAttachment.Count=0]" DisplayName="If no or too many attachments" sap:VirtualizedContainerService.HintSize="484,218" sap2010:WorkflowViewState.IdRef="If_2">
           <If.Then>
             <ae:CreateThrowCustomException DisplayName="[B0053] Attachment not found" ErrorCategory="Attachment not found" ErrorCode="B0053" ErrorDescription="[&quot;Attachment '&quot; &amp; AttachmentName &amp; &quot;' not found in mail&quot;]" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="CreateThrowCustomException_1">
               <sap:WorkflowViewStateService.ViewState>
@@ -146,7 +163,7 @@
         <OutArgument x:TypeArguments="x:String">[PathAttachmentFile]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="x:String">[colAttachments(0)]</InArgument>
+        <InArgument x:TypeArguments="x:String">[arrAttachment(0)]</InArgument>
       </Assign.Value>
     </Assign>
   </Sequence>

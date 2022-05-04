@@ -72,7 +72,6 @@
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>UiPath.MicrosoftOffice365.Activities.Design</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
       <AssemblyReference>ARL_DataManipulation</AssemblyReference>
       <AssemblyReference>Newtonsoft.Json</AssemblyReference>
     </sco:Collection>
