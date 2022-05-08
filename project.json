@@ -15,7 +15,7 @@
   "entitiesStores": [],
   "schemaVersion": "4.0",
   "studioVersion": "21.10.3.0",
-  "projectVersion": "1.0.0",
+  "projectVersion": "1.0.1",
   "runtimeOptions": {
     "autoDispose": false,
     "isPausable": true,
@@ -71,6 +71,12 @@
         "testCaseId": "9a61f703-cab4-4578-9bef-1e32c26a8732",
         "dataVariationFilePath": ".variations\\TEST_PR_CheckVicinityContent_TestCases_Sheet1.json",
         "fileName": "TEST\\PR_CheckVicinityContent\\TEST_PR_CheckVicinityContent.xaml"
+      },
+      {
+        "editingStatus": "InProgress",
+        "testCaseId": "aed05cfa-1140-4f3d-90b5-ebba5175bd20",
+        "dataVariationFilePath": ".variations\\TEST_PR_GetMailByMessageId_TestCases_Sheet1.json",
+        "fileName": "TEST\\PR_SaveMail\\TEST_PR_SaveMail.xaml"
       }
     ],
     "modernBehavior": true

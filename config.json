@@ -33,6 +33,6 @@
 	"VicinityTreshold": "30",
 	"IndicatorForwardTreshold": "0.60",
 	
-	"PathOutputReport": "C:\\Users\\A0796649\\OneDrive - Aon\\Documents\\UiPath\\REQ-117_PolicyIntake\\ReportSummary.xlsx"
-	
+	"PathOutputReport": "C:\\Users\\A0796649\\OneDrive - Aon\\Documents\\UiPath\\REQ-117_PolicyIntake\\ReportSummary.xlsx",
+	"PathMailSave": "C:\\Users\\A0796649\\OneDrive - Aon\\Documents\\UiPath\\REQ-117_PolicyIntake\\MailSaved"
 }
