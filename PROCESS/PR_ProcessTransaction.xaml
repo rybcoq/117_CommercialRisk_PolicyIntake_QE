@@ -207,7 +207,7 @@
                       <av:PointCollection x:Key="ConnectorLocation">300,651.7 300,697</av:PointCollection>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <Sequence DisplayName="Save mail-non temp" sap:VirtualizedContainerService.HintSize="376,266" sap2010:WorkflowViewState.IdRef="Sequence_17">
+                  <Sequence DisplayName="Save mail-non temp" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_17">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -215,18 +215,10 @@
                     </sap:WorkflowViewStateService.ViewState>
                     <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Save mail locally to non temp directory" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_21" UnSafe="False" WorkflowFileName="PROCESS\PR_SaveEmail.xaml">
                       <ui:InvokeWorkflowFile.Arguments>
-                        <InArgument x:TypeArguments="snm:MailMessage" x:Key="MailMessage">
-                          <mva:VisualBasicValue x:TypeArguments="snm:MailMessage" ExpressionText="mailMessage" />
-                        </InArgument>
-                        <InArgument x:TypeArguments="x:String" x:Key="PathFolderToSave">
-                          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="DictConfig(&quot;PathMailSave&quot;)" />
-                        </InArgument>
-                        <InArgument x:TypeArguments="x:String" x:Key="FileName">
-                          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="TransactionQueueItem.SpecificContent(&quot;TempFolderName&quot;).ToString" />
-                        </InArgument>
-                        <OutArgument x:TypeArguments="x:String" x:Key="PathSavedMail">
-                          <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="PathEmail" />
-                        </OutArgument>
+                        <InArgument x:TypeArguments="snm:MailMessage" x:Key="MailMessage">[mailMessage]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="PathFolderToSave">[DictConfig("PathMailSave")]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="FileName">[TransactionQueueItem.SpecificContent("TempFolderName").ToString]</InArgument>
+                        <OutArgument x:TypeArguments="x:String" x:Key="PathSavedMail">[PathEmail]</OutArgument>
                       </ui:InvokeWorkflowFile.Arguments>
                     </ui:InvokeWorkflowFile>
                     <al:ReportProgressStep DisplayName="Report mail saved" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="ReportProgressStep_10" ProgressStepMessage="Mail saved on local drive" TransactionQueueItem="[TransactionQueueItem]">
@@ -644,7 +636,7 @@
                                                       <av:PointCollection x:Key="ConnectorLocation">310,1522.04 310,1562.04</av:PointCollection>
                                                     </scg:Dictionary>
                                                   </sap:WorkflowViewStateService.ViewState>
-                                                  <Sequence DisplayName="Finalize indicators" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_13">
+                                                  <Sequence DisplayName="Finalize indicators" sap:VirtualizedContainerService.HintSize="376,266" sap2010:WorkflowViewState.IdRef="Sequence_13">
                                                     <sap:WorkflowViewStateService.ViewState>
                                                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -658,7 +650,7 @@
                                                         <OutArgument x:TypeArguments="x:Decimal" x:Key="ValueHighestIndicator">[ValueHighestIndicator]</OutArgument>
                                                       </ui:InvokeWorkflowFile.Arguments>
                                                     </ui:InvokeWorkflowFile>
-                                                    <al:ReportProgressStep DisplayName="Report finalize" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="ReportProgressStep_8" ProgressStepMessage="[&quot;Content scanned. Final result: &quot; &amp; IndicatorJsonString]" TransactionQueueItem="[TransactionQueueItem]">
+                                                    <al:ReportProgressStep DisplayName="Report finalize" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="ReportProgressStep_8" ProgressStepMessage="Content scanned" TransactionQueueItem="[TransactionQueueItem]">
                                                       <sap:WorkflowViewStateService.ViewState>
                                                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                                           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
