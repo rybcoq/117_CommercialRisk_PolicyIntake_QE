@@ -8,7 +8,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1684,1383</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1090,1383</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>PR_FilterMailByMessageId_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="32">
@@ -119,7 +119,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <ui:Comment sap:VirtualizedContainerService.HintSize="334,93" sap2010:WorkflowViewState.IdRef="Comment_1" Text="// All attachments are being saved (instead of one) due to possible regex keywords in file name" />
-      <ui:SaveMailAttachments Attachments="[colAttachments]" DisplayName="Save all pdf attachments" Filter=".pdf|.PDF" FolderPath="[PathAttachmentFolder]" sap:VirtualizedContainerService.HintSize="334,89" sap2010:WorkflowViewState.IdRef="SaveMailAttachments_1" Message="[MailMessage]" OverwriteExisting="True" />
+      <ui:SaveMailAttachments Attachments="[colAttachments]" DisplayName="Save all pdf attachments" Filter=".pdf|.PDF|.Pdf" FolderPath="[PathAttachmentFolder]" sap:VirtualizedContainerService.HintSize="334,89" sap2010:WorkflowViewState.IdRef="SaveMailAttachments_1" Message="[MailMessage]" OverwriteExisting="True" />
       <Assign DisplayName="Get single attachment" sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_2">
         <Assign.To>
           <OutArgument x:TypeArguments="s:String[]">[arrAttachment]</OutArgument>
