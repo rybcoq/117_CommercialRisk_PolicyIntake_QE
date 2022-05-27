@@ -32,7 +32,7 @@
 	"PdfPagesMinimumThreshold": "10",
 	"IndicatorWeightMailAttachmentVicinityContent": "0.15",
 	"RegexVicinityKeyword": "PolicyNr|PolicyNumber|PolicyNo|PolicyNbr",
-	"RegexAttachmentNameBlacklistKeyword": "endorsement|endorsment|endt|^end\w|invoice|quote|proposal|lossrun|postingnotice|nonrenewal|cancel|draft",
+	"RegexAttachmentNameBlacklistKeyword": "endorsement|endorsment|endt|^end\\w|invoice|quote|proposal|lossrun|postingnotice|nonrenewal|cancel|draft",
 	"VicinityTreshold": "30",
 	"IndicatorForwardTreshold": "0.60",
 	
