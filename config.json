@@ -24,12 +24,15 @@
 	"PoliciesFileHeaderName": "Policy Number",
 	
 	"IndicatorWeightMailBody": "0.05",
-	"IndicatorWeightMailSubject": "0.15",
+	"IndicatorWeightMailSubject": "0.10",
 	"IndicatorWeightMailAttachmentName": "0.20",
+	"IndicatorWeightDeclarationsSection": "0.10",
 	"IndicatorWeightMailAttachmentContent": "0.40",
 	"PdfPagesRangeLimit": "20",
-	"IndicatorWeightMailAttachmentVicinityContent": "0.20",
+	"PdfPagesMinimumThreshold": "10",
+	"IndicatorWeightMailAttachmentVicinityContent": "0.15",
 	"RegexVicinityKeyword": "PolicyNr|PolicyNumber|PolicyNo|PolicyNbr",
+	"RegexAttachmentNameBlacklistKeyword": "endorsement|endorsment|endt|^end\w|invoice|quote|proposal|lossrun|postingnotice|nonrenewal|cancel|draft",
 	"VicinityTreshold": "30",
 	"IndicatorForwardTreshold": "0.60",
 	
