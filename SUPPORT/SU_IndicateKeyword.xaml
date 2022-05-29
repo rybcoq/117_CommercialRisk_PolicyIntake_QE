@@ -9,7 +9,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1090,911</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1090,1003</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>IndicatePolicyNr_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="52">
@@ -78,10 +78,9 @@
       <AssemblyReference>ARL_Framework</AssemblyReference>
       <AssemblyReference>UiPath.MicrosoftOffice365.Activities.Design</AssemblyReference>
       <AssemblyReference>System.Linq.Async</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="SU_IndicateKeyword" sap:VirtualizedContainerService.HintSize="966,846" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="SU_IndicateKeyword" sap:VirtualizedContainerService.HintSize="1008,938" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="s:String[]" Name="colPoliciesToSearch" />
       <Variable x:TypeArguments="scg:Dictionary(x:String, x:Decimal)" Name="dictInticatorTemp" />
@@ -91,15 +90,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Assign sap:VirtualizedContainerService.HintSize="924,60" sap2010:WorkflowViewState.IdRef="Assign_2">
-      <Assign.To>
-        <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:Decimal)">[dictInticatorTemp]</OutArgument>
-      </Assign.To>
-      <Assign.Value>
-        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Decimal)">[new Dictionary(of string, decimal) (DictInticator)]</InArgument>
-      </Assign.Value>
-    </Assign>
-    <If Condition="[System.Text.RegularExpressions.Regex.IsMatch(StringContent,RegexKeywords,RegexOptions.IgnoreCase and RegexOptions.Multiline)]" DisplayName="If found expression" sap:VirtualizedContainerService.HintSize="924,654" sap2010:WorkflowViewState.IdRef="If_7">
+    <If Condition="[System.Text.RegularExpressions.Regex.IsMatch(StringContent,RegexKeywords,RegexOptions.IgnoreCase and RegexOptions.Multiline)]" DisplayName="If found expression" sap:VirtualizedContainerService.HintSize="966,846" sap2010:WorkflowViewState.IdRef="If_7">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -107,7 +98,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <If.Then>
-        <If Condition="[FlagBlacklistKeyword]" sap:VirtualizedContainerService.HintSize="679,496" sap2010:WorkflowViewState.IdRef="If_8">
+        <If Condition="[FlagBlacklistKeyword]" sap:VirtualizedContainerService.HintSize="721,688" sap2010:WorkflowViewState.IdRef="If_8">
           <If.Then>
             <ae:CreateThrowCustomException DisplayName="[B0048] Blacklist keyword - out of scope" ErrorCategory="Item out of scope" ErrorCode="B0048" ErrorDescription="Blacklisted expression found" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="CreateThrowCustomException_1">
               <sap:WorkflowViewStateService.ViewState>
@@ -119,31 +110,52 @@
             </ae:CreateThrowCustomException>
           </If.Then>
           <If.Else>
-            <ui:ForEach x:TypeArguments="scg:KeyValuePair(x:String, x:Decimal)" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="434,338" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[dictInticatorTemp]">
-              <ui:ForEach.Body>
-                <ActivityAction x:TypeArguments="scg:KeyValuePair(x:String, x:Decimal)">
-                  <ActivityAction.Argument>
-                    <DelegateInArgument x:TypeArguments="scg:KeyValuePair(x:String, x:Decimal)" Name="kvp" />
-                  </ActivityAction.Argument>
-                  <Sequence DisplayName="Increment indicator" sap:VirtualizedContainerService.HintSize="304,214" sap2010:WorkflowViewState.IdRef="Sequence_4">
-                    <sap:WorkflowViewStateService.ViewState>
-                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                      </scg:Dictionary>
-                    </sap:WorkflowViewStateService.ViewState>
-                    <al:Logging ErrorCode="{x:Null}" ErrorDescription="{x:Null}" ExceptionObject="{x:Null}" FlagInfo="{x:Null}" DisplayName="Log incremented indicator" sap:VirtualizedContainerService.HintSize="262,22" sap2010:WorkflowViewState.IdRef="Logging_4" LogMessage="[&quot;Matched '&quot; &amp; RegexKeywords &amp; &quot;' keyword, Indicator incremented with: &quot; &amp; Weight.ToString]" />
-                    <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_1">
-                      <Assign.To>
-                        <OutArgument x:TypeArguments="x:Decimal">[DictInticator(kvp.key)]</OutArgument>
-                      </Assign.To>
-                      <Assign.Value>
-                        <InArgument x:TypeArguments="x:Decimal">[kvp.Value+Weight]</InArgument>
-                      </Assign.Value>
-                    </Assign>
-                  </Sequence>
-                </ActivityAction>
-              </ui:ForEach.Body>
-            </ui:ForEach>
+            <Sequence sap:VirtualizedContainerService.HintSize="476,530" sap2010:WorkflowViewState.IdRef="Sequence_6">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <Assign DisplayName="Assign temp dictionary" sap:VirtualizedContainerService.HintSize="434,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:Decimal)">[dictInticatorTemp]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Decimal)">[new Dictionary(of string, decimal) (DictInticator)]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <ui:ForEach x:TypeArguments="scg:KeyValuePair(x:String, x:Decimal)" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="434,338" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[dictInticatorTemp]">
+                <ui:ForEach.Body>
+                  <ActivityAction x:TypeArguments="scg:KeyValuePair(x:String, x:Decimal)">
+                    <ActivityAction.Argument>
+                      <DelegateInArgument x:TypeArguments="scg:KeyValuePair(x:String, x:Decimal)" Name="kvp" />
+                    </ActivityAction.Argument>
+                    <Sequence DisplayName="Increment indicator" sap:VirtualizedContainerService.HintSize="304,214" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <al:Logging ErrorCode="{x:Null}" ErrorDescription="{x:Null}" ExceptionObject="{x:Null}" FlagInfo="{x:Null}" DisplayName="Log incremented indicator" sap:VirtualizedContainerService.HintSize="262,22" sap2010:WorkflowViewState.IdRef="Logging_5" LogMessage="[&quot;Matched '&quot; &amp; RegexKeywords &amp; &quot;' keyword, Indicator incremented with: &quot; &amp; Weight.ToString]" />
+                      <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_3">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:Decimal">[DictInticator(kvp.key)]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:Decimal">[kvp.Value+Weight]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                    </Sequence>
+                  </ActivityAction>
+                </ui:ForEach.Body>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </ui:ForEach>
+            </Sequence>
           </If.Else>
         </If>
       </If.Then>
