@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="PR_GetPdfContent" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:ae="clr-namespace:ARL_Framework.Error_Handling;assembly=ARL_Framework" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:upap="clr-namespace:UiPath.PDF.Activities.PDF;assembly=UiPath.PDF.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="PR_GetPdfContent" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:ae="clr-namespace:ARL_Framework.Error_Handling;assembly=ARL_Framework" xmlns:al="clr-namespace:ARL_Framework.Logging_and_Reporting;assembly=ARL_Framework" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Drawing;assembly=System.Drawing" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:upap="clr-namespace:UiPath.PDF.Activities.PDF;assembly=UiPath.PDF.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="PathPdfFile" Type="InArgument(x:String)" />
     <x:Property Name="PdfPagesLimit" Type="InArgument(x:Int32)" />
@@ -8,7 +8,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1090,850</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1129,1864</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>PR_GetPdfContent_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="54">
@@ -40,6 +40,13 @@
       <x:String>UiPath.PDF.Activities</x:String>
       <x:String>System.Activities.DynamicUpdate</x:String>
       <x:String>ARL_Framework.Error_Handling</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>ARL_Framework.Logging_and_Reporting</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.Vision.OCR</x:String>
+      <x:String>UiPath.OCR.Contracts</x:String>
+      <x:String>UiPath.OCR.Contracts.Activities</x:String>
+      <x:String>UiPath.Core.Activities.OCR.Engines</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -69,22 +76,50 @@
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>UiPath.MicrosoftOffice365.Activities.Design</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
       <AssemblyReference>ARL_Framework</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.MicrosoftOffice365.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Vision.Core</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Contracts</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="PR_GetPdfContent" sap:VirtualizedContainerService.HintSize="611,785" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="PR_GetPdfContent" sap:VirtualizedContainerService.HintSize="695,1799" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:Int32" Name="countPages" />
       <Variable x:TypeArguments="x:String" Name="rangePDF" />
+      <Variable x:TypeArguments="x:Int32" Name="lastPage" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <upap:GetPDFPageCount DisplayName="Get PDF Page Count" FileName="[PathPdfFile]" sap:VirtualizedContainerService.HintSize="569,59" sap2010:WorkflowViewState.IdRef="GetPDFPageCount_1" PageCount="[countPages]" />
-    <If Condition="[countPages&lt;PdfPagesThreshold]" DisplayName="If threshold not met" sap:VirtualizedContainerService.HintSize="569,237" sap2010:WorkflowViewState.IdRef="If_2">
+    <TryCatch DisplayName="Try Catch - get PDF pages" sap:VirtualizedContainerService.HintSize="653,287" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+      <TryCatch.Try>
+        <upap:GetPDFPageCount DisplayName="Get PDF Page Count" FileName="[PathPdfFile]" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="GetPDFPageCount_1" PageCount="[countPages]" />
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ActivityAction x:TypeArguments="s:Exception">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+            </ActivityAction.Argument>
+            <ae:CreateThrowCustomException DisplayName="[S0047] Cannot read PDF" ErrorCategory="Failed to open the file" ErrorCode="S0047" ErrorDescription="[&quot;Problem with reading PDF file. Original message:&quot; &amp; exception.Message]" sap:VirtualizedContainerService.HintSize="334,185" sap2010:WorkflowViewState.IdRef="CreateThrowCustomException_3" />
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+    </TryCatch>
+    <If Condition="[countPages&lt;PdfPagesThreshold]" DisplayName="If threshold not met" sap:VirtualizedContainerService.HintSize="653,237" sap2010:WorkflowViewState.IdRef="If_2">
       <If.Then>
         <ae:CreateThrowCustomException DisplayName="[B0048] Pdf file size is too small" ErrorCategory="Item out of scope" ErrorCode="B0048" ErrorDescription="Pdf file size is too small" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="CreateThrowCustomException_1">
           <sap:WorkflowViewStateService.ViewState>
@@ -105,28 +140,96 @@
         </Sequence>
       </If.Else>
     </If>
-    <If Condition="[countPages&gt;PdfPagesLimit]" DisplayName="If exceeds limit" sap:VirtualizedContainerService.HintSize="569,218" sap2010:WorkflowViewState.IdRef="If_1">
+    <If Condition="[countPages&gt;PdfPagesLimit]" DisplayName="If exceeds limit" sap:VirtualizedContainerService.HintSize="653,410" sap2010:WorkflowViewState.IdRef="If_1">
       <If.Then>
-        <Assign DisplayName="Limit range" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_1">
-          <Assign.To>
-            <OutArgument x:TypeArguments="x:String">[rangePDF]</OutArgument>
-          </Assign.To>
-          <Assign.Value>
-            <InArgument x:TypeArguments="x:String">["1-" &amp; PdfPagesLimit.ToString]</InArgument>
-          </Assign.Value>
-        </Assign>
+        <Sequence DisplayName="Exceed limit" sap:VirtualizedContainerService.HintSize="304,252" sap2010:WorkflowViewState.IdRef="Sequence_6">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Assign DisplayName="Limit range" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[rangePDF]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">["1-" &amp; PdfPagesLimit.ToString]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <Assign DisplayName="Assign last page-exceed limit" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_3">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:Int32">[lastPage]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:Int32">[PdfPagesLimit]</InArgument>
+            </Assign.Value>
+          </Assign>
+        </Sequence>
       </If.Then>
       <If.Else>
-        <Assign DisplayName="Unlimited range" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_2">
-          <Assign.To>
-            <OutArgument x:TypeArguments="x:String">[rangePDF]</OutArgument>
-          </Assign.To>
-          <Assign.Value>
-            <InArgument x:TypeArguments="x:String">All</InArgument>
-          </Assign.Value>
-        </Assign>
+        <Sequence DisplayName="Fit limit" sap:VirtualizedContainerService.HintSize="304,252" sap2010:WorkflowViewState.IdRef="Sequence_7">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Assign DisplayName="Unlimited range" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[rangePDF]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">All</InArgument>
+            </Assign.Value>
+          </Assign>
+          <Assign DisplayName="Assign last page-fit limit" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_4">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:Int32">[lastPage]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:Int32">[countPages]</InArgument>
+            </Assign.Value>
+          </Assign>
+        </Sequence>
       </If.Else>
     </If>
-    <ui:ReadPDFText PreserveFormatting="{x:Null}" DisplayName="Read PDF Text" FileName="[PathPdfFile]" sap:VirtualizedContainerService.HintSize="569,59" sap2010:WorkflowViewState.IdRef="ReadPDFText_1" Range="[rangePDF]" Text="[PdfContent]" />
+    <Sequence DisplayName="Read PDF" sap:VirtualizedContainerService.HintSize="653,653" sap2010:WorkflowViewState.IdRef="Sequence_3">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:ReadPDFText PreserveFormatting="{x:Null}" DisplayName="Read PDF Text" FileName="[PathPdfFile]" sap:VirtualizedContainerService.HintSize="484,59" sap2010:WorkflowViewState.IdRef="ReadPDFText_1" Range="[rangePDF]" Text="[PdfContent]" />
+      <If Condition="[PdfContent.Length&lt;lastPage*10]" DisplayName="If not enough characters" sap:VirtualizedContainerService.HintSize="484,462" sap2010:WorkflowViewState.IdRef="If_3">
+        <If.Then>
+          <Sequence DisplayName="Read with OCR" sap:VirtualizedContainerService.HintSize="376,285" sap2010:WorkflowViewState.IdRef="Sequence_5">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <al:Logging ErrorCode="{x:Null}" ErrorDescription="{x:Null}" ExceptionObject="{x:Null}" FlagInfo="{x:Null}" DisplayName="Log problem with reading" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="Logging_1" LogMessage="Entire or part of PDF document is non-readable. Using OCR engine." />
+            <ui:ReadPDFWithOCR DegreeOfParallelism="-1" DisplayName="Read PDF With OCR" FileName="[PathPdfFile]" sap:VirtualizedContainerService.HintSize="334,131" sap2010:WorkflowViewState.IdRef="ReadPDFWithOCR_1" ImageDpi="150" Range="[rangePDF]" Text="[PdfContent]">
+              <ui:ReadPDFWithOCR.OCREngine>
+                <ActivityFunc x:TypeArguments="sd:Image, scg:IEnumerable(scg:KeyValuePair(sd:Rectangle, x:String))">
+                  <ActivityFunc.Argument>
+                    <DelegateInArgument x:TypeArguments="sd:Image" Name="Image" />
+                  </ActivityFunc.Argument>
+                  <ui:MicrosoftOCR FilterRegion="{x:Null}" Language="{x:Null}" Output="{x:Null}" Scale="{x:Null}" Text="{x:Null}" ComputeSkewAngle="False" DisplayName="Microsoft OCR" ExtractWords="False" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="MicrosoftOCR_1" Image="[Image]" Profile="None" />
+                </ActivityFunc>
+              </ui:ReadPDFWithOCR.OCREngine>
+            </ui:ReadPDFWithOCR>
+          </Sequence>
+        </If.Then>
+        <If.Else>
+          <Sequence sap2010:WorkflowViewState.IdRef="Sequence_4">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </Sequence>
+        </If.Else>
+      </If>
+    </Sequence>
   </Sequence>
 </Activity>

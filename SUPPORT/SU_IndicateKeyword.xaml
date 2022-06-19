@@ -5,11 +5,12 @@
     <x:Property Name="DictInticator" Type="InOutArgument(scg:Dictionary(x:String, x:Decimal))" />
     <x:Property Name="FlagBlacklistKeyword" Type="InArgument(x:Boolean)" />
     <x:Property Name="Weight" Type="InArgument(x:Decimal)" />
+    <x:Property Name="FlagKeywordFound" Type="OutArgument(x:Boolean)" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1090,1003</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1057,1203</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>IndicatePolicyNr_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="52">
@@ -78,9 +79,10 @@
       <AssemblyReference>ARL_Framework</AssemblyReference>
       <AssemblyReference>UiPath.MicrosoftOffice365.Activities.Design</AssemblyReference>
       <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="SU_IndicateKeyword" sap:VirtualizedContainerService.HintSize="1008,938" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="SU_IndicateKeyword" sap:VirtualizedContainerService.HintSize="1008,1138" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="s:String[]" Name="colPoliciesToSearch" />
       <Variable x:TypeArguments="scg:Dictionary(x:String, x:Decimal)" Name="dictInticatorTemp" />
@@ -90,7 +92,15 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <If Condition="[System.Text.RegularExpressions.Regex.IsMatch(StringContent,RegexKeywords,RegexOptions.IgnoreCase and RegexOptions.Multiline)]" DisplayName="If found expression" sap:VirtualizedContainerService.HintSize="966,846" sap2010:WorkflowViewState.IdRef="If_7">
+    <Assign DisplayName="Assign default flag" sap:VirtualizedContainerService.HintSize="966,60" sap2010:WorkflowViewState.IdRef="Assign_5">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:Boolean">[FlagKeywordFound]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+      </Assign.Value>
+    </Assign>
+    <If Condition="[System.Text.RegularExpressions.Regex.IsMatch(StringContent,RegexKeywords,RegexOptions.IgnoreCase)]" DisplayName="If found expression" sap:VirtualizedContainerService.HintSize="966,946" sap2010:WorkflowViewState.IdRef="If_7">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -98,7 +108,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <If.Then>
-        <If Condition="[FlagBlacklistKeyword]" sap:VirtualizedContainerService.HintSize="721,688" sap2010:WorkflowViewState.IdRef="If_8">
+        <If Condition="[FlagBlacklistKeyword]" sap:VirtualizedContainerService.HintSize="721,788" sap2010:WorkflowViewState.IdRef="If_8">
           <If.Then>
             <ae:CreateThrowCustomException DisplayName="[B0048] Blacklist keyword - out of scope" ErrorCategory="Item out of scope" ErrorCode="B0048" ErrorDescription="Blacklisted expression found" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="CreateThrowCustomException_1">
               <sap:WorkflowViewStateService.ViewState>
@@ -110,7 +120,7 @@
             </ae:CreateThrowCustomException>
           </If.Then>
           <If.Else>
-            <Sequence sap:VirtualizedContainerService.HintSize="476,530" sap2010:WorkflowViewState.IdRef="Sequence_6">
+            <Sequence sap:VirtualizedContainerService.HintSize="476,630" sap2010:WorkflowViewState.IdRef="Sequence_6">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -155,6 +165,14 @@
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
               </ui:ForEach>
+              <Assign DisplayName="Assign flag" sap:VirtualizedContainerService.HintSize="434,60" sap2010:WorkflowViewState.IdRef="Assign_4">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:Boolean">[FlagKeywordFound]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                </Assign.Value>
+              </Assign>
             </Sequence>
           </If.Else>
         </If>

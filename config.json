@@ -32,9 +32,12 @@
 	"PdfPagesMinimumThreshold": "10",
 	"IndicatorWeightMailAttachmentVicinityContent": "0.15",
 	"RegexVicinityKeyword": "PolicyNr|PolicyNumber|PolicyNo|PolicyNbr",
-	"RegexAttachmentNameBlacklistKeyword": "endorsement|endorsment|endt|^end\\w|invoice|quote|proposal|lossrun|postingnotice|nonrenewal|cancel|draft",
+	"AssetRegexAttachmentNameBlacklistKeyword": "REQ-117_RegexAttachmentNameBlacklistKeyword",
 	"VicinityTreshold": "30",
-	"IndicatorForwardTreshold": "0.60",
+	"ExtraTimeDifferenceThreshold": "0.10",
+	"IndicatorExtraTime": "0.10",
+	"RegexExtraTimeKeyword": "Policy|Policies|Plc",
+	"IndicatorForwardThreshold": "0.60",
 	
 	"PathOutputReport": "C:\\Users\\A0796649\\OneDrive - Aon\\Documents\\UiPath\\REQ-117_PolicyIntake\\ReportSummary.xlsx",
 	"PathMailSave": "C:\\Users\\A0796649\\OneDrive - Aon\\Documents\\UiPath\\REQ-117_PolicyIntake\\MailSaved"
