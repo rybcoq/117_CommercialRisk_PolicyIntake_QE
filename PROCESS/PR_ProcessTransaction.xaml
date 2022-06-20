@@ -418,7 +418,7 @@
                                       <av:PointCollection x:Key="ConnectorLocation">300,1065 300,1105</av:PointCollection>
                                     </scg:Dictionary>
                                   </sap:WorkflowViewStateService.ViewState>
-                                  <Sequence DisplayName="Scan mail attachment name" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                                  <Sequence DisplayName="Scan mail attachment name" sap:VirtualizedContainerService.HintSize="382,894" sap2010:WorkflowViewState.IdRef="Sequence_6">
                                     <Sequence.Variables>
                                       <Variable x:TypeArguments="x:Decimal" Name="weightMailAttachmentName" />
                                     </Sequence.Variables>
@@ -448,7 +448,7 @@
                                           <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="mailAttachmentNameCleared.ToLower" />
                                         </InArgument>
                                         <InArgument x:TypeArguments="x:String" x:Key="RegexKeywords">
-                                          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="DictConfig(&quot;AssetRegexAttachmentNameBlacklistKeyword&quot;)" />
+                                          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="DictConfig(&quot;Asset_RegexAttachmentNameBlacklistKeyword&quot;)" />
                                         </InArgument>
                                         <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Decimal)" x:Key="DictInticator" />
                                         <InArgument x:TypeArguments="x:Boolean" x:Key="FlagBlacklistKeyword">
@@ -544,21 +544,11 @@
                                         </Assign>
                                         <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Indicate declarations keyword" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_24" UnSafe="False" WorkflowFileName="SUPPORT\SU_IndicateKeyword.xaml">
                                           <ui:InvokeWorkflowFile.Arguments>
-                                            <InArgument x:TypeArguments="x:String" x:Key="StringContent">
-                                              <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="mailAttachmentContentCleared" />
-                                            </InArgument>
-                                            <InArgument x:TypeArguments="x:String" x:Key="RegexKeywords">
-                                              <Literal x:TypeArguments="x:String">Declarations</Literal>
-                                            </InArgument>
-                                            <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Decimal)" x:Key="DictInticator">
-                                              <mva:VisualBasicReference x:TypeArguments="scg:Dictionary(x:String, x:Decimal)" ExpressionText="dictIndicator" />
-                                            </InOutArgument>
-                                            <InArgument x:TypeArguments="x:Boolean" x:Key="FlagBlacklistKeyword">
-                                              <Literal x:TypeArguments="x:Boolean" />
-                                            </InArgument>
-                                            <InArgument x:TypeArguments="x:Decimal" x:Key="Weight">
-                                              <mva:VisualBasicValue x:TypeArguments="x:Decimal" ExpressionText="weightDeclarations" />
-                                            </InArgument>
+                                            <InArgument x:TypeArguments="x:String" x:Key="StringContent">[mailAttachmentContentCleared]</InArgument>
+                                            <InArgument x:TypeArguments="x:String" x:Key="RegexKeywords">Declarations</InArgument>
+                                            <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Decimal)" x:Key="DictInticator">[dictIndicator]</InOutArgument>
+                                            <InArgument x:TypeArguments="x:Boolean" x:Key="FlagBlacklistKeyword">False</InArgument>
+                                            <InArgument x:TypeArguments="x:Decimal" x:Key="Weight">[weightDeclarations]</InArgument>
                                             <OutArgument x:TypeArguments="x:Boolean" x:Key="FlagKeywordFound" />
                                           </ui:InvokeWorkflowFile.Arguments>
                                         </ui:InvokeWorkflowFile>
@@ -698,10 +688,7 @@
                                                     </ui:InvokeWorkflowFile>
                                                   </Sequence>
                                                   <FlowStep.Next>
-                                                    <FlowDecision x:Name="__ReferenceID13" DisplayName="Extra time?" sap:VirtualizedContainerService.HintSize="70,87" sap2010:WorkflowViewState.IdRef="FlowDecision_2">
-                                                      <FlowDecision.Condition>
-                                                        <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="(CDbl(DictConfig(&quot;IndicatorForwardThreshold&quot;))-ValueHighestIndicator&lt;=CDbl(DictConfig(&quot;ExtraTimeThreshold&quot;))) AND (ValueHighestIndicator&lt;CDbl(DictConfig(&quot;IndicatorForwardThreshold&quot;)))" />
-                                                      </FlowDecision.Condition>
+                                                    <FlowDecision x:Name="__ReferenceID13" Condition="[(CDbl(DictConfig(&quot;IndicatorForwardThreshold&quot;))-ValueHighestIndicator&lt;=CDbl(DictConfig(&quot;ExtraTimeThreshold&quot;))) AND (ValueHighestIndicator&lt;CDbl(DictConfig(&quot;IndicatorForwardThreshold&quot;)))]" DisplayName="Extra time?" sap:VirtualizedContainerService.HintSize="70,87" sap2010:WorkflowViewState.IdRef="FlowDecision_2">
                                                       <sap:WorkflowViewStateService.ViewState>
                                                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -728,18 +715,10 @@
                                                             </sap:WorkflowViewStateService.ViewState>
                                                             <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Perform extra time" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_25" UnSafe="False" WorkflowFileName="PROCESS\PR_PerformExtraTime.xaml">
                                                               <ui:InvokeWorkflowFile.Arguments>
-                                                                <InArgument x:TypeArguments="x:String" x:Key="MailAttachmentNameCleared">
-                                                                  <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="mailAttachmentNameCleared" />
-                                                                </InArgument>
-                                                                <InArgument x:TypeArguments="x:String" x:Key="MailSubjectCleared">
-                                                                  <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="mailSubjectCleared" />
-                                                                </InArgument>
-                                                                <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="DictConfig">
-                                                                  <mva:VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:String)" ExpressionText="DictConfig" />
-                                                                </InArgument>
-                                                                <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Decimal)" x:Key="DictIndicator">
-                                                                  <mva:VisualBasicReference x:TypeArguments="scg:Dictionary(x:String, x:Decimal)" ExpressionText="dictIndicator" />
-                                                                </InOutArgument>
+                                                                <InArgument x:TypeArguments="x:String" x:Key="MailAttachmentNameCleared">[mailAttachmentNameCleared]</InArgument>
+                                                                <InArgument x:TypeArguments="x:String" x:Key="MailSubjectCleared">[mailSubjectCleared]</InArgument>
+                                                                <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="DictConfig">[DictConfig]</InArgument>
+                                                                <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Decimal)" x:Key="DictIndicator">[dictIndicator]</InOutArgument>
                                                               </ui:InvokeWorkflowFile.Arguments>
                                                             </ui:InvokeWorkflowFile>
                                                             <al:ReportProgressStep DisplayName="Report extra time" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="ReportProgressStep_11" ProgressStepMessage="Extra time" TransactionQueueItem="[TransactionQueueItem]">

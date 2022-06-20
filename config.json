@@ -32,7 +32,7 @@
 	"PdfPagesMinimumThreshold": "10",
 	"IndicatorWeightMailAttachmentVicinityContent": "0.15",
 	"RegexVicinityKeyword": "PolicyNr|PolicyNumber|PolicyNo|PolicyNbr",
-	"AssetRegexAttachmentNameBlacklistKeyword": "REQ-117_RegexAttachmentNameBlacklistKeyword",
+	"Asset_RegexAttachmentNameBlacklistKeyword": "REQ-117_RegexAttachmentNameBlacklistKeyword",
 	"VicinityTreshold": "30",
 	"ExtraTimeDifferenceThreshold": "0.10",
 	"IndicatorExtraTime": "0.10",
