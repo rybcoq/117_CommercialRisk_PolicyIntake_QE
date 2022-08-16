@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1090,902" sap2010:WorkflowViewState.IdRef="Main_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:ac="clr-namespace:ARL_Framework.Configuration;assembly=ARL_Framework" xmlns:ad="clr-namespace:ARL_DataManipulation.Datatypes_Initialization;assembly=ARL_DataManipulation" xmlns:af="clr-namespace:ARL_SystemInteractions.Files_and_Folders_Manipulation;assembly=ARL_SystemInteractions" xmlns:al="clr-namespace:ARL_Framework.Logging_and_Reporting;assembly=ARL_Framework" xmlns:as="clr-namespace:ARL_Mail.SMTP;assembly=ARL_Mail" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1040,902" sap2010:WorkflowViewState.IdRef="Main_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:ac="clr-namespace:ARL_Framework.Configuration;assembly=ARL_Framework" xmlns:ad="clr-namespace:ARL_DataManipulation.Datatypes_Initialization;assembly=ARL_DataManipulation" xmlns:af="clr-namespace:ARL_SystemInteractions.Files_and_Folders_Manipulation;assembly=ARL_SystemInteractions" xmlns:al="clr-namespace:ARL_Framework.Logging_and_Reporting;assembly=ARL_Framework" xmlns:as="clr-namespace:ARL_Mail.SMTP;assembly=ARL_Mail" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="34">
       <x:String>System.Activities</x:String>
@@ -89,7 +89,7 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <State x:Name="__ReferenceID0" sap2010:Annotation.AnnotationText="Clear environment and temp." DisplayName="End state" sap:VirtualizedContainerService.HintSize="572,1499" sap2010:WorkflowViewState.IdRef="State_1" IsFinal="True">
+    <State x:Name="__ReferenceID0" sap2010:Annotation.AnnotationText="Clear environment and temp." DisplayName="End state" sap:VirtualizedContainerService.HintSize="134,118" sap2010:WorkflowViewState.IdRef="State_1" IsFinal="True">
       <State.Entry>
         <Sequence DisplayName="End state sequence" sap:VirtualizedContainerService.HintSize="526,1355" sap2010:WorkflowViewState.IdRef="Sequence_14">
           <sap:WorkflowViewStateService.ViewState>
@@ -376,7 +376,7 @@
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
                           <ui:Comment DisplayName="Comment-Create summary datatable" sap:VirtualizedContainerService.HintSize="334,207" sap2010:WorkflowViewState.IdRef="Comment_9" Text="// Standard ARF summary set of columns is 'ItemId', 'Status', 'RetryNr', 'ErrorCategory', 'ErrorType', 'ErrorCode', 'ErrorMessage' and 'Progress' - *do not remove default ones*. You can create additional columns according to your needs. Be aware to add those additional columns handling to 'PR_UpdateSummaryDt.xaml' file which is invoked in process-finally state machine." />
-                          <ad:InitDatatable ArrColumnNames="[{&quot;ItemId&quot;, &quot;Status&quot;, &quot;RetryNr&quot;, &quot;ErrorCategory&quot;, &quot;ErrorType&quot;, &quot;ErrorCode&quot;, &quot;ErrorMessage&quot;,&quot;Progress&quot;, &quot;MailSubject&quot;,&quot;MailSender&quot;, &quot;AttachmentPdf&quot;,&quot;MatchedPolicies&quot;, &quot;MatchedPolicyNr&quot;,&quot;MatchedPolicyIndicator&quot;, &quot;Timestamp&quot;, &quot;PathEmail&quot;}]" DisplayName="Init summary datatable" DtOutput="[dtSummary]" sap:VirtualizedContainerService.HintSize="334,79" sap2010:WorkflowViewState.IdRef="InitDatatable_3" />
+                          <ad:InitDatatable ArrColumnNames="[{&quot;ItemId&quot;, &quot;Status&quot;, &quot;RetryNr&quot;, &quot;ErrorCategory&quot;, &quot;ErrorType&quot;, &quot;ErrorCode&quot;, &quot;ErrorMessage&quot;,&quot;Progress&quot;, &quot;MailSubject&quot;,&quot;MailSender&quot;, &quot;AttachmentPdf&quot;,&quot;MatchedPolicies&quot;, &quot;MatchedPolicyNr&quot;,&quot;MatchedPolicyIndicator&quot;, &quot;Timestamp&quot;}]" DisplayName="Init summary datatable" DtOutput="[dtSummary]" sap:VirtualizedContainerService.HintSize="334,79" sap2010:WorkflowViewState.IdRef="InitDatatable_3" />
                         </Sequence>
                       </If.Then>
                     </If>
@@ -692,13 +692,24 @@
                               </Sequence>
                               <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Process transaction" sap:VirtualizedContainerService.HintSize="376,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="PROCESS\PR_ProcessTransaction.xaml">
                                 <ui:InvokeWorkflowFile.Arguments>
-                                  <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="DictConfig">[dictConfig]</InArgument>
-                                  <InArgument x:TypeArguments="ui:QueueItem" x:Key="TransactionQueueItem">[transactionQueueItem]</InArgument>
-                                  <InArgument x:TypeArguments="s:String[]" x:Key="ArrPolicies">[arrPolicies]</InArgument>
-                                  <OutArgument x:TypeArguments="x:Decimal" x:Key="ValueHighestIndicator">[valueHighestIndicator]</OutArgument>
-                                  <OutArgument x:TypeArguments="x:String" x:Key="PolicyNrHighestIndicator">[policyNrHighestIndicator]</OutArgument>
-                                  <OutArgument x:TypeArguments="x:String" x:Key="IndicatorJsonString">[indicatorJsonString]</OutArgument>
-                                  <OutArgument x:TypeArguments="x:String" x:Key="PathEmail">[pathEmail]</OutArgument>
+                                  <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="DictConfig">
+                                    <mva:VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:String)" ExpressionText="dictConfig" />
+                                  </InArgument>
+                                  <InArgument x:TypeArguments="ui:QueueItem" x:Key="TransactionQueueItem">
+                                    <mva:VisualBasicValue x:TypeArguments="ui:QueueItem" ExpressionText="transactionQueueItem" />
+                                  </InArgument>
+                                  <InArgument x:TypeArguments="s:String[]" x:Key="ArrPolicies">
+                                    <mva:VisualBasicValue x:TypeArguments="s:String[]" ExpressionText="arrPolicies" />
+                                  </InArgument>
+                                  <OutArgument x:TypeArguments="x:Decimal" x:Key="ValueHighestIndicator">
+                                    <mva:VisualBasicReference x:TypeArguments="x:Decimal" ExpressionText="valueHighestIndicator" />
+                                  </OutArgument>
+                                  <OutArgument x:TypeArguments="x:String" x:Key="PolicyNrHighestIndicator">
+                                    <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="policyNrHighestIndicator" />
+                                  </OutArgument>
+                                  <OutArgument x:TypeArguments="x:String" x:Key="IndicatorJsonString">
+                                    <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="indicatorJsonString" />
+                                  </OutArgument>
                                 </ui:InvokeWorkflowFile.Arguments>
                               </ui:InvokeWorkflowFile>
                             </Sequence>
@@ -715,7 +726,7 @@
                                 <ActivityAction.Argument>
                                   <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
                                 </ActivityAction.Argument>
-                                <Sequence DisplayName="Catch process transaction" sap:VirtualizedContainerService.HintSize="387,551" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                                <Sequence DisplayName="Catch process transaction" sap:VirtualizedContainerService.HintSize="387,548" sap2010:WorkflowViewState.IdRef="Sequence_10">
                                   <sap:WorkflowViewStateService.ViewState>
                                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -787,16 +798,33 @@
                                     <If.Then>
                                       <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Update Summary datatable" sap:VirtualizedContainerService.HintSize="379,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_50" UnSafe="False" WorkflowFileName="PROCESS/PROCESS_FRAMEWORK/PR_UpdateSummaryDt.xaml">
                                         <ui:InvokeWorkflowFile.Arguments>
-                                          <InArgument x:TypeArguments="s:Exception" x:Key="ExceptionArgument">[exceptionProcessing]</InArgument>
-                                          <InOutArgument x:TypeArguments="sd:DataTable" x:Key="DtSummary">[dtSummary]</InOutArgument>
-                                          <InArgument x:TypeArguments="ui:QueueItem" x:Key="TransactionItem">[transactionQueueItem]</InArgument>
-                                          <InArgument x:TypeArguments="x:Decimal" x:Key="ValueHighestIndicator">[valueHighestIndicator]</InArgument>
-                                          <InArgument x:TypeArguments="x:String" x:Key="PolicyNrHighestIndicator">[policyNrHighestIndicator]</InArgument>
-                                          <InArgument x:TypeArguments="x:String" x:Key="IndicatorJsonString">[indicatorJsonString]</InArgument>
-                                          <InArgument x:TypeArguments="x:String" x:Key="MailSubject">[TransactionQueueItem.SpecificContent("MailSubject").ToString]</InArgument>
-                                          <InArgument x:TypeArguments="x:String" x:Key="MailSender">[TransactionQueueItem.SpecificContent("MailSender").ToString]</InArgument>
-                                          <InArgument x:TypeArguments="x:String" x:Key="AttachmentPdf">[TransactionQueueItem.SpecificContent("AttachmentName").ToString]</InArgument>
-                                          <InArgument x:TypeArguments="x:String" x:Key="PathEmail">[pathEmail]</InArgument>
+                                          <InArgument x:TypeArguments="s:Exception" x:Key="ExceptionArgument">
+                                            <mva:VisualBasicValue x:TypeArguments="s:Exception" ExpressionText="exceptionProcessing" />
+                                          </InArgument>
+                                          <InOutArgument x:TypeArguments="sd:DataTable" x:Key="DtSummary">
+                                            <mva:VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="dtSummary" />
+                                          </InOutArgument>
+                                          <InArgument x:TypeArguments="ui:QueueItem" x:Key="TransactionItem">
+                                            <mva:VisualBasicValue x:TypeArguments="ui:QueueItem" ExpressionText="transactionQueueItem" />
+                                          </InArgument>
+                                          <InArgument x:TypeArguments="x:Decimal" x:Key="ValueHighestIndicator">
+                                            <mva:VisualBasicValue x:TypeArguments="x:Decimal" ExpressionText="valueHighestIndicator" />
+                                          </InArgument>
+                                          <InArgument x:TypeArguments="x:String" x:Key="PolicyNrHighestIndicator">
+                                            <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="policyNrHighestIndicator" />
+                                          </InArgument>
+                                          <InArgument x:TypeArguments="x:String" x:Key="IndicatorJsonString">
+                                            <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="indicatorJsonString" />
+                                          </InArgument>
+                                          <InArgument x:TypeArguments="x:String" x:Key="MailSubject">
+                                            <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="TransactionQueueItem.SpecificContent(&quot;MailSubject&quot;).ToString" />
+                                          </InArgument>
+                                          <InArgument x:TypeArguments="x:String" x:Key="MailSender">
+                                            <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="TransactionQueueItem.SpecificContent(&quot;MailSender&quot;).ToString" />
+                                          </InArgument>
+                                          <InArgument x:TypeArguments="x:String" x:Key="AttachmentPdf">
+                                            <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="TransactionQueueItem.SpecificContent(&quot;AttachmentName&quot;).ToString" />
+                                          </InArgument>
                                         </ui:InvokeWorkflowFile.Arguments>
                                       </ui:InvokeWorkflowFile>
                                     </If.Then>
@@ -930,7 +958,6 @@
                         <Variable x:TypeArguments="x:Decimal" Name="valueHighestIndicator" />
                         <Variable x:TypeArguments="x:String" Name="policyNrHighestIndicator" />
                         <Variable x:TypeArguments="x:String" Name="indicatorJsonString" />
-                        <Variable x:TypeArguments="x:String" Name="pathEmail" />
                       </State.Variables>
                     </State>
                   </Transition.To>

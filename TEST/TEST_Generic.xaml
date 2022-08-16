@@ -1,6 +1,6 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="TEST_Generic" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1057,713" sap2010:WorkflowViewState.IdRef="TEST_Generic_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:ac="clr-namespace:ARL_Framework.Configuration;assembly=ARL_Framework" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="TEST_Generic" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1040,950" sap2010:WorkflowViewState.IdRef="TEST_Generic_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:ac="clr-namespace:ARL_Framework.Configuration;assembly=ARL_Framework" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:snm="clr-namespace:System.Net.Mail;assembly=System" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:um="clr-namespace:UiPath.Mail;assembly=UiPath.Mail.Activities" xmlns:umab="clr-namespace:UiPath.Mail.Activities.Business;assembly=UiPath.Mail.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="44">
+    <scg:List x:TypeArguments="x:String" Capacity="100">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -45,10 +45,18 @@
       <x:String>UiPath.OCR.Contracts.Activities</x:String>
       <x:String>UiPath.Core.Activities.OCR.Engines</x:String>
       <x:String>ARL_Framework.Configuration</x:String>
+      <x:String>UiPath.Mail.Activities.Business</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Activities.Mail</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Models</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Activities</x:String>
+      <x:String>UiPath.Mail.Activities.Business.ForEachMail</x:String>
+      <x:String>UiPath.Shared.Activities.Business</x:String>
+      <x:String>ARL_DataManipulation.Datatypes_Conversion</x:String>
+      <x:String>System.Xml.Serialization</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="38">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="80">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
@@ -85,11 +93,14 @@
       <AssemblyReference>UiPath.PDF.Activities</AssemblyReference>
       <AssemblyReference>UiPath.Vision.Core</AssemblyReference>
       <AssemblyReference>UiPath.OCR.Contracts</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
       <AssemblyReference>ARL_Framework</AssemblyReference>
+      <AssemblyReference>UiPath.MicrosoftOffice365.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.MicrosoftOffice365</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+      <AssemblyReference>ARL_DataManipulation</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="TEST_Generic" sap:VirtualizedContainerService.HintSize="473,648" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="TEST_Generic" sap:VirtualizedContainerService.HintSize="473,885" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Default="Distinguished Umbrella Quote -  Geolo Capital II, LP - 2022.pdf&#x9; " Name="stringValue" />
       <Variable x:TypeArguments="x:String" Name="PdfContent" />
@@ -97,6 +108,8 @@
       <Variable x:TypeArguments="x:String" Name="mailRobotSupport" />
       <Variable x:TypeArguments="x:String" Name="processName" />
       <Variable x:TypeArguments="scg:Dictionary(x:String, x:String)" Name="dictConfig" />
+      <Variable x:TypeArguments="scg:List(snm:MailMessage)" Name="colMessages" />
+      <Variable x:TypeArguments="x:String" Name="pathEmail" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -132,22 +145,119 @@
       </sap:WorkflowViewStateService.ViewState>
     </ui:MultipleAssign>
     <ac:GetJsonConfig AssetNameConfigPath="[assetNameConfigPath]" DictConfig="[dictConfig]" DisplayName="Get config from json file" sap:VirtualizedContainerService.HintSize="431,132" sap2010:WorkflowViewState.IdRef="GetJsonConfig_1" MailRobotSupport="[mailRobotSupport]" PathBotCurrentDirectory="[Directory.GetCurrentDirectory]" ProcessName="[processName]" />
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Check blacklisted expression" sap:VirtualizedContainerService.HintSize="431,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="SUPPORT\SU_IndicateKeyword.xaml">
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="431,22" sap2010:WorkflowViewState.IdRef="CommentOut_2">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="304,152" sap2010:WorkflowViewState.IdRef="Sequence_6">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+            <Assign.To>
+              <OutArgument x:TypeArguments="scg:List(snm:MailMessage)">[colMessages]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="scg:List(snm:MailMessage)">[new List(of System.Net.Mail.MailMessage)]</InArgument>
+            </Assign.Value>
+          </Assign>
+        </Sequence>
+      </ui:CommentOut.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:CommentOut>
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="431,22" sap2010:WorkflowViewState.IdRef="CommentOut_3">
+      <ui:CommentOut.Body>
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="552,713" sap2010:WorkflowViewState.IdRef="Sequence_7">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <umab:OutlookApplicationCard Account="{x:Null}" DisplayName="Use Desktop Outlook App" sap:VirtualizedContainerService.HintSize="510,621" sap2010:WorkflowViewState.IdRef="OutlookApplicationCard_2">
+            <umab:OutlookApplicationCard.Body>
+              <ActivityAction x:TypeArguments="um:IMailQuickHandle">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="um:IMailQuickHandle" Name="Outlook" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="476,440" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <umab:ForEachEmailX MailFilter="{x:Null}" DisplayName="For Each Email" sap:VirtualizedContainerService.HintSize="434,348" sap2010:WorkflowViewState.IdRef="ForEachEmailX_1" IncludeSubfolders="False" Mails="[Outlook.Folder(&quot;Inbox\TEST&quot;)]" NumberOfEmailsLimit="100" UnreadOnly="True" WithAttachmentsOnly="False">
+                    <umab:ForEachEmailX.Body>
+                      <ActivityAction x:TypeArguments="snm:MailMessage, x:Int32">
+                        <ActivityAction.Argument1>
+                          <DelegateInArgument x:TypeArguments="snm:MailMessage" Name="CurrentMail" />
+                        </ActivityAction.Argument1>
+                        <ActivityAction.Argument2>
+                          <DelegateInArgument x:TypeArguments="x:Int32" Name="CurrentIndex" />
+                        </ActivityAction.Argument2>
+                        <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="242,114" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <AddToCollection x:TypeArguments="snm:MailMessage" Collection="[colMessages]" DisplayName="Add To Collection" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="AddToCollection`1_1" Item="[CurrentMail]" />
+                        </Sequence>
+                      </ActivityAction>
+                    </umab:ForEachEmailX.Body>
+                  </umab:ForEachEmailX>
+                </Sequence>
+              </ActivityAction>
+            </umab:OutlookApplicationCard.Body>
+          </umab:OutlookApplicationCard>
+        </Sequence>
+      </ui:CommentOut.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:CommentOut>
+    <ui:GetOutlookMailMessages Account="{x:Null}" Filter="{x:Null}" FilterByMessageIds="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Get Outlook Mail Messages" GetAttachements="False" sap:VirtualizedContainerService.HintSize="431,22" sap2010:WorkflowViewState.IdRef="GetOutlookMailMessages_1" MailFolder="Inbox\TEST" MarkAsRead="False" Messages="[colMessages]" OnlyUnreadMessages="True" OrderByDate="NewestFirst" Top="30" />
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Save mail locally to non temp directory" sap:VirtualizedContainerService.HintSize="431,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="PROCESS\PR_SaveEmail.xaml">
       <ui:InvokeWorkflowFile.Arguments>
-        <InArgument x:TypeArguments="x:String" x:Key="StringContent">
-          <Literal x:TypeArguments="x:String">1 AUTO DRAFT.pdf</Literal>
+        <InArgument x:TypeArguments="snm:MailMessage" x:Key="MailMessage">
+          <mva:VisualBasicValue x:TypeArguments="snm:MailMessage" ExpressionText="colMessages(0)" />
         </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="RegexKeywords">
-          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="DictConfig(&quot;Asset_RegexAttachmentNameBlacklistKeyword&quot;)" />
+        <InArgument x:TypeArguments="x:String" x:Key="PathFolderToSave">
+          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="DictConfig(&quot;PathMailSave&quot;)" />
         </InArgument>
-        <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Decimal)" x:Key="DictInticator" />
-        <InArgument x:TypeArguments="x:Boolean" x:Key="FlagBlacklistKeyword">
-          <Literal x:TypeArguments="x:Boolean" Value="True" />
+        <InArgument x:TypeArguments="x:String" x:Key="FileName">
+          <Literal x:TypeArguments="x:String">ASD</Literal>
         </InArgument>
-        <InArgument x:TypeArguments="x:Decimal" x:Key="Weight" />
-        <OutArgument x:TypeArguments="x:Boolean" x:Key="FlagKeywordFound" />
+        <OutArgument x:TypeArguments="x:String" x:Key="PathSavedMail">
+          <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="pathEmail" />
+        </OutArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="431,61" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="[PdfContent]" />
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke PR_ForwardMail workflow" sap:VirtualizedContainerService.HintSize="431,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="PROCESS\PR_ForwardMail.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="MailTo">
+          <Literal x:TypeArguments="x:String">tomasz.rybka@aon.com</Literal>
+        </InArgument>
+        <InArgument x:TypeArguments="snm:MailMessage" x:Key="MailMessage">
+          <mva:VisualBasicValue x:TypeArguments="snm:MailMessage" ExpressionText="colMessages(0)" />
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="IndicatorValue">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="PathPdfAttachment">
+          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="pathEmail" />
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="PathMsgAttachment">
+          <Literal x:TypeArguments="x:String">asd</Literal>
+        </InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
   </Sequence>
 </Activity>

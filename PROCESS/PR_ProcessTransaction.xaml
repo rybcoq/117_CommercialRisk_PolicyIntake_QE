@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="PR_ProcessTransaction" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:al="clr-namespace:ARL_Framework.Logging_and_Reporting;assembly=ARL_Framework" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:snm="clr-namespace:System.Net.Mail;assembly=System" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="PR_ProcessTransaction" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:ae="clr-namespace:ARL_Framework.Error_Handling;assembly=ARL_Framework" xmlns:al="clr-namespace:ARL_Framework.Logging_and_Reporting;assembly=ARL_Framework" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:snm="clr-namespace:System.Net.Mail;assembly=System" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="DictConfig" Type="InArgument(scg:Dictionary(x:String, x:String))" />
     <x:Property Name="TransactionQueueItem" Type="InArgument(ui:QueueItem)" />
@@ -6,15 +6,14 @@
     <x:Property Name="ValueHighestIndicator" Type="OutArgument(x:Decimal)" />
     <x:Property Name="PolicyNrHighestIndicator" Type="OutArgument(x:String)" />
     <x:Property Name="IndicatorJsonString" Type="OutArgument(x:String)" />
-    <x:Property Name="PathEmail" Type="OutArgument(x:String)" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1057,2089</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1040,2089</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>PR_ProcessTransaction_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="38">
+    <scg:List x:TypeArguments="x:String" Capacity="76">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -53,6 +52,7 @@
       <x:String>System.Collections.Specialized</x:String>
       <x:String>UiPath.Web.Activities</x:String>
       <x:String>System.Text.RegularExpressions</x:String>
+      <x:String>ARL_Framework.Error_Handling</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -103,7 +103,6 @@
       <AssemblyReference>Newtonsoft.Json</AssemblyReference>
       <AssemblyReference>UiPath.Web.Activities</AssemblyReference>
       <AssemblyReference>System.Linq.Async</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
   <Flowchart DisplayName="PR_ProcessTransaction" sap:VirtualizedContainerService.HintSize="646,2024" sap2010:WorkflowViewState.IdRef="Flowchart_1">
@@ -114,6 +113,7 @@
       <Variable x:TypeArguments="snm:MailMessage" Name="mailMessage" />
       <Variable x:TypeArguments="x:String" Name="mailAttachmentNameCleared" />
       <Variable x:TypeArguments="x:String" Name="mailSubjectCleared" />
+      <Variable x:TypeArguments="x:String" Name="pathEmail" />
     </Flowchart.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -209,7 +209,7 @@
                       <av:PointCollection x:Key="ConnectorLocation">300,651.7 300,687</av:PointCollection>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <Sequence DisplayName="Save mail-non temp" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_17">
+                  <Sequence DisplayName="Save mail to temp" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_17">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -218,7 +218,7 @@
                     <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Save mail locally to non temp directory" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_21" UnSafe="False" WorkflowFileName="PROCESS\PR_SaveEmail.xaml">
                       <ui:InvokeWorkflowFile.Arguments>
                         <InArgument x:TypeArguments="snm:MailMessage" x:Key="MailMessage">[mailMessage]</InArgument>
-                        <InArgument x:TypeArguments="x:String" x:Key="PathFolderToSave">[DictConfig("PathMailSave")]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="PathFolderToSave">[DictConfig("PathTemp")]</InArgument>
                         <InArgument x:TypeArguments="x:String" x:Key="FileName">[TransactionQueueItem.SpecificContent("TempFolderName").ToString]</InArgument>
                         <OutArgument x:TypeArguments="x:String" x:Key="PathSavedMail">[PathEmail]</OutArgument>
                       </ui:InvokeWorkflowFile.Arguments>
@@ -418,7 +418,7 @@
                                       <av:PointCollection x:Key="ConnectorLocation">300,1065 300,1105</av:PointCollection>
                                     </scg:Dictionary>
                                   </sap:WorkflowViewStateService.ViewState>
-                                  <Sequence DisplayName="Scan mail attachment name" sap:VirtualizedContainerService.HintSize="382,894" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                                  <Sequence DisplayName="Scan mail attachment name" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_6">
                                     <Sequence.Variables>
                                       <Variable x:TypeArguments="x:Decimal" Name="weightMailAttachmentName" />
                                     </Sequence.Variables>
@@ -444,16 +444,10 @@
                                     </ui:InvokeWorkflowFile>
                                     <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Check blacklisted expression" sap:VirtualizedContainerService.HintSize="340,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_23" UnSafe="False" WorkflowFileName="SUPPORT\SU_IndicateKeyword.xaml">
                                       <ui:InvokeWorkflowFile.Arguments>
-                                        <InArgument x:TypeArguments="x:String" x:Key="StringContent">
-                                          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="mailAttachmentNameCleared.ToLower" />
-                                        </InArgument>
-                                        <InArgument x:TypeArguments="x:String" x:Key="RegexKeywords">
-                                          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="DictConfig(&quot;Asset_RegexAttachmentNameBlacklistKeyword&quot;)" />
-                                        </InArgument>
+                                        <InArgument x:TypeArguments="x:String" x:Key="StringContent">[mailAttachmentNameCleared.ToLower]</InArgument>
+                                        <InArgument x:TypeArguments="x:String" x:Key="RegexKeywords">[DictConfig("Asset_RegexAttachmentNameBlacklistKeyword")]</InArgument>
                                         <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Decimal)" x:Key="DictInticator" />
-                                        <InArgument x:TypeArguments="x:Boolean" x:Key="FlagBlacklistKeyword">
-                                          <Literal x:TypeArguments="x:Boolean" Value="True" />
-                                        </InArgument>
+                                        <InArgument x:TypeArguments="x:Boolean" x:Key="FlagBlacklistKeyword">True</InArgument>
                                         <InArgument x:TypeArguments="x:Decimal" x:Key="Weight" />
                                         <OutArgument x:TypeArguments="x:Boolean" x:Key="FlagKeywordFound" />
                                       </ui:InvokeWorkflowFile.Arguments>
@@ -672,7 +666,7 @@
                                                       <av:PointCollection x:Key="ConnectorLocation">370,1512.04 370,1556.5</av:PointCollection>
                                                     </scg:Dictionary>
                                                   </sap:WorkflowViewStateService.ViewState>
-                                                  <Sequence DisplayName="Calculate indicators" sap:VirtualizedContainerService.HintSize="376,204" sap2010:WorkflowViewState.IdRef="Sequence_13">
+                                                  <Sequence DisplayName="Calculate indicators" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_13">
                                                     <sap:WorkflowViewStateService.ViewState>
                                                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -762,32 +756,56 @@
                                                                       <av:Size x:Key="ShapeSize">200,66</av:Size>
                                                                     </scg:Dictionary>
                                                                   </sap:WorkflowViewStateService.ViewState>
-                                                                  <Sequence DisplayName="Forward decision" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_14">
+                                                                  <Sequence DisplayName="Forward decision" sap:VirtualizedContainerService.HintSize="839,589" sap2010:WorkflowViewState.IdRef="Sequence_14">
                                                                     <sap:WorkflowViewStateService.ViewState>
                                                                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                                                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                                                       </scg:Dictionary>
                                                                     </sap:WorkflowViewStateService.ViewState>
-                                                                    <If Condition="[ValueHighestIndicator&gt;=CDBL(DictConfig(&quot;IndicatorForwardThreshold&quot;))]" DisplayName="If treshold exceeded" sap:VirtualizedContainerService.HintSize="484,218" sap2010:WorkflowViewState.IdRef="If_1">
+                                                                    <If Condition="[ValueHighestIndicator&gt;=CDBL(DictConfig(&quot;IndicatorForwardThreshold&quot;))]" DisplayName="If treshold exceeded" sap:VirtualizedContainerService.HintSize="797,497" sap2010:WorkflowViewState.IdRef="If_1">
                                                                       <If.Then>
-                                                                        <al:ReportProgressStep DisplayName="Report forward" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="ReportProgressStep_9" ProgressStepMessage="Mail to be forwarded" TransactionQueueItem="[TransactionQueueItem]">
+                                                                        <Sequence DisplayName="Forward mail" sap:VirtualizedContainerService.HintSize="376,266" sap2010:WorkflowViewState.IdRef="Sequence_20">
                                                                           <sap:WorkflowViewStateService.ViewState>
                                                                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                                                                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                                                             </scg:Dictionary>
                                                                           </sap:WorkflowViewStateService.ViewState>
-                                                                        </al:ReportProgressStep>
+                                                                          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Forward mail" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_27" UnSafe="False" WorkflowFileName="PROCESS\PR_ForwardMail.xaml">
+                                                                            <ui:InvokeWorkflowFile.Arguments>
+                                                                              <InArgument x:TypeArguments="x:String" x:Key="MailTo">[DictConfig("Asset_PolicyIntakeMail")]</InArgument>
+                                                                              <InArgument x:TypeArguments="snm:MailMessage" x:Key="MailMessage">[mailMessage]</InArgument>
+                                                                              <InArgument x:TypeArguments="x:String" x:Key="IndicatorValue">[ValueHighestIndicator.ToString]</InArgument>
+                                                                              <InArgument x:TypeArguments="x:String" x:Key="PathPdfAttachment">[PathEmail]</InArgument>
+                                                                              <InArgument x:TypeArguments="x:String" x:Key="PathMsgAttachment">[pathAttachmentFile]</InArgument>
+                                                                            </ui:InvokeWorkflowFile.Arguments>
+                                                                          </ui:InvokeWorkflowFile>
+                                                                          <al:ReportProgressStep DisplayName="Report forward" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="ReportProgressStep_9" ProgressStepMessage="Mail to be forwarded" TransactionQueueItem="[TransactionQueueItem]">
+                                                                            <sap:WorkflowViewStateService.ViewState>
+                                                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                                                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                                              </scg:Dictionary>
+                                                                            </sap:WorkflowViewStateService.ViewState>
+                                                                          </al:ReportProgressStep>
+                                                                        </Sequence>
                                                                       </If.Then>
                                                                       <If.Else>
-                                                                        <al:ReportProgressStep DisplayName="Report no forward" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="ReportProgressStep_12" ProgressStepMessage="Mail NOT forwarded" TransactionQueueItem="[TransactionQueueItem]">
+                                                                        <Sequence DisplayName="No forward" sap:VirtualizedContainerService.HintSize="376,339" sap2010:WorkflowViewState.IdRef="Sequence_21">
                                                                           <sap:WorkflowViewStateService.ViewState>
                                                                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                                                                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                                                             </scg:Dictionary>
                                                                           </sap:WorkflowViewStateService.ViewState>
-                                                                        </al:ReportProgressStep>
+                                                                          <al:ReportProgressStep DisplayName="Report no forward" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="ReportProgressStep_12" ProgressStepMessage="Mail NOT forwarded" TransactionQueueItem="[TransactionQueueItem]">
+                                                                            <sap:WorkflowViewStateService.ViewState>
+                                                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                                                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                                              </scg:Dictionary>
+                                                                            </sap:WorkflowViewStateService.ViewState>
+                                                                          </al:ReportProgressStep>
+                                                                          <ae:CreateThrowCustomException DisplayName="[B0048] Item out of scope - too low indicator" ErrorCategory="Item out of scope" ErrorCode="B0048" ErrorDescription="[&quot;Mail attachment not recognized as policy. Calculated indicator : &quot; &amp; ValueHighestIndicator &amp; &quot; is below threshold&quot;]" sap:VirtualizedContainerService.HintSize="334,185" sap2010:WorkflowViewState.IdRef="CreateThrowCustomException_1" />
+                                                                        </Sequence>
                                                                       </If.Else>
                                                                     </If>
                                                                   </Sequence>
