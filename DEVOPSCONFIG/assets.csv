@@ -1,0 +1,5 @@
+name,type,value
+REQ-117_PathConfigQE,text,put here path
+REQ-117_RobotSupportMail,text,tomasz.rybka@aon.com
+REQ-117_PolicyIntakeMail,text,acs.policy.checking@aon.com
+REQ-117_RegexAttachmentNameBlacklistKeyword,text,endorsement|endorsment|endsmnt|endt|^end\w|invoice|quote|proposal|lossrun|postingnotice|nonrenewal|cancel|draft|binder

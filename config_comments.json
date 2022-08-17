@@ -1,0 +1,17 @@
+{
+	"Comment_ProcessName": "<Required>This is placeholder and this value is build and replaced by one stored in project.json file",
+
+	"Comment_QueueName": "<Required>Name of the queue. In case of QB-type bot this queue will be populated and consumed during bot performance, in case of QE-type bot this queue will be consumed",
+	"Comment_QueueNameSecond": "<Optional>Name of the queue being populated - valid only for QB-type bot. In case of QE-type bot this queue is not being used",
+	
+	"Comment_Asset_RobotSupportMail": "<Required>Mail distribution list of RPA Team support separated by semicolon ';'. Must be an Orchestrator asset. By default receives error report in case of general error",
+	"Comment_Asset_BusinessMail": "<Required>Mail distribution list of business SMEs separated by semicolon ';'. Must be an Orchestrator asset. By default receives final report and processing error mails",
+	
+	"Comment_CredName_ApplicationCredentialName": "<Optional>Name of Orchestrator credential asset from which username and password will we fetched",
+
+	"Comment_PathTemp": "<Required>This is placeholder and this value is build and replaced after config initialization",
+	
+	"Comment_ErrorsInRowLimit": "<Required>Limit of processing system errors thrown in a row (must be at least 2). After reaching this limit - bot will be automatically stopped. Set to -1 if you want to disable this functionality",
+	"Comment_FlagSummaryReport": "<Required>If true then default summary report in being generated and send",
+	"Comment_FlagCheckIfNewItems": "<Required>If true then at init bot checks if any 'New' queue items in the queue - before launching applications",
+}

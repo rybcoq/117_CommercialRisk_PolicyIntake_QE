@@ -1,0 +1,104 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="PR_LaunchProcessEnvironment" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:al="clr-namespace:ARL_Framework.Logging_and_Reporting;assembly=ARL_Framework" xmlns:aq="clr-namespace:ARL_Orchestrator.Queues_and_Transactions;assembly=ARL_Orchestrator" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="FlagNoNewItems" Type="OutArgument(x:Boolean)" />
+    <x:Property Name="DictConfig" Type="InArgument(scg:Dictionary(x:String, x:String))" />
+    <x:Property Name="FlagCheckIfNewItems" Type="InArgument(x:Boolean)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1248,1268</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>PR_LaunchProcessEnvironment_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="42">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>ARL_Orchestrator.Queues_and_Transactions</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="30">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>ARL_Orchestrator_Expressions_36774486</AssemblyReference>
+      <AssemblyReference>ARL_Orchestrator_Expressions_37680577</AssemblyReference>
+      <AssemblyReference>ARL_Orchestrator_Expressions_63566348</AssemblyReference>
+      <AssemblyReference>ARL_Orchestrator</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="PR_LaunchProcessEnvironment" sap:VirtualizedContainerService.HintSize="663,1203" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:Comment DisplayName="Comment-Launch process environment" sap:VirtualizedContainerService.HintSize="621,188" sap2010:WorkflowViewState.IdRef="Comment_1" Text="// Initialize applications required within the process. If certain applications require a lot of time to start (launching, logging on) it is suggested to at first check if there is data to be processed and quit execution before launching application. This remark concerns QE-type bots. For QB-type bot simply disable checking queue for new queue items." />
+    <If Condition="[FlagCheckIfNewItems]" DisplayName="If check for new items" sap:VirtualizedContainerService.HintSize="621,481" sap2010:WorkflowViewState.IdRef="If_2">
+      <If.Then>
+        <Sequence DisplayName="Check if new queue items" sap:VirtualizedContainerService.HintSize="376,304" sap2010:WorkflowViewState.IdRef="Sequence_3">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:Comment DisplayName="Comment-Check if new queue items" sap:VirtualizedContainerService.HintSize="334,93" sap2010:WorkflowViewState.IdRef="Comment_3" Text="// Checking if any new items in queue is being enabled or disabled by changing 'FlagCheckIfNewItems' key in config.json file." />
+          <aq:CheckIfAnyNewItems DisplayName="Check iI no new items in" FlagNoNewItems="[FlagNoNewItems]" sap:VirtualizedContainerService.HintSize="334,79" sap2010:WorkflowViewState.IdRef="CheckIfAnyNewItems_2" QueueName="[dictConfig(&quot;QueueName&quot;)]" />
+        </Sequence>
+      </If.Then>
+    </If>
+    <If Condition="[FlagNoNewItems]" DisplayName="If any new items in the queue" sap:VirtualizedContainerService.HintSize="621,362" sap2010:WorkflowViewState.IdRef="If_1">
+      <If.Then>
+        <al:Logging ErrorCode="{x:Null}" ErrorDescription="{x:Null}" ExceptionObject="{x:Null}" FlagInfo="{x:Null}" DisplayName="Log no items" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Logging_1" LogMessage="Launch process environment skipped due to no new items to process in queue" />
+      </If.Then>
+      <If.Else>
+        <Sequence DisplayName="Launch all applications sequence" sap:VirtualizedContainerService.HintSize="376,204" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:Comment DisplayName="Comment-Launch all applications" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="Comment_2" Text="// Put here launching all applications. Use 'LaunchAndLogInto' component as a template. File located here: https://confluence.ie.aon.bz/display/AC/XAML+files" />
+        </Sequence>
+      </If.Else>
+    </If>
+  </Sequence>
+</Activity>

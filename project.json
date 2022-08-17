@@ -1,0 +1,97 @@
+{
+  "name": "REQ-117_CommercialRisk_PolicyIntake_QE",
+  "description": "Policy intake queue eater",
+  "main": "Main.xaml",
+  "dependencies": {
+    "ARL_DataManipulation": "[1.0.0]",
+    "ARL_Excel": "[1.0.0]",
+    "ARL_Framework": "[1.0.0]",
+    "ARL_Mail": "[1.0.0]",
+    "ARL_Orchestrator": "[1.0.0]",
+    "ARL_SystemInteractions": "[1.0.0]",
+    "UiPath.PDF.Activities": "3.4.1"
+  },
+  "webServices": [],
+  "entitiesStores": [],
+  "schemaVersion": "4.0",
+  "studioVersion": "21.10.3.0",
+  "projectVersion": "1.0.9",
+  "runtimeOptions": {
+    "autoDispose": false,
+    "isPausable": true,
+    "isAttended": false,
+    "requiresUserInteraction": true,
+    "supportsPersistence": false,
+    "excludedLoggedData": [
+      "Private:*",
+      "*password*"
+    ],
+    "executionType": "Workflow",
+    "readyForPiP": false,
+    "startsInPiP": false,
+    "mustRestoreAllDependencies": false
+  },
+  "designOptions": {
+    "projectProfile": "Developement",
+    "outputType": "Process",
+    "libraryOptions": {
+      "includeOriginalXaml": false,
+      "privateWorkflows": []
+    },
+    "processOptions": {
+      "ignoredFiles": []
+    },
+    "fileInfoCollection": [
+      {
+        "editingStatus": "InProgress",
+        "testCaseId": "5e8160ce-1930-457c-8437-43d8fefeee1e",
+        "dataVariationFilePath": ".variations\\TEST_PR_GetMailByMessageId_TestCases_Sheet1.json",
+        "fileName": "TEST\\PR_GetMailByMessageId\\TEST_PR_GetMailByMessageId.xaml"
+      },
+      {
+        "editingStatus": "InProgress",
+        "testCaseId": "4e60769b-5d24-4a0a-8f82-a6fb0a8e820e",
+        "dataVariationFilePath": ".variations\\TEST_SU_GetListOfPolicies_TestCases_Sheet1.json",
+        "fileName": "TEST\\SU_GetListOfPolicies\\TEST_SU_GetListOfPolicies.xaml"
+      },
+      {
+        "editingStatus": "InProgress",
+        "testCaseId": "bf6cbf01-31b0-4a5d-bf76-ac6f6653f928",
+        "dataVariationFilePath": ".variations\\TEST_SU_ClearStringSpecChars_TestCases_Sheet1.json",
+        "fileName": "TEST\\SU_ClearStringSpecChars\\TEST_SU_ClearStringSpecChars.xaml"
+      },
+      {
+        "editingStatus": "InProgress",
+        "testCaseId": "eac15649-a79d-4bca-b055-9c9e6826a590",
+        "dataVariationFilePath": ".variations\\TEST_PR_GetMailByMessageId_TestCases_Sheet1.json",
+        "fileName": "TEST\\PR_SaveMailAttachment\\TEST_PR_SaveMailAttachment.xaml"
+      },
+      {
+        "editingStatus": "InProgress",
+        "testCaseId": "9a61f703-cab4-4578-9bef-1e32c26a8732",
+        "dataVariationFilePath": ".variations\\TEST_PR_CheckVicinityContent_TestCases_Sheet1.json",
+        "fileName": "TEST\\PR_CheckVicinityContent\\TEST_PR_CheckVicinityContent.xaml"
+      },
+      {
+        "editingStatus": "InProgress",
+        "testCaseId": "aed05cfa-1140-4f3d-90b5-ebba5175bd20",
+        "dataVariationFilePath": ".variations\\TEST_PR_GetMailByMessageId_TestCases_Sheet1.json",
+        "fileName": "TEST\\PR_SaveMail\\TEST_PR_SaveMail.xaml"
+      }
+    ],
+    "modernBehavior": true
+  },
+  "expressionLanguage": "VisualBasic",
+  "entryPoints": [
+    {
+      "filePath": "Main.xaml",
+      "uniqueId": "09a61895-ce2b-46d7-9020-497969df0094",
+      "input": [],
+      "output": []
+    }
+  ],
+  "isTemplate": false,
+  "templateProjectData": {},
+  "publishData": {},
+  "targetFramework": "Legacy"
+}

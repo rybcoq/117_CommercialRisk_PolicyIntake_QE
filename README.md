@@ -1,20 +1,11 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+# Comment
+Each Aon Robotic Framework folder 'FRAMEWORK', 'PROCESS', 'SUPPORT', 'SCRIPTS', 'DEVOPSCONFIG' and 'TEST' contains README.md file containing brief information of each folder purpose.
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+# Useful links
+- ARF documentation: https://confluence.ie.aon.bz/display/AC/Aon+Robotic+Framework
+- Azure DevOps Aon documentation: https://confluence.ie.aon.bz/pages/viewpage.action?pageId=59818094
+- Project documentation paths: <paste url's here>
+- Project config paths: <paste url's here>
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
-
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
-
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+# Exceptions - code review
+Put here in points information about code review exceptions agreed with Aon CoE.
