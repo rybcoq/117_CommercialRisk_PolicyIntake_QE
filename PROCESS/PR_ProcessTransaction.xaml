@@ -10,7 +10,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1040,2089</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1039,2089</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>PR_ProcessTransaction_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="76">
@@ -103,6 +103,7 @@
       <AssemblyReference>Newtonsoft.Json</AssemblyReference>
       <AssemblyReference>UiPath.Web.Activities</AssemblyReference>
       <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
   <Flowchart DisplayName="PR_ProcessTransaction" sap:VirtualizedContainerService.HintSize="646,2024" sap2010:WorkflowViewState.IdRef="Flowchart_1">
@@ -682,7 +683,10 @@
                                                     </ui:InvokeWorkflowFile>
                                                   </Sequence>
                                                   <FlowStep.Next>
-                                                    <FlowDecision x:Name="__ReferenceID13" Condition="[(CDbl(DictConfig(&quot;IndicatorForwardThreshold&quot;))-ValueHighestIndicator&lt;=CDbl(DictConfig(&quot;ExtraTimeThreshold&quot;))) AND (ValueHighestIndicator&lt;CDbl(DictConfig(&quot;IndicatorForwardThreshold&quot;)))]" DisplayName="Extra time?" sap:VirtualizedContainerService.HintSize="70,87" sap2010:WorkflowViewState.IdRef="FlowDecision_2">
+                                                    <FlowDecision x:Name="__ReferenceID13" DisplayName="Extra time?" sap:VirtualizedContainerService.HintSize="70,87" sap2010:WorkflowViewState.IdRef="FlowDecision_2">
+                                                      <FlowDecision.Condition>
+                                                        <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="(CDbl(DictConfig(&quot;IndicatorForwardThreshold&quot;))-ValueHighestIndicator&lt;=CDbl(DictConfig(&quot;ExtraTimeDifferenceThreshold&quot;))) AND (ValueHighestIndicator&lt;CDbl(DictConfig(&quot;IndicatorForwardThreshold&quot;)))" />
+                                                      </FlowDecision.Condition>
                                                       <sap:WorkflowViewStateService.ViewState>
                                                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -756,7 +760,7 @@
                                                                       <av:Size x:Key="ShapeSize">200,66</av:Size>
                                                                     </scg:Dictionary>
                                                                   </sap:WorkflowViewStateService.ViewState>
-                                                                  <Sequence DisplayName="Forward decision" sap:VirtualizedContainerService.HintSize="839,589" sap2010:WorkflowViewState.IdRef="Sequence_14">
+                                                                  <Sequence DisplayName="Forward decision" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_14">
                                                                     <sap:WorkflowViewStateService.ViewState>
                                                                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                                                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
