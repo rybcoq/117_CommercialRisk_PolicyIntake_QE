@@ -15,7 +15,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1040,713</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1039,713</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>PR_ForwardMail_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="40">
@@ -132,7 +132,7 @@
         <OutArgument x:TypeArguments="x:String">[mailBody]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="x:String" xml:space="preserve">["Attached email was identifed by the bot as containing policy.&lt;br&gt;&lt;br&gt;" &amp; _
+        <InArgument x:TypeArguments="x:String" xml:space="preserve">["Attached email was identified by the bot as containing policy.&lt;br&gt;&lt;br&gt;" &amp; _
 "Mail subject: " &amp; mailSubject &amp; "&lt;br&gt;" &amp; _
 "Mail sender: " &amp; MailMessage.Sender.Address &amp; "&lt;br&gt;" &amp; _
 "Document name: " &amp; Path.GetFileName(PathPdfAttachment) &amp; "&lt;br&gt;" &amp; _ 

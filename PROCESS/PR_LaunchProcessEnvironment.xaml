@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="PR_LaunchProcessEnvironment" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:al="clr-namespace:ARL_Framework.Logging_and_Reporting;assembly=ARL_Framework" xmlns:aq="clr-namespace:ARL_Orchestrator.Queues_and_Transactions;assembly=ARL_Orchestrator" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="PR_LaunchProcessEnvironment" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:acq="clr-namespace:ARL_Orchestrator.Current_Orchestrator.Queues_and_Transactions;assembly=ARL_Orchestrator" xmlns:al="clr-namespace:ARL_Framework.Logging_and_Reporting;assembly=ARL_Framework" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="FlagNoNewItems" Type="OutArgument(x:Boolean)" />
     <x:Property Name="DictConfig" Type="InArgument(scg:Dictionary(x:String, x:String))" />
@@ -7,7 +7,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1248,1268</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1040,1268</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>PR_LaunchProcessEnvironment_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="42">
@@ -35,6 +35,7 @@
       <x:String>System.Collections.ObjectModel</x:String>
       <x:String>System.Activities.DynamicUpdate</x:String>
       <x:String>ARL_Orchestrator.Queues_and_Transactions</x:String>
+      <x:String>ARL_Orchestrator.Current_Orchestrator.Queues_and_Transactions</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -81,7 +82,7 @@
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
           <ui:Comment DisplayName="Comment-Check if new queue items" sap:VirtualizedContainerService.HintSize="334,93" sap2010:WorkflowViewState.IdRef="Comment_3" Text="// Checking if any new items in queue is being enabled or disabled by changing 'FlagCheckIfNewItems' key in config.json file." />
-          <aq:CheckIfAnyNewItems DisplayName="Check iI no new items in" FlagNoNewItems="[FlagNoNewItems]" sap:VirtualizedContainerService.HintSize="334,79" sap2010:WorkflowViewState.IdRef="CheckIfAnyNewItems_2" QueueName="[dictConfig(&quot;QueueName&quot;)]" />
+          <acq:CheckIfAnyNewItems FlagNoNewItems="{x:Null}" DisplayName="Check if no new items" sap:VirtualizedContainerService.HintSize="334,79" sap2010:WorkflowViewState.IdRef="CheckIfAnyNewItems_1" QueueName="[DictConfig(&quot;QueueName&quot;)]" />
         </Sequence>
       </If.Then>
     </If>
