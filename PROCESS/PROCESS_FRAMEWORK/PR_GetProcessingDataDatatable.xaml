@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="PR_GetProcessingDataDatatable" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:al="clr-namespace:ARL_Framework.Logging_and_Reporting;assembly=ARL_Framework" xmlns:aq="clr-namespace:ARL_Orchestrator.Queues_and_Transactions;assembly=ARL_Orchestrator" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="PR_GetProcessingDataDatatable" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:acq="clr-namespace:ARL_Orchestrator.Current_Orchestrator.Queues_and_Transactions;assembly=ARL_Orchestrator" xmlns:al="clr-namespace:ARL_Framework.Logging_and_Reporting;assembly=ARL_Framework" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="DictConfig" Type="InArgument(scg:Dictionary(x:String, x:String))">
       <x:Property.Attributes>
@@ -15,10 +15,10 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1229,2972</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1040,2972</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>PR_GetProcessingData_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="22">
+    <scg:List x:TypeArguments="x:String" Capacity="44">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System</x:String>
@@ -41,6 +41,7 @@
       <x:String>ARL_Framework.Logging_and_Reporting</x:String>
       <x:String>System.Collections.ObjectModel</x:String>
       <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>ARL_Orchestrator.Current_Orchestrator.Queues_and_Transactions</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -90,7 +91,7 @@
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <ui:Comment DisplayName="Comment-Clear queue" sap:VirtualizedContainerService.HintSize="452,74" sap2010:WorkflowViewState.IdRef="Comment_9" Text="// Clearing queue from new items for QB is necessary to avoid transaction misusage" />
-    <aq:ClearQueue DeletedQueueItems="{x:Null}" DisplayName="Clear queue from any 'New' items" sap:VirtualizedContainerService.HintSize="452,79" sap2010:WorkflowViewState.IdRef="ClearQueue_1" QueueName="[QueueName]" />
+    <acq:ClearQueue DeletedQueueItems="{x:Null}" DisplayName="Clear queue from 'New' items" sap:VirtualizedContainerService.HintSize="452,79" sap2010:WorkflowViewState.IdRef="ClearQueue_1" QueueName="[QueueName]" />
     <ui:Comment DisplayName="Comment-Get datatable" sap:VirtualizedContainerService.HintSize="452,188" sap2010:WorkflowViewState.IdRef="Comment_2" Text="// Datatable is being loaded from source - for example Excel file, webpage, application table etc. Build your own loading datatable logic. Later on each row is being added to the queue. Feel free to add more info to queue item specific content fields. By default only row nr is being added to the queue because it is necessary for fetching data logic" />
     <Sequence DisplayName="Loading datatable" sap:VirtualizedContainerService.HintSize="452,607" sap2010:WorkflowViewState.IdRef="Sequence_3">
       <sap:WorkflowViewStateService.ViewState>

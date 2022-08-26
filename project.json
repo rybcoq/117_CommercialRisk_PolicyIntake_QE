@@ -4,11 +4,11 @@
   "main": "Main.xaml",
   "dependencies": {
     "ARL_DataManipulation": "[1.0.0]",
-    "ARL_Excel": "[1.0.0]",
-    "ARL_Framework": "[1.0.0]",
-    "ARL_Mail": "[1.0.0]",
-    "ARL_Orchestrator": "[1.0.0]",
-    "ARL_SystemInteractions": "[1.0.0]",
+    "ARL_Excel": "[1.0.1]",
+    "ARL_Framework": "[1.0.1]",
+    "ARL_Mail": "[1.0.1]",
+    "ARL_Orchestrator": "[1.0.1]",
+    "ARL_SystemInteractions": "[1.0.1]",
     "UiPath.PDF.Activities": "3.4.1"
   },
   "webServices": [],
