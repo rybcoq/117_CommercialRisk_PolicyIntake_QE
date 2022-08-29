@@ -38,6 +38,7 @@
 	"IndicatorExtraTime": "0.10",
 	"RegexExtraTimeKeyword": "Policy|Policies|Plc",
 	"IndicatorForwardThreshold": "0.60",
+	"Asset_PolicyIntakeMail": "REQ-117_PolicyIntakeMail",
 	
 	"PathOutputReport": "C:\\Users\\A0796649\\OneDrive - Aon\\Documents\\UiPath\\REQ-117_PolicyIntake\\ReportSummary.xlsx",
 	"PathMailSave": "C:\\Users\\A0796649\\OneDrive - Aon\\Documents\\UiPath\\REQ-117_PolicyIntake\\MailSaved"

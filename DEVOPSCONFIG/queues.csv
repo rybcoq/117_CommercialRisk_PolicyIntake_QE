@@ -1,1 +1,2 @@
 Name,Description,MaxNumberOfRetries,AcceptAutomaticallyRetry,EnforceUniqueReference
+REQ-117_CommercialRisk_PolicyIntake_AttachQueue,Attachments queue for REQ-117,1,true,false

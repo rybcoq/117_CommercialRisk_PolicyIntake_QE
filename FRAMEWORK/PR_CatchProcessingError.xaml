@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="PR_CatchProcessingError" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:ad="clr-namespace:ARL_DataManipulation.Datatypes_Conversion;assembly=ARL_DataManipulation" xmlns:ae="clr-namespace:ARL_Framework.Error_Handling;assembly=ARL_Framework" xmlns:al="clr-namespace:ARL_Framework.Logging_and_Reporting;assembly=ARL_Framework" xmlns:aq="clr-namespace:ARL_Orchestrator.Queues_and_Transactions;assembly=ARL_Orchestrator" xmlns:as="clr-namespace:ARL_Mail.SMTP;assembly=ARL_Mail" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="PR_CatchProcessingError" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:acq="clr-namespace:ARL_Orchestrator.Current_Orchestrator.Queues_and_Transactions;assembly=ARL_Orchestrator" xmlns:ad="clr-namespace:ARL_DataManipulation.Datatypes_Conversion;assembly=ARL_DataManipulation" xmlns:ae="clr-namespace:ARL_Framework.Error_Handling;assembly=ARL_Framework" xmlns:al="clr-namespace:ARL_Framework.Logging_and_Reporting;assembly=ARL_Framework" xmlns:as="clr-namespace:ARL_Mail.SMTP;assembly=ARL_Mail" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="ExceptionObject" Type="InArgument(s:Exception)">
       <x:Property.Attributes>
@@ -31,7 +31,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1205,3946</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1040,4233</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>SU_GeneralCatch_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="76">
@@ -52,6 +52,9 @@
       <x:String>ARL_DataManipulation.Datatypes_Conversion</x:String>
       <x:String>ARL_Mail.SMTP</x:String>
       <x:String>System.Linq</x:String>
+      <x:String>ARL_Orchestrator.Current_Orchestrator.Queues_and_Transactions</x:String>
+      <x:String>Newtonsoft.Json.Linq</x:String>
+      <x:String>Newtonsoft.Json</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -77,9 +80,11 @@
       <AssemblyReference>ARL_DataManipulation</AssemblyReference>
       <AssemblyReference>ARL_Mail</AssemblyReference>
       <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>ARL_Orchestrator</AssemblyReference>
+      <AssemblyReference>Newtonsoft.Json</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="PR_CatchProcessingError" sap:VirtualizedContainerService.HintSize="653,3881" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="PR_CatchProcessingError" sap:VirtualizedContainerService.HintSize="653,4168" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="mailSubject" />
       <Variable x:TypeArguments="x:String" Name="mailBody" />
@@ -97,8 +102,8 @@
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <al:Logging ErrorCode="{x:Null}" ErrorDescription="{x:Null}" ExceptionObject="{x:Null}" FlagInfo="{x:Null}" DisplayName="Log start of error catch" sap:VirtualizedContainerService.HintSize="611,22" sap2010:WorkflowViewState.IdRef="Logging_11" LogMessage="Catch processing error started" />
-    <ae:IdentifyExceptionType DefaultErrorCode="S0010" DisplayName="Identify exception type" ErrorCategory="[errorCategory]" ErrorCode="[errorCode]" ErrorDescription="[errorDescription]" ErrorType="[errorType]" ExceptionObject="[ExceptionObject]" sap:VirtualizedContainerService.HintSize="611,22" sap2010:WorkflowViewState.IdRef="IdentifyExceptionType_1" />
-    <al:ReportProgressStep DisplayName="Report exception to progress" sap:VirtualizedContainerService.HintSize="611,22" sap2010:WorkflowViewState.IdRef="ReportProgressStep_1" ProgressStepMessage="[errorType &amp; &quot; EXCEPTION&quot;]" TransactionQueueItem="[TransactionQueueItem]" />
+    <ae:IdentifyExceptionType DefaultErrorCode="S0010" DisplayName="Identify exception type" ErrorCategory="[errorCategory]" ErrorCode="[errorCode]" ErrorDescription="[errorDescription]" ErrorType="[errorType]" ExceptionObject="[ExceptionObject]" sap:VirtualizedContainerService.HintSize="611,132" sap2010:WorkflowViewState.IdRef="IdentifyExceptionType_1" />
+    <al:ReportProgressStep DisplayName="Report exception to progress" sap:VirtualizedContainerService.HintSize="611,132" sap2010:WorkflowViewState.IdRef="ReportProgressStep_1" ProgressStepMessage="[errorType &amp; &quot; EXCEPTION&quot;]" TransactionQueueItem="[TransactionQueueItem]" />
     <Sequence DisplayName="Prepare transaction content data" sap:VirtualizedContainerService.HintSize="611,725" sap2010:WorkflowViewState.IdRef="Sequence_13">
       <Sequence.Variables>
         <Variable x:TypeArguments="s:String[]" Name="arrTransactionContentDataKeys" />
@@ -141,7 +146,7 @@
       </If>
     </Sequence>
     <al:PrepareErrorMailHTML DictTransactionContentData="[dictTransactionContentData]" DisplayName="Prepare error mail" ErrorCategory="[errorCategory]" ErrorCode="[errorCode]" ErrorDescription="[errorDescription]" ErrorType="[errorType]" ExceptionObject="[ExceptionObject]" sap:VirtualizedContainerService.HintSize="611,22" sap2010:WorkflowViewState.IdRef="PrepareErrorMailHTML_1" MailBody="[mailBody]" MailSubject="[mailSubject]" ProcessName="[DictConfig(&quot;ProcessName&quot;)]" StatusName="PROCESSING ERROR" TransactionQueueItem="[TransactionQueueItem]" />
-    <Sequence DisplayName="Build handling logic" sap:VirtualizedContainerService.HintSize="611,2064" sap2010:WorkflowViewState.IdRef="Sequence_12">
+    <Sequence DisplayName="Build handling logic" sap:VirtualizedContainerService.HintSize="611,2131" sap2010:WorkflowViewState.IdRef="Sequence_12">
       <Sequence.Variables>
         <Variable x:TypeArguments="x:Int32" Name="queueRetryLimit" />
       </Sequence.Variables>
@@ -152,7 +157,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <ui:Comment DisplayName="Comment-Handle error mail sendout" sap:VirtualizedContainerService.HintSize="569,131" sap2010:WorkflowViewState.IdRef="Comment_2" Text="// Set mail sendout scenario ID used in below activity by setting an argument in the Main.xaml level. For more details about each scenario ID behaviour - open below file 'SU_HandleErrorMailSendout'" />
-      <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Handle error mail sendout" sap:VirtualizedContainerService.HintSize="569,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_14" UnSafe="False" WorkflowFileName="FRAMEWORK\SU_HandleErrorMailSendout.xaml">
+      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Handle error mail sendout" sap:VirtualizedContainerService.HintSize="569,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_14" UnSafe="False" WorkflowFileName="FRAMEWORK\SU_HandleErrorMailSendout.xaml">
         <ui:InvokeWorkflowFile.Arguments>
           <OutArgument x:TypeArguments="x:Boolean" x:Key="FlagSendErrorMail">[flagSendErrorMail]</OutArgument>
           <InArgument x:TypeArguments="x:String" x:Key="ErrorCode">[errorCode]</InArgument>
@@ -160,8 +165,8 @@
           <InArgument x:TypeArguments="x:Int32" x:Key="MailSendoutScenarioID">[MailSendoutScenarioID]</InArgument>
         </ui:InvokeWorkflowFile.Arguments>
       </ui:InvokeWorkflowFile>
-      <aq:GetQueueMaxRetryNumber DisplayName="Get queue retry limit" sap:VirtualizedContainerService.HintSize="569,22" sap2010:WorkflowViewState.IdRef="GetQueueMaxRetryNumber_2" QueueMaxRetryNumber="[queueRetryLimit]" QueueName="[TransactionQueueItem.QueueName]" />
-      <If Condition="[flagSendErrorMail And TransactionQueueItem.RetryNo&gt;=queueRetryLimit OR  (flagSendErrorMail AND errorType = &quot;BUSINESS&quot;)]" DisplayName="If mail sendout and retry limit reached" sap:VirtualizedContainerService.HintSize="569,208" sap2010:WorkflowViewState.IdRef="If_8">
+      <acq:GetQueueMaxRetryNumber QueueMaxRetryNumber="{x:Null}" DisplayName="Get queue max retry number" sap:VirtualizedContainerService.HintSize="569,79" sap2010:WorkflowViewState.IdRef="GetQueueMaxRetryNumber_1" QueueName="[TransactionQueueItem.QueueName]" />
+      <If Condition="[flagSendErrorMail And TransactionQueueItem.RetryNo&gt;=queueRetryLimit OR  (flagSendErrorMail AND errorType = &quot;BUSINESS&quot;)]" DisplayName="If mail sendout and retry limit reached" sap:VirtualizedContainerService.HintSize="569,218" sap2010:WorkflowViewState.IdRef="If_8">
         <If.Then>
           <Assign DisplayName="Assign send mail" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_4">
             <Assign.To>
@@ -192,7 +197,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
         <If.Then>
-          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Handle error screenshot creation" sap:VirtualizedContainerService.HintSize="379,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_18" UnSafe="False" WorkflowFileName="FRAMEWORK\SU_HandleErrorScreenshotCreation.xaml">
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Handle error screenshot creation" sap:VirtualizedContainerService.HintSize="379,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_18" UnSafe="False" WorkflowFileName="FRAMEWORK\SU_HandleErrorScreenshotCreation.xaml">
             <ui:InvokeWorkflowFile.Arguments>
               <InArgument x:TypeArguments="x:String" x:Key="ErrorCode">[errorCode]</InArgument>
               <InArgument x:TypeArguments="x:String" x:Key="ErrorType">[errorType]</InArgument>
@@ -203,7 +208,7 @@
         </If.Then>
       </If>
       <ui:Comment DisplayName="Comment-Handle environment reset" sap:VirtualizedContainerService.HintSize="569,131" sap2010:WorkflowViewState.IdRef="Comment_3" Text="// Set environment reset scenario ID used in below activity by setting an argument in the Main.xaml level. For more details about each scenario ID behaviour - open below file 'PR_HandleEnvironmentReset'" />
-      <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Handle environment reset" sap:VirtualizedContainerService.HintSize="569,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_16" UnSafe="False" WorkflowFileName="PROCESS\PROCESS_FRAMEWORK\PR_HandleEnvironmentReset.xaml">
+      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Handle environment reset" sap:VirtualizedContainerService.HintSize="569,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_16" UnSafe="False" WorkflowFileName="PROCESS\PROCESS_FRAMEWORK\PR_HandleEnvironmentReset.xaml">
         <ui:InvokeWorkflowFile.Arguments>
           <OutArgument x:TypeArguments="x:Boolean" x:Key="FlagResetEnvironment">[FlagResetEnvironment]</OutArgument>
           <InArgument x:TypeArguments="x:String" x:Key="ErrorCode">[errorCode]</InArgument>
@@ -220,7 +225,7 @@
       <ui:Comment DisplayName="Comment-Handle error in row limit" sap:VirtualizedContainerService.HintSize="569,188" sap2010:WorkflowViewState.IdRef="Comment_4" Text="// Checking if errors in row limit reached is being enabled or disabled by changing 'ErrorsInRowLimit' key in config.json file. Set errors in row limit scenario ID used in below activity by setting an argument in the Main.xaml level. For more details about each scenario ID behaviour - open below file 'PR_HandleErrorInRowLimit'" />
       <If Condition="[CINT(DictConfig(&quot;ErrorsInRowLimit&quot;))&gt;1]" DisplayName="If errors in row limit enabled" sap:VirtualizedContainerService.HintSize="569,260" sap2010:WorkflowViewState.IdRef="If_9">
         <If.Then>
-          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Handle error in row limit" sap:VirtualizedContainerService.HintSize="379,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_19" UnSafe="False" WorkflowFileName="PROCESS\PROCESS_FRAMEWORK\PR_HandleErrorInRowLimit.xaml">
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Handle error in row limit" sap:VirtualizedContainerService.HintSize="379,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_19" UnSafe="False" WorkflowFileName="PROCESS\PROCESS_FRAMEWORK\PR_HandleErrorInRowLimit.xaml">
             <ui:InvokeWorkflowFile.Arguments>
               <OutArgument x:TypeArguments="x:Boolean" x:Key="FlagErrorInRowLimitReached">[FlagErrorInRowLimitReached]</OutArgument>
               <InArgument x:TypeArguments="x:Int32" x:Key="ErrorInRowScenarioID">[ErrorInRowScenarioID]</InArgument>

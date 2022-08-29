@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="PR_HandleGetProcessingData" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:ad="clr-namespace:ARL_DataManipulation.Datatypes_Initialization;assembly=ARL_DataManipulation" xmlns:ae="clr-namespace:ARL_Framework.Error_Handling;assembly=ARL_Framework" xmlns:aq="clr-namespace:ARL_Orchestrator.Queues_and_Transactions;assembly=ARL_Orchestrator" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:si="clr-namespace:System.IO;assembly=mscorlib" xmlns:snm="clr-namespace:System.Net.Mail;assembly=System" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="PR_HandleGetProcessingData" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:acq="clr-namespace:ARL_Orchestrator.Current_Orchestrator.Queues_and_Transactions;assembly=ARL_Orchestrator" xmlns:ad="clr-namespace:ARL_DataManipulation.Datatypes_Initialization;assembly=ARL_DataManipulation" xmlns:ae="clr-namespace:ARL_Framework.Error_Handling;assembly=ARL_Framework" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:si="clr-namespace:System.IO;assembly=mscorlib" xmlns:snm="clr-namespace:System.Net.Mail;assembly=System" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="GetProcessingDataScenarioID" Type="InArgument(x:Int32)">
       <x:Property.Attributes>
@@ -52,6 +52,7 @@
       <x:String>ARL_Framework.Logging_and_Reporting</x:String>
       <x:String>System.Reflection</x:String>
       <x:String>System.ComponentModel</x:String>
+      <x:String>ARL_Orchestrator.Current_Orchestrator.Queues_and_Transactions</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -255,7 +256,7 @@
           <av:PointCollection x:Key="ConnectorLocation">790,543 790,573 680,573 680,607</av:PointCollection>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <Sequence DisplayName="Not transactional bot (Lite)" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_3">
+      <Sequence DisplayName="Not transactional bot (Lite)" sap:VirtualizedContainerService.HintSize="526,1068" sap2010:WorkflowViewState.IdRef="Sequence_3">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -284,7 +285,7 @@
                 </Assign.Value>
               </Assign>
               <ad:GetCurrentTimestamp DatetimeTimestampUTC="{x:Null}" DisplayName="Get current timestamp" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="GetCurrentTimestamp_1" StringTimestampUTC="[startTime]" />
-              <aq:ClearQueue DeletedQueueItems="{x:Null}" DisplayName="Clear queue" sap:VirtualizedContainerService.HintSize="334,79" sap2010:WorkflowViewState.IdRef="ClearQueue_1" QueueName="[queueName]" />
+              <acq:ClearQueue DeletedQueueItems="{x:Null}" DisplayName="Clear queue from 'New' items" sap:VirtualizedContainerService.HintSize="334,79" sap2010:WorkflowViewState.IdRef="ClearQueue_1" QueueName="[QueueName]" />
               <Assign DisplayName="Assign queue reference (ItemId)" sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_4">
                 <Assign.To>
                   <OutArgument x:TypeArguments="x:String">[itemReference]</OutArgument>
