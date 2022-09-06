@@ -5,6 +5,8 @@
     <x:Property Name="IndicatorValue" Type="InArgument(x:String)" />
     <x:Property Name="PathPdfAttachment" Type="InArgument(x:String)" />
     <x:Property Name="PathMsgAttachment" Type="InArgument(x:String)" />
+    <x:Property Name="PolicyNumbers" Type="InArgument(x:String)" />
+    <x:Property Name="PolicyIds" Type="InArgument(x:String)" />
   </x:Members>
   <this:PR_ForwardMail.MailMessage>
     <InArgument x:TypeArguments="snm:MailMessage" />
@@ -15,7 +17,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1039,713</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1040,837</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>PR_ForwardMail_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="40">
@@ -136,6 +138,8 @@
 "Mail subject: " &amp; mailSubject &amp; "&lt;br&gt;" &amp; _
 "Mail sender: " &amp; MailMessage.Sender.Address &amp; "&lt;br&gt;" &amp; _
 "Document name: " &amp; Path.GetFileName(PathPdfAttachment) &amp; "&lt;br&gt;" &amp; _ 
+"Found policy nr: " &amp; PolicyNumbers &amp; "&lt;br&gt;" &amp; _ 
+"Found policy id: " &amp; PolicyIds &amp; "&lt;br&gt;" &amp; _ 
 "Highest indicator value: " &amp; IndicatorValue]</InArgument>
       </Assign.Value>
     </Assign>
