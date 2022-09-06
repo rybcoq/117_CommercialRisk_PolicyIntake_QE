@@ -21,7 +21,8 @@
 	"PolicyLengthTreshold": "5",
 	"PathPoliciesFile": "C:\\Users\\A0796649\\OneDrive - Aon\\Documents\\UiPath\\REQ-117_PolicyIntake\\Policy Receipt Pilot Test Data.xlsx",
 	"PoliciesFileSheetName": "Broker Reviewed List",
-	"PoliciesFileHeaderName": "Policy Number",
+	"HeaderNamePolicyId": "PID",
+	"HeaderNamePolicyNr": "Policy Nbr",
 	
 	"IndicatorWeightMailBody": "0.05",
 	"IndicatorWeightMailSubject": "0.10",

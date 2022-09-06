@@ -385,8 +385,11 @@
                         <OutArgument x:TypeArguments="s:String[]" x:Key="ArrPolicies">[arrPolicies]</OutArgument>
                         <InArgument x:TypeArguments="x:String" x:Key="PathPoliciesFile">[dictConfig("PathPoliciesFile")]</InArgument>
                         <InArgument x:TypeArguments="x:Int32" x:Key="PolicyLengthTreshold">[CINT(dictConfig("PolicyLengthTreshold"))]</InArgument>
-                        <InArgument x:TypeArguments="x:String" x:Key="SheetNamePoliciesFile">[dictConfig("PoliciesFileSheetName")]</InArgument>
-                        <InArgument x:TypeArguments="x:String" x:Key="HeaderNamePoliciesFile">[dictConfig("PoliciesFileHeaderName")]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="HeaderNamePolicyId">[dictConfig("HeaderNamePolicyId")]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="HeaderNamePolicyNr">[dictConfig("HeaderNamePolicyNr")]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="SheetName">[dictConfig("PoliciesFileSheetName")]</InArgument>
+                        <OutArgument x:TypeArguments="scg:Dictionary(x:String, scg:List(x:String))" x:Key="DictPolicyNrClearedAndId">[dictPolicyNrClearedAndId]</OutArgument>
+                        <OutArgument x:TypeArguments="scg:Dictionary(x:String, scg:List(x:String))" x:Key="DictPolicyNrClearedAndNr">[dictPolicyNrClearedAndNr]</OutArgument>
                       </ui:InvokeWorkflowFile.Arguments>
                     </ui:InvokeWorkflowFile>
                   </Sequence>
@@ -422,7 +425,7 @@
                 <ActivityAction.Argument>
                   <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
                 </ActivityAction.Argument>
-                <Sequence DisplayName="Catch init" sap:VirtualizedContainerService.HintSize="385,646" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                <Sequence DisplayName="Catch init" sap:VirtualizedContainerService.HintSize="385,643" sap2010:WorkflowViewState.IdRef="Sequence_4">
                   <Sequence.Variables>
                     <Variable x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="[REQUIRED]&#xA;Temp path - used only in case of init state error" Name="pathTemp" />
                   </Sequence.Variables>
@@ -644,9 +647,9 @@
                   </sap:WorkflowViewStateService.ViewState>
                   <Transition.Condition>[NOT flagStop and NOT flagGetDataError]</Transition.Condition>
                   <Transition.To>
-                    <State x:Name="__ReferenceID3" sap2010:Annotation.AnnotationText="Process transaction data. Set success or error status. Log execution message." DisplayName="Process data state" sap:VirtualizedContainerService.HintSize="648,2009" sap2010:WorkflowViewState.IdRef="State_4">
+                    <State x:Name="__ReferenceID3" sap2010:Annotation.AnnotationText="Process transaction data. Set success or error status. Log execution message." DisplayName="Process data state" sap:VirtualizedContainerService.HintSize="502,1406" sap2010:WorkflowViewState.IdRef="State_4">
                       <State.Entry>
-                        <TryCatch DisplayName="TC process data" sap:VirtualizedContainerService.HintSize="602,1564" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+                        <TryCatch DisplayName="TC process data" sap:VirtualizedContainerService.HintSize="456,961" sap2010:WorkflowViewState.IdRef="TryCatch_2">
                           <TryCatch.Variables>
                             <Variable x:TypeArguments="s:DateTime" sap2010:Annotation.AnnotationText="[REQUIRED]&#xA;UTC datetime of single transaction start" Name="startTransactionTime" />
                           </TryCatch.Variables>
@@ -710,12 +713,18 @@
                                   <OutArgument x:TypeArguments="x:String" x:Key="IndicatorJsonString">
                                     <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="indicatorJsonString" />
                                   </OutArgument>
+                                  <InArgument x:TypeArguments="scg:Dictionary(x:String, scg:List(x:String))" x:Key="DictPolicyNrClearedAndId">
+                                    <mva:VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, scg:List(x:String))" ExpressionText="dictPolicyNrClearedAndId" />
+                                  </InArgument>
+                                  <InArgument x:TypeArguments="scg:Dictionary(x:String, scg:List(x:String))" x:Key="DictPolicyNrClearedAndNr">
+                                    <mva:VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, scg:List(x:String))" ExpressionText="dictPolicyNrClearedAndNr" />
+                                  </InArgument>
                                 </ui:InvokeWorkflowFile.Arguments>
                               </ui:InvokeWorkflowFile>
                             </Sequence>
                           </TryCatch.Try>
                           <TryCatch.Catches>
-                            <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="568,21" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+                            <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="422,21" sap2010:WorkflowViewState.IdRef="Catch`1_2">
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                   <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -798,33 +807,15 @@
                                     <If.Then>
                                       <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Update Summary datatable" sap:VirtualizedContainerService.HintSize="379,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_50" UnSafe="False" WorkflowFileName="PROCESS/PROCESS_FRAMEWORK/PR_UpdateSummaryDt.xaml">
                                         <ui:InvokeWorkflowFile.Arguments>
-                                          <InArgument x:TypeArguments="s:Exception" x:Key="ExceptionArgument">
-                                            <mva:VisualBasicValue x:TypeArguments="s:Exception" ExpressionText="exceptionProcessing" />
-                                          </InArgument>
-                                          <InOutArgument x:TypeArguments="sd:DataTable" x:Key="DtSummary">
-                                            <mva:VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="dtSummary" />
-                                          </InOutArgument>
-                                          <InArgument x:TypeArguments="ui:QueueItem" x:Key="TransactionItem">
-                                            <mva:VisualBasicValue x:TypeArguments="ui:QueueItem" ExpressionText="transactionQueueItem" />
-                                          </InArgument>
-                                          <InArgument x:TypeArguments="x:Decimal" x:Key="ValueHighestIndicator">
-                                            <mva:VisualBasicValue x:TypeArguments="x:Decimal" ExpressionText="valueHighestIndicator" />
-                                          </InArgument>
-                                          <InArgument x:TypeArguments="x:String" x:Key="PolicyNrHighestIndicator">
-                                            <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="policyNrHighestIndicator" />
-                                          </InArgument>
-                                          <InArgument x:TypeArguments="x:String" x:Key="IndicatorJsonString">
-                                            <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="indicatorJsonString" />
-                                          </InArgument>
-                                          <InArgument x:TypeArguments="x:String" x:Key="MailSubject">
-                                            <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="TransactionQueueItem.SpecificContent(&quot;MailSubject&quot;).ToString" />
-                                          </InArgument>
-                                          <InArgument x:TypeArguments="x:String" x:Key="MailSender">
-                                            <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="TransactionQueueItem.SpecificContent(&quot;MailSender&quot;).ToString" />
-                                          </InArgument>
-                                          <InArgument x:TypeArguments="x:String" x:Key="AttachmentPdf">
-                                            <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="TransactionQueueItem.SpecificContent(&quot;AttachmentName&quot;).ToString" />
-                                          </InArgument>
+                                          <InArgument x:TypeArguments="s:Exception" x:Key="ExceptionArgument">[exceptionProcessing]</InArgument>
+                                          <InOutArgument x:TypeArguments="sd:DataTable" x:Key="DtSummary">[dtSummary]</InOutArgument>
+                                          <InArgument x:TypeArguments="ui:QueueItem" x:Key="TransactionItem">[transactionQueueItem]</InArgument>
+                                          <InArgument x:TypeArguments="x:Decimal" x:Key="ValueHighestIndicator">[valueHighestIndicator]</InArgument>
+                                          <InArgument x:TypeArguments="x:String" x:Key="PolicyNrHighestIndicator">[policyNrHighestIndicator]</InArgument>
+                                          <InArgument x:TypeArguments="x:String" x:Key="IndicatorJsonString">[indicatorJsonString]</InArgument>
+                                          <InArgument x:TypeArguments="x:String" x:Key="MailSubject">[TransactionQueueItem.SpecificContent("MailSubject").ToString]</InArgument>
+                                          <InArgument x:TypeArguments="x:String" x:Key="MailSender">[TransactionQueueItem.SpecificContent("MailSender").ToString]</InArgument>
+                                          <InArgument x:TypeArguments="x:String" x:Key="AttachmentPdf">[TransactionQueueItem.SpecificContent("AttachmentName").ToString]</InArgument>
                                         </ui:InvokeWorkflowFile.Arguments>
                                       </ui:InvokeWorkflowFile>
                                     </If.Then>
@@ -986,6 +977,8 @@
       <Variable x:TypeArguments="sd:DataTable" sap2010:Annotation.AnnotationText="[REQUIRED for QB-type only]&#xA;Edit variable type to correct one dependent on get processing data scenario type. For instance if QB-datatable type bot then variable type should be set to System.Datatable. For QE type bot this variable is usually unused" Name="processingData" />
       <Variable x:TypeArguments="sd:DataRow" sap2010:Annotation.AnnotationText="[REQUIRED for QB-type only]&#xA;Edit variable type to correct one dependent on get processing data scenario type. For instance if QB-datatable type bot then variable type should be set to System.DataRow. For QE type bot this variable is usually unused" Name="transactionData" />
       <Variable x:TypeArguments="s:String[]" Name="arrPolicies" />
+      <Variable x:TypeArguments="scg:Dictionary(x:String, scg:List(x:String))" Name="dictPolicyNrClearedAndId" />
+      <Variable x:TypeArguments="scg:Dictionary(x:String, scg:List(x:String))" Name="dictPolicyNrClearedAndNr" />
     </StateMachine.Variables>
   </StateMachine>
 </Activity>
