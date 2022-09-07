@@ -1,18 +1,21 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="SU_GetListOfPolicies" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:al="clr-namespace:ARL_Framework.Logging_and_Reporting;assembly=ARL_Framework" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="SU_GetListOfPolicies" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:al="clr-namespace:ARL_Framework.Logging_and_Reporting;assembly=ARL_Framework" xmlns:maes="clr-namespace:Microsoft.Activities.Extensions.Statements;assembly=Microsoft.Activities.Extensions" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="ArrPolicies" Type="OutArgument(s:String[])" />
+    <x:Property sap2010:Annotation.AnnotationText="List of policies - cleared" Name="ArrPolicies" Type="OutArgument(s:String[])" />
     <x:Property Name="PathPoliciesFile" Type="InArgument(x:String)" />
     <x:Property Name="PolicyLengthTreshold" Type="InArgument(x:Int32)" />
-    <x:Property Name="SheetNamePoliciesFile" Type="InArgument(x:String)" />
-    <x:Property Name="HeaderNamePoliciesFile" Type="InArgument(x:String)" />
+    <x:Property Name="HeaderNamePolicyId" Type="InArgument(x:String)" />
+    <x:Property Name="HeaderNamePolicyNr" Type="InArgument(x:String)" />
+    <x:Property Name="SheetName" Type="InArgument(x:String)" />
+    <x:Property Name="DictPolicyNrClearedAndId" Type="OutArgument(scg:Dictionary(x:String, scg:List(x:String)))" />
+    <x:Property Name="DictPolicyNrClearedAndNr" Type="OutArgument(scg:Dictionary(x:String, scg:List(x:String)))" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1129,1036</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1040,2808</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>SU_GetListOfPolicies_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="31">
+    <scg:List x:TypeArguments="x:String" Capacity="62">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -44,10 +47,13 @@
       <x:String>UiPath.Excel</x:String>
       <x:String>UiPath.Excel.Activities</x:String>
       <x:String>System.Reflection</x:String>
+      <x:String>UiPath.DataTableUtilities</x:String>
+      <x:String>Microsoft.Activities.Extensions.Statements</x:String>
+      <x:String>Microsoft.Activities</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="22">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="44">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
@@ -70,68 +76,215 @@
       <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>UiPath.MicrosoftOffice365.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>Microsoft.Activities.Extensions</AssemblyReference>
+      <AssemblyReference>Microsoft.Activities</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>System.Linq.Async.Queryable</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="SU_GetListOfPolicies" sap:VirtualizedContainerService.HintSize="476,971" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="SU_GetListOfPolicies" sap:VirtualizedContainerService.HintSize="985,2743" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
-      <Variable x:TypeArguments="s:String[]" Name="arrPoliciesTemp" />
       <Variable x:TypeArguments="sd:DataTable" Name="dtPolicies" />
-      <Variable x:TypeArguments="x:Int32" Name="indexArray" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <al:Logging ErrorCode="{x:Null}" ErrorDescription="{x:Null}" ExceptionObject="{x:Null}" FlagInfo="{x:Null}" DisplayName="Log start fetch" sap:VirtualizedContainerService.HintSize="434,22" sap2010:WorkflowViewState.IdRef="Logging_1" LogMessage="[&quot;Getting list of policies from &quot; &amp; PathPoliciesFile]" />
-    <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[dtPolicies]" DisplayName="Read Range" sap:VirtualizedContainerService.HintSize="434,87" sap2010:WorkflowViewState.IdRef="ReadRange_1" SheetName="[SheetNamePoliciesFile]" WorkbookPath="[PathPoliciesFile]" />
-    <Assign DisplayName="Assign temp list of policies from dt column" sap:VirtualizedContainerService.HintSize="434,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+    <al:Logging ErrorCode="{x:Null}" ErrorDescription="{x:Null}" ExceptionObject="{x:Null}" FlagInfo="{x:Null}" DisplayName="Log start fetch" sap:VirtualizedContainerService.HintSize="943,22" sap2010:WorkflowViewState.IdRef="Logging_1" LogMessage="[&quot;Getting list of policies from &quot; &amp; PathPoliciesFile]" />
+    <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[dtPolicies]" DisplayName="Read Range" sap:VirtualizedContainerService.HintSize="943,87" sap2010:WorkflowViewState.IdRef="ReadRange_1" SheetName="[SheetName]" WorkbookPath="[PathPoliciesFile]" />
+    <Assign DisplayName="Initialize dictionary policy id" sap:VirtualizedContainerService.HintSize="943,60" sap2010:WorkflowViewState.IdRef="Assign_9">
       <Assign.To>
-        <OutArgument x:TypeArguments="s:String[]">[arrPoliciesTemp]</OutArgument>
+        <OutArgument x:TypeArguments="scg:Dictionary(x:String, scg:List(x:String))">[dictPolicyNrClearedAndId]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="s:String[]">[(From r As DataRow In dtPolicies.Rows.Cast(Of DataRow) Select CStr(r(HeaderNamePoliciesFile))).ToArray]</InArgument>
+        <InArgument x:TypeArguments="scg:Dictionary(x:String, scg:List(x:String))">[New Dictionary(of string, List(of string))]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="[indexArray]" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="434,428" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[arrPoliciesTemp]">
-      <ui:ForEach.Body>
-        <ActivityAction x:TypeArguments="x:String">
+    <Assign DisplayName="Initialize dictionary policy nr" sap:VirtualizedContainerService.HintSize="943,60" sap2010:WorkflowViewState.IdRef="Assign_11">
+      <Assign.To>
+        <OutArgument x:TypeArguments="scg:Dictionary(x:String, scg:List(x:String))">[dictPolicyNrClearedAndNr]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="scg:Dictionary(x:String, scg:List(x:String))">[New Dictionary(of string, List(of string))]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dtPolicies]" DisplayName="For each row in policies file" sap:VirtualizedContainerService.HintSize="943,2100" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+      <ui:ForEachRow.Body>
+        <ActivityAction x:TypeArguments="sd:DataRow">
           <ActivityAction.Argument>
-            <DelegateInArgument x:TypeArguments="x:String" Name="item" />
+            <DelegateInArgument x:TypeArguments="sd:DataRow" Name="CurrentRow" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Replace special char" sap:VirtualizedContainerService.HintSize="376,304" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <Sequence DisplayName="Fetch single policy nr" sap:VirtualizedContainerService.HintSize="909,1980" sap2010:WorkflowViewState.IdRef="Sequence_3">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="x:String" Name="policyNrCleared" />
+              <Variable x:TypeArguments="x:String" Name="policyNrOriginal" />
+            </Sequence.Variables>
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Clear special characters" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="SUPPORT\SU_ClearStringSpecChars.xaml">
-              <ui:InvokeWorkflowFile.Arguments>
-                <InOutArgument x:TypeArguments="x:String" x:Key="StringValue">
-                  <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="item" />
-                </InOutArgument>
-              </ui:InvokeWorkflowFile.Arguments>
-            </ui:InvokeWorkflowFile>
-            <Assign DisplayName="Replace" sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_3">
+            <Assign DisplayName="Assign original policy nr" sap:VirtualizedContainerService.HintSize="867,60" sap2010:WorkflowViewState.IdRef="Assign_7">
               <Assign.To>
-                <OutArgument x:TypeArguments="x:String">[arrPoliciesTemp(indexArray)]</OutArgument>
+                <OutArgument x:TypeArguments="x:String">[policyNrOriginal]</OutArgument>
               </Assign.To>
               <Assign.Value>
-                <InArgument x:TypeArguments="x:String">[item]</InArgument>
+                <InArgument x:TypeArguments="x:String">[CurrentRow(HeaderNamePolicyNr).ToString]</InArgument>
               </Assign.Value>
             </Assign>
+            <Assign DisplayName="Assign cleared policy nr" sap:VirtualizedContainerService.HintSize="867,60" sap2010:WorkflowViewState.IdRef="Assign_6">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[policyNrCleared]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[policyNrOriginal]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <If Condition="[Len(policyNrCleared)&gt;PolicyLengthTreshold]" DisplayName="If policy length in scope" sap:VirtualizedContainerService.HintSize="867,1688" sap2010:WorkflowViewState.IdRef="If_2">
+              <If.Then>
+                <Sequence DisplayName="Policy nr in scope" sap:VirtualizedContainerService.HintSize="831,1511" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                  <Sequence.Variables>
+                    <Variable x:TypeArguments="scg:List(x:String)" Name="lstPolicyId" />
+                    <Variable x:TypeArguments="x:String" Name="policyId" />
+                  </Sequence.Variables>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <Assign DisplayName="Assign policy id" sap:VirtualizedContainerService.HintSize="789,60" sap2010:WorkflowViewState.IdRef="Assign_8">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[policyId]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">[CurrentRow(HeaderNamePolicyId).ToString]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <If Condition="[String.IsNullOrEmpty(policyId)]" sap:VirtualizedContainerService.HintSize="789,237" sap2010:WorkflowViewState.IdRef="If_3">
+                    <If.Then>
+                      <Assign DisplayName="Assign empty policy id" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_19">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:String">[policyId]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:String">[String.Empty]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                    </If.Then>
+                    <If.Else>
+                      <Sequence sap2010:WorkflowViewState.IdRef="Sequence_10">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </Sequence>
+                    </If.Else>
+                  </If>
+                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Clear special characters" sap:VirtualizedContainerService.HintSize="789,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="SUPPORT\SU_ClearStringSpecChars.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InOutArgument x:TypeArguments="x:String" x:Key="StringValue">[policyNrCleared]</InOutArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
+                  <If Condition="[NOT dictPolicyNrClearedAndId.ContainsKey(policyNrCleared)]" DisplayName="If unique policy nr" sap:VirtualizedContainerService.HintSize="789,890" sap2010:WorkflowViewState.IdRef="If_1">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <If.Then>
+                      <Sequence DisplayName="Add new policy to objets" sap:VirtualizedContainerService.HintSize="440,732" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                        <Sequence.Variables>
+                          <Variable x:TypeArguments="scg:List(x:String)" Name="lstPolicyNr" />
+                        </Sequence.Variables>
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <Assign DisplayName="Initialize list of policy nr" sap:VirtualizedContainerService.HintSize="398,60" sap2010:WorkflowViewState.IdRef="Assign_18">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="scg:List(x:String)">[lstPolicyNr]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="scg:List(x:String)">[new List(of string)]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <AddToCollection x:TypeArguments="x:String" Collection="[lstPolicyNr]" DisplayName="Build new list" sap:VirtualizedContainerService.HintSize="398,22" sap2010:WorkflowViewState.IdRef="AddToCollection`1_6" Item="[policyNrOriginal]" />
+                        <maes:AddToDictionary x:TypeArguments="x:String, scg:List(x:String)" Dictionary="[dictPolicyNrClearedAndNr]" DisplayName="Add to dictionary of policy ids" sap:VirtualizedContainerService.HintSize="398,138" sap2010:WorkflowViewState.IdRef="AddToDictionary`2_6" Key="[policyNrCleared]" Value="[lstPolicyNr]" />
+                        <Assign DisplayName="Initialize list of policy ids" sap:VirtualizedContainerService.HintSize="398,60" sap2010:WorkflowViewState.IdRef="Assign_14">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="scg:List(x:String)">[lstPolicyId]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="scg:List(x:String)">[new List(of string)]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <AddToCollection x:TypeArguments="x:String" Collection="[lstPolicyId]" DisplayName="Build new list" sap:VirtualizedContainerService.HintSize="398,22" sap2010:WorkflowViewState.IdRef="AddToCollection`1_4" Item="[policyId]" />
+                        <maes:AddToDictionary x:TypeArguments="x:String, scg:List(x:String)" Dictionary="[dictPolicyNrClearedAndId]" DisplayName="Add to dictionary of policy ids" sap:VirtualizedContainerService.HintSize="398,138" sap2010:WorkflowViewState.IdRef="AddToDictionary`2_5" Key="[policyNrCleared]" Value="[lstPolicyId]" />
+                      </Sequence>
+                    </If.Then>
+                    <If.Else>
+                      <Sequence DisplayName="Increment duplicated policy" sap:VirtualizedContainerService.HintSize="304,314" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <Assign DisplayName="Get existing list" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_15">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="scg:List(x:String)">[lstPolicyId]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="scg:List(x:String)">[dictPolicyNrClearedAndId(policyNrCleared)]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <AddToCollection x:TypeArguments="x:String" Collection="[lstPolicyId]" DisplayName="Increment existing list" sap:VirtualizedContainerService.HintSize="262,22" sap2010:WorkflowViewState.IdRef="AddToCollection`1_5" Item="[policyId]" />
+                        <Assign DisplayName="Add existing list" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_16">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="scg:List(x:String)">[dictPolicyNrClearedAndId(policyNrCleared)]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="scg:List(x:String)">[lstPolicyId]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                      </Sequence>
+                    </If.Else>
+                  </If>
+                </Sequence>
+              </If.Then>
+              <If.Else>
+                <Sequence sap2010:WorkflowViewState.IdRef="Sequence_8">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </Sequence>
+              </If.Else>
+            </If>
           </Sequence>
         </ActivityAction>
-      </ui:ForEach.Body>
-    </ui:ForEach>
-    <Assign DisplayName="Filter policies-length treshold" sap:VirtualizedContainerService.HintSize="434,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+      </ui:ForEachRow.Body>
+    </ui:ForEachRow>
+    <Assign DisplayName="Convert to array" sap:VirtualizedContainerService.HintSize="943,60" sap2010:WorkflowViewState.IdRef="Assign_17">
       <Assign.To>
         <OutArgument x:TypeArguments="s:String[]">[ArrPolicies]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="s:String[]">[(From plc In arrPoliciesTemp Where plc.Length&gt;PolicyLengthTreshold Select plc).Distinct.ToArray]</InArgument>
+        <InArgument x:TypeArguments="s:String[]">[dictPolicyNrClearedAndNr.Keys.ToArray()]</InArgument>
       </Assign.Value>
     </Assign>
-    <al:Logging ErrorCode="{x:Null}" ErrorDescription="{x:Null}" ExceptionObject="{x:Null}" FlagInfo="{x:Null}" DisplayName="Log policies amount" sap:VirtualizedContainerService.HintSize="434,22" sap2010:WorkflowViewState.IdRef="Logging_2" LogMessage="[&quot;List of policies fetched and cleared, contains &quot; &amp; ArrPolicies.Count.ToString &amp; &quot; distinct policies&quot;]" />
+    <al:Logging ErrorCode="{x:Null}" ErrorDescription="{x:Null}" ExceptionObject="{x:Null}" FlagInfo="{x:Null}" DisplayName="Log policies amount" sap:VirtualizedContainerService.HintSize="943,22" sap2010:WorkflowViewState.IdRef="Logging_2" LogMessage="[&quot;List of policies fetched and cleared, contains &quot; &amp; ArrPolicies.Count.ToString &amp; &quot; distinct policies&quot;]" />
   </Sequence>
 </Activity>

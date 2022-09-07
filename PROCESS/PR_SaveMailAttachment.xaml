@@ -4,14 +4,15 @@
     <x:Property Name="AttachmentName" Type="InArgument(x:String)" />
     <x:Property Name="PathAttachmentFolder" Type="InArgument(x:String)" />
     <x:Property Name="PathAttachmentFile" Type="OutArgument(x:String)" />
+    <x:Property Name="PathAttachmentFolderOptional" Type="InArgument(x:String)" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1090,1383</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1040,1273</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>PR_FilterMailByMessageId_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="32">
+    <scg:List x:TypeArguments="x:String" Capacity="64">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -84,9 +85,11 @@
       <AssemblyReference>UiPath.MicrosoftOffice365.Activities</AssemblyReference>
       <AssemblyReference>System.Collections.Immutable</AssemblyReference>
       <AssemblyReference>System.Linq.Async.Queryable</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="PR_SaveMailAttachment" sap:VirtualizedContainerService.HintSize="771,1318" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="PR_SaveMailAttachment" sap:VirtualizedContainerService.HintSize="771,1208" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="s:String[]" Name="arrAttachment" />
     </Sequence.Variables>
@@ -109,7 +112,7 @@
         </Sequence>
       </If.Else>
     </If>
-    <Sequence DisplayName="Get attachment" sap:VirtualizedContainerService.HintSize="729,414" sap2010:WorkflowViewState.IdRef="Sequence_3">
+    <Sequence DisplayName="Get attachment" sap:VirtualizedContainerService.HintSize="729,304" sap2010:WorkflowViewState.IdRef="Sequence_3">
       <Sequence.Variables>
         <Variable x:TypeArguments="scg:IEnumerable(x:String)" Name="colAttachments" />
       </Sequence.Variables>
@@ -118,8 +121,25 @@
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ui:Comment sap:VirtualizedContainerService.HintSize="334,93" sap2010:WorkflowViewState.IdRef="Comment_1" Text="// All attachments are being saved (instead of one) due to possible regex keywords in file name" />
-      <ui:SaveMailAttachments Attachments="[colAttachments]" DisplayName="Save all pdf attachments" Filter=".pdf|.PDF|.Pdf" FolderPath="[PathAttachmentFolder]" sap:VirtualizedContainerService.HintSize="334,89" sap2010:WorkflowViewState.IdRef="SaveMailAttachments_1" Message="[MailMessage]" OverwriteExisting="True" />
+      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke PR_SaveAttachment workflow" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="PROCESS\PR_SaveAttachment.xaml">
+        <ui:InvokeWorkflowFile.Arguments>
+          <InArgument x:TypeArguments="x:String" x:Key="PathAttachmentFolder">
+            <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="PathAttachmentFolder" />
+          </InArgument>
+          <InArgument x:TypeArguments="snm:MailMessage" x:Key="MailMessage">
+            <mva:VisualBasicValue x:TypeArguments="snm:MailMessage" ExpressionText="MailMessage" />
+          </InArgument>
+          <OutArgument x:TypeArguments="scg:IEnumerable(x:String)" x:Key="ColAttachments">
+            <mva:VisualBasicReference x:TypeArguments="scg:IEnumerable(x:String)" ExpressionText="colAttachments" />
+          </OutArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="AttachmentName">
+            <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="AttachmentName" />
+          </InArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="PathAttachmentFolderOptional">
+            <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="PathAttachmentFolderOptional" />
+          </InArgument>
+        </ui:InvokeWorkflowFile.Arguments>
+      </ui:InvokeWorkflowFile>
       <Assign DisplayName="Get single attachment" sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_2">
         <Assign.To>
           <OutArgument x:TypeArguments="s:String[]">[arrAttachment]</OutArgument>
