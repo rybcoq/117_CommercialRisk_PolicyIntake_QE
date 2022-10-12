@@ -22,7 +22,7 @@
 	"PathPoliciesFile": "C:\\Users\\A0796649\\OneDrive - Aon\\Documents\\UiPath\\REQ-117_PolicyIntake\\Policy Receipt Pilot Test Data.xlsx",
 	"PoliciesFileSheetName": "Broker Reviewed List",
 	"HeaderNamePolicyId": "PID",
-	"HeaderNamePolicyNr": "Policy Nbr",
+	"HeaderNamePolicyNr": "Policy Number",
 	
 	"IndicatorWeightMailBody": "0.05",
 	"IndicatorWeightMailSubject": "0.10",

@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="PR_FinalizeIndicators" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:al="clr-namespace:ARL_Framework.Logging_and_Reporting;assembly=ARL_Framework" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="PR_FinalizeIndicators" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:al="clr-namespace:ARL_Framework.Logging_and_Reporting;assembly=ARL_Framework" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="DictIndicator" Type="InArgument(scg:Dictionary(x:String, x:Decimal))" />
     <x:Property Name="PolicyNrHighestIndicator" Type="OutArgument(x:String)" />
@@ -12,7 +12,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1040,1091</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1044,1642</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>PR_FinalizeIndicators_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -78,9 +78,10 @@
       <AssemblyReference>UiPath.MicrosoftOffice365.Activities.Design</AssemblyReference>
       <AssemblyReference>ARL_DataManipulation</AssemblyReference>
       <AssemblyReference>Newtonsoft.Json</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="PR_FinalizeIndicators" sap:VirtualizedContainerService.HintSize="591,1026" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="PR_FinalizeIndicators" sap:VirtualizedContainerService.HintSize="1054,1577" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="scg:List(scg:KeyValuePair(x:String, x:Decimal))" Name="colIndicatorSorted" />
     </Sequence.Variables>
@@ -89,16 +90,16 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <If Condition="[DictIndicator.Count&gt;0]" DisplayName="If something matched" sap:VirtualizedContainerService.HintSize="549,934" sap2010:WorkflowViewState.IdRef="If_1">
+    <If Condition="[DictIndicator.Count&gt;0]" DisplayName="If something matched" sap:VirtualizedContainerService.HintSize="1012,1485" sap2010:WorkflowViewState.IdRef="If_1">
       <If.Then>
-        <Sequence DisplayName="Finalize" sap:VirtualizedContainerService.HintSize="304,776" sap2010:WorkflowViewState.IdRef="Sequence_3">
+        <Sequence DisplayName="Finalize" sap:VirtualizedContainerService.HintSize="767,1327" sap2010:WorkflowViewState.IdRef="Sequence_3">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <al:Logging ErrorCode="{x:Null}" ErrorDescription="{x:Null}" ExceptionObject="{x:Null}" FlagInfo="{x:Null}" DisplayName="Log finalize" sap:VirtualizedContainerService.HintSize="262,22" sap2010:WorkflowViewState.IdRef="Logging_1" LogMessage="Finalizing indicators" />
-          <Assign DisplayName="Sort dictionary" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+          <al:Logging ErrorCode="{x:Null}" ErrorDescription="{x:Null}" ExceptionObject="{x:Null}" FlagInfo="{x:Null}" DisplayName="Log finalize" sap:VirtualizedContainerService.HintSize="725,22" sap2010:WorkflowViewState.IdRef="Logging_1" LogMessage="Finalizing indicators" />
+          <Assign DisplayName="Sort dictionary" sap:VirtualizedContainerService.HintSize="725,60" sap2010:WorkflowViewState.IdRef="Assign_1">
             <Assign.To>
               <OutArgument x:TypeArguments="scg:List(scg:KeyValuePair(x:String, x:Decimal))">[colIndicatorSorted]</OutArgument>
             </Assign.To>
@@ -106,7 +107,7 @@
               <InArgument x:TypeArguments="scg:List(scg:KeyValuePair(x:String, x:Decimal))">[(From tPair As KeyValuePair(Of String, Decimal) In DictIndicator Order By tPair.Value Descending Select tPair).ToList]</InArgument>
             </Assign.Value>
           </Assign>
-          <Assign DisplayName="Convert dictionary to json string" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_4">
+          <Assign DisplayName="Convert dictionary to json string" sap:VirtualizedContainerService.HintSize="725,60" sap2010:WorkflowViewState.IdRef="Assign_4">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">[IndicatorJsonString]</OutArgument>
             </Assign.To>
@@ -114,15 +115,7 @@
               <InArgument x:TypeArguments="x:String">[Newtonsoft.Json.JsonConvert.SerializeObject(DictIndicator)]</InArgument>
             </Assign.Value>
           </Assign>
-          <Assign DisplayName="Assign highest match policy nr" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_5">
-            <Assign.To>
-              <OutArgument x:TypeArguments="x:String">[PolicyNrHighestIndicator]</OutArgument>
-            </Assign.To>
-            <Assign.Value>
-              <InArgument x:TypeArguments="x:String">[colIndicatorSorted(0).Key]</InArgument>
-            </Assign.Value>
-          </Assign>
-          <Assign DisplayName="Assign highest match indicator value" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_6">
+          <Assign DisplayName="Assign highest match indicator value" sap:VirtualizedContainerService.HintSize="725,60" sap2010:WorkflowViewState.IdRef="Assign_6">
             <Assign.To>
               <OutArgument x:TypeArguments="x:Decimal">[ValueHighestIndicator]</OutArgument>
             </Assign.To>
@@ -130,23 +123,97 @@
               <InArgument x:TypeArguments="x:Decimal">[colIndicatorSorted(0).Value]</InArgument>
             </Assign.Value>
           </Assign>
-          <Assign DisplayName="Assign highest match policy original nr" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_7">
-            <Assign.To>
-              <OutArgument x:TypeArguments="x:String">[PolicyNrOriginalHighestIndicator]</OutArgument>
-            </Assign.To>
-            <Assign.Value>
-              <InArgument x:TypeArguments="x:String">[String.Join(", ",DictPolicyNrClearedAndNr(PolicyNrHighestIndicator))]</InArgument>
-            </Assign.Value>
-          </Assign>
-          <Assign DisplayName="Assign highest match policy id" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_8">
-            <Assign.To>
-              <OutArgument x:TypeArguments="x:String">[PolicyIdHighestIndicator]</OutArgument>
-            </Assign.To>
-            <Assign.Value>
-              <InArgument x:TypeArguments="x:String">[String.Join(", ",DictPolicyNrClearedAndId(PolicyNrHighestIndicator))]</InArgument>
-            </Assign.Value>
-          </Assign>
-          <al:Logging ErrorCode="{x:Null}" ErrorDescription="{x:Null}" ExceptionObject="{x:Null}" FlagInfo="{x:Null}" DisplayName="Log highest match" sap:VirtualizedContainerService.HintSize="262,22" sap2010:WorkflowViewState.IdRef="Logging_3" LogMessage="[&quot;Highest match is &quot; &amp; ValueHighestIndicator.ToString &amp; &quot; for policy nr &quot; &amp; PolicyNrHighestIndicator]" />
+          <ui:ForEach x:TypeArguments="scg:KeyValuePair(x:String, x:Decimal)" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="725,811" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[colIndicatorSorted]">
+            <ui:ForEach.Body>
+              <ActivityAction x:TypeArguments="scg:KeyValuePair(x:String, x:Decimal)">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="scg:KeyValuePair(x:String, x:Decimal)" Name="item" />
+                </ActivityAction.Argument>
+                <If Condition="[item.Value=colIndicatorSorted(0).value]" DisplayName="If the same value as max" sap:VirtualizedContainerService.HintSize="689,687" sap2010:WorkflowViewState.IdRef="If_3">
+                  <If.Then>
+                    <If Condition="[String.IsNullOrEmpty(PolicyNrHighestIndicator)]" DisplayName="If assign or incement" sap:VirtualizedContainerService.HintSize="653,510" sap2010:WorkflowViewState.IdRef="If_2">
+                      <If.Then>
+                        <Sequence DisplayName="First match" sap:VirtualizedContainerService.HintSize="304,352" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <Assign DisplayName="Assign highest match policy nr" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_9">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:String">[PolicyNrHighestIndicator]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:String">[item.Key]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                          <Assign DisplayName="Assign highest match policy original nr" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_7">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:String">[PolicyNrOriginalHighestIndicator]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:String">[String.Join(", ",DictPolicyNrClearedAndNr(item.Key))]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                          <Assign DisplayName="Assign highest match policy id" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_8">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:String">[PolicyIdHighestIndicator]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:String">[String.Join(", ",DictPolicyNrClearedAndId(item.Key))]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                        </Sequence>
+                      </If.Then>
+                      <If.Else>
+                        <Sequence DisplayName="More than 1 match" sap:VirtualizedContainerService.HintSize="304,352" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <Assign DisplayName="Increment highest match policy nr" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_10">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:String">[PolicyNrHighestIndicator]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:String">[PolicyNrHighestIndicator &amp; ", " &amp; item.Key]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                          <Assign DisplayName="Increment highest match policy original nr" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_11">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:String">[PolicyNrOriginalHighestIndicator]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:String">[PolicyNrOriginalHighestIndicator &amp; ", " &amp; String.Join(", ",DictPolicyNrClearedAndNr(item.Key))]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                          <Assign DisplayName="Increment highest match policy id" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_12">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:String">[PolicyIdHighestIndicator]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:String">[PolicyIdHighestIndicator &amp; ", " &amp; String.Join(", ",DictPolicyNrClearedAndId(item.Key))]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                        </Sequence>
+                      </If.Else>
+                    </If>
+                  </If.Then>
+                  <If.Else>
+                    <Sequence sap2010:WorkflowViewState.IdRef="Sequence_4">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </Sequence>
+                  </If.Else>
+                </If>
+              </ActivityAction>
+            </ui:ForEach.Body>
+          </ui:ForEach>
+          <al:Logging ErrorCode="{x:Null}" ErrorDescription="{x:Null}" ExceptionObject="{x:Null}" FlagInfo="{x:Null}" DisplayName="Log highest match" sap:VirtualizedContainerService.HintSize="725,22" sap2010:WorkflowViewState.IdRef="Logging_3" LogMessage="[&quot;Highest match is &quot; &amp; ValueHighestIndicator.ToString &amp; &quot; for policy (policies) nr &quot; &amp; PolicyNrHighestIndicator]" />
         </Sequence>
       </If.Then>
       <If.Else>
