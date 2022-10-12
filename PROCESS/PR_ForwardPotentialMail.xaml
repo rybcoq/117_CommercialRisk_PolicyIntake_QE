@@ -103,7 +103,7 @@
       <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="PR_ForwardMail" sap:VirtualizedContainerService.HintSize="376,489" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="PR_ForwardPotentialMail" sap:VirtualizedContainerService.HintSize="376,489" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="mailBody" />
       <Variable x:TypeArguments="x:String" Name="mailSubject" />
@@ -113,15 +113,11 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <al:Logging ErrorCode="{x:Null}" ErrorDescription="{x:Null}" ExceptionObject="{x:Null}" FlagInfo="{x:Null}" DisplayName="Log mail forward" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="Logging_1" LogMessage="[&quot;Forwarding mail to: &quot; &amp; MailTo]" />
+    <al:Logging ErrorCode="{x:Null}" ErrorDescription="{x:Null}" ExceptionObject="{x:Null}" FlagInfo="{x:Null}" DisplayName="Log mail potential forward" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="Logging_1" LogMessage="[&quot;Forwarding potential mail to: &quot; &amp; MailTo]" />
     <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Handle mail subject" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="SUPPORT\SU_HandleMailSubject.xaml">
       <ui:InvokeWorkflowFile.Arguments>
-        <InArgument x:TypeArguments="snm:MailMessage" x:Key="MailMessage">
-          <mva:VisualBasicValue x:TypeArguments="snm:MailMessage" ExpressionText="MailMessage" />
-        </InArgument>
-        <InOutArgument x:TypeArguments="x:String" x:Key="MailSubject">
-          <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="mailSubject" />
-        </InOutArgument>
+        <InArgument x:TypeArguments="snm:MailMessage" x:Key="MailMessage">[MailMessage]</InArgument>
+        <InOutArgument x:TypeArguments="x:String" x:Key="MailSubject">[mailSubject]</InOutArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
     <Assign DisplayName="Assign mail body" sap:VirtualizedContainerService.HintSize="334,64" sap2010:WorkflowViewState.IdRef="Assign_1">
@@ -129,15 +125,15 @@
         <OutArgument x:TypeArguments="x:String">[mailBody]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="x:String" xml:space="preserve">["Attached email was identified by the bot as containing policy.&lt;br&gt;&lt;br&gt;" &amp; _
+        <InArgument x:TypeArguments="x:String" xml:space="preserve">["Attached email was identified by the bot as POTENTIALLY containing policy.&lt;br&gt;&lt;br&gt;" &amp; _
 "Mail subject: " &amp; mailSubject &amp; "&lt;br&gt;" &amp; _
 "Mail sender: " &amp; MailMessage.Sender.Address &amp; "&lt;br&gt;" &amp; _
 "Document name: " &amp; Path.GetFileName(PathPdfAttachment) &amp; "&lt;br&gt;" &amp; _ 
-"Found policy nr: " &amp; PolicyNumbers &amp; "&lt;br&gt;" &amp; _ 
-"Found policy id: " &amp; PolicyIds &amp; "&lt;br&gt;" &amp; _ 
-"Highest indicator value: " &amp; IndicatorValue]</InArgument>
+"Found POTENTIAL policy nr (if any recognized): " &amp; PolicyNumbers &amp; "&lt;br&gt;" &amp; _ 
+"Found POTENTIAL policy id (if any recognized): " &amp; PolicyIds &amp; "&lt;br&gt;" &amp; _ 
+"Highest indicator value of POTENTIAL policy (if any recognized): " &amp; IndicatorValue]</InArgument>
       </Assign.Value>
     </Assign>
-    <as:SendEmailSMTP MailBcc="{x:Null}" MailCc="{x:Null}" MailSender="{x:Null}" ServerSMTP="{x:Null}" ArrPathAttachment="[{PathMsgAttachment}]" FlagMailbodyHTML="True" sap:VirtualizedContainerService.HintSize="334,79" sap2010:WorkflowViewState.IdRef="SendEmailSMTP_1" MailBody="[mailBody]" MailRecipient="[MailTo]" MailSubject="[&quot;FW:&quot; &amp; MailMessage.Subject]" />
+    <as:SendEmailSMTP MailBcc="{x:Null}" MailCc="{x:Null}" MailSender="{x:Null}" ServerSMTP="{x:Null}" ArrPathAttachment="[{PathMsgAttachment}]" FlagMailbodyHTML="True" sap:VirtualizedContainerService.HintSize="334,79" sap2010:WorkflowViewState.IdRef="SendEmailSMTP_1" MailBody="[mailBody]" MailRecipient="[MailTo]" MailSubject="[&quot;POTENTIAL FW:&quot; &amp; MailMessage.Subject]" />
   </Sequence>
 </Activity>

@@ -12,7 +12,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1040,2089</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1040,2434</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>PR_ProcessTransaction_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="39">
@@ -108,7 +108,7 @@
       <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Flowchart DisplayName="PR_ProcessTransaction" sap:VirtualizedContainerService.HintSize="646,2024" sap2010:WorkflowViewState.IdRef="Flowchart_1">
+  <Flowchart DisplayName="PR_ProcessTransaction" sap:VirtualizedContainerService.HintSize="784,2369" sap2010:WorkflowViewState.IdRef="Flowchart_1">
     <Flowchart.Variables>
       <Variable x:TypeArguments="scg:Dictionary(x:String, x:Decimal)" Name="dictIndicator" />
       <Variable x:TypeArguments="x:String" Name="pathPdfAttachmentFile" />
@@ -126,14 +126,14 @@
         <av:Point x:Key="ShapeLocation">270,2.5</av:Point>
         <av:Size x:Key="ShapeSize">60,75</av:Size>
         <av:PointCollection x:Key="ConnectorLocation">300,77.5 300,127.7</av:PointCollection>
-        <x:Double x:Key="Height">1988.04</x:Double>
-        <x:Double x:Key="Width">612</x:Double>
+        <x:Double x:Key="Height">2333</x:Double>
+        <x:Double x:Key="Width">750</x:Double>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <Flowchart.StartNode>
-      <x:Reference>__ReferenceID15</x:Reference>
+      <x:Reference>__ReferenceID20</x:Reference>
     </Flowchart.StartNode>
-    <FlowStep x:Name="__ReferenceID15" sap2010:WorkflowViewState.IdRef="FlowStep_1">
+    <FlowStep x:Name="__ReferenceID20" sap2010:WorkflowViewState.IdRef="FlowStep_1">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <av:Point x:Key="ShapeLocation">133,127.7</av:Point>
@@ -149,7 +149,7 @@
         </sap:WorkflowViewStateService.ViewState>
       </ui:Comment>
       <FlowStep.Next>
-        <FlowStep x:Name="__ReferenceID5" sap2010:WorkflowViewState.IdRef="FlowStep_13">
+        <FlowStep x:Name="__ReferenceID6" sap2010:WorkflowViewState.IdRef="FlowStep_13">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <av:Point x:Key="ShapeLocation">200,376.04</av:Point>
@@ -173,7 +173,7 @@
             </Assign>
           </Sequence>
           <FlowStep.Next>
-            <FlowStep x:Name="__ReferenceID2" sap2010:WorkflowViewState.IdRef="FlowStep_12">
+            <FlowStep x:Name="__ReferenceID3" sap2010:WorkflowViewState.IdRef="FlowStep_12">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <av:Point x:Key="ShapeLocation">200,479.7</av:Point>
@@ -206,7 +206,7 @@
                 </al:ReportProgressStep>
               </Sequence>
               <FlowStep.Next>
-                <FlowStep x:Name="__ReferenceID12" sap2010:WorkflowViewState.IdRef="FlowStep_11">
+                <FlowStep x:Name="__ReferenceID13" sap2010:WorkflowViewState.IdRef="FlowStep_11">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <av:Point x:Key="ShapeLocation">200,585.7</av:Point>
@@ -238,7 +238,7 @@
                     </al:ReportProgressStep>
                   </Sequence>
                   <FlowStep.Next>
-                    <FlowStep x:Name="__ReferenceID3" sap2010:WorkflowViewState.IdRef="FlowStep_10">
+                    <FlowStep x:Name="__ReferenceID4" sap2010:WorkflowViewState.IdRef="FlowStep_10">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <av:Point x:Key="ShapeLocation">200,687</av:Point>
@@ -292,7 +292,7 @@
                         </al:ReportProgressStep>
                       </Sequence>
                       <FlowStep.Next>
-                        <FlowStep x:Name="__ReferenceID4" sap2010:WorkflowViewState.IdRef="FlowStep_9">
+                        <FlowStep x:Name="__ReferenceID5" sap2010:WorkflowViewState.IdRef="FlowStep_9">
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
                               <av:Point x:Key="ShapeLocation">200,787</av:Point>
@@ -357,7 +357,7 @@
                             </al:ReportProgressStep>
                           </Sequence>
                           <FlowStep.Next>
-                            <FlowStep x:Name="__ReferenceID6" sap2010:WorkflowViewState.IdRef="FlowStep_8">
+                            <FlowStep x:Name="__ReferenceID7" sap2010:WorkflowViewState.IdRef="FlowStep_8">
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                   <av:Point x:Key="ShapeLocation">200,893</av:Point>
@@ -416,7 +416,7 @@
                                 </al:ReportProgressStep>
                               </Sequence>
                               <FlowStep.Next>
-                                <FlowStep x:Name="__ReferenceID7" sap2010:WorkflowViewState.IdRef="FlowStep_7">
+                                <FlowStep x:Name="__ReferenceID8" sap2010:WorkflowViewState.IdRef="FlowStep_7">
                                   <sap:WorkflowViewStateService.ViewState>
                                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                       <av:Point x:Key="ShapeLocation">200,999</av:Point>
@@ -485,7 +485,7 @@
                                     </al:ReportProgressStep>
                                   </Sequence>
                                   <FlowStep.Next>
-                                    <FlowStep x:Name="__ReferenceID8" sap2010:WorkflowViewState.IdRef="FlowStep_6">
+                                    <FlowStep x:Name="__ReferenceID9" sap2010:WorkflowViewState.IdRef="FlowStep_6">
                                       <sap:WorkflowViewStateService.ViewState>
                                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                           <av:Point x:Key="ShapeLocation">200,1105</av:Point>
@@ -563,7 +563,7 @@
                                         </al:ReportProgressStep>
                                       </Sequence>
                                       <FlowStep.Next>
-                                        <FlowDecision x:Name="__ReferenceID10" Condition="[DictIndicator.Keys.Count&gt;0]" DisplayName="Any match?" sap:VirtualizedContainerService.HintSize="70,87" sap2010:WorkflowViewState.IdRef="FlowDecision_1">
+                                        <FlowDecision x:Name="__ReferenceID11" Condition="[DictIndicator.Keys.Count&gt;0]" DisplayName="Any match?" sap:VirtualizedContainerService.HintSize="70,87" sap2010:WorkflowViewState.IdRef="FlowDecision_1">
                                           <sap:WorkflowViewStateService.ViewState>
                                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -574,7 +574,7 @@
                                             </scg:Dictionary>
                                           </sap:WorkflowViewStateService.ViewState>
                                           <FlowDecision.True>
-                                            <FlowStep x:Name="__ReferenceID9" sap2010:WorkflowViewState.IdRef="FlowStep_5">
+                                            <FlowStep x:Name="__ReferenceID10" sap2010:WorkflowViewState.IdRef="FlowStep_5">
                                               <sap:WorkflowViewStateService.ViewState>
                                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                                   <av:Point x:Key="ShapeLocation">100,1327</av:Point>
@@ -664,7 +664,7 @@
                                                 </al:ReportProgressStep>
                                               </Sequence>
                                               <FlowStep.Next>
-                                                <FlowStep x:Name="__ReferenceID1" sap2010:WorkflowViewState.IdRef="FlowStep_3">
+                                                <FlowStep x:Name="__ReferenceID2" sap2010:WorkflowViewState.IdRef="FlowStep_3">
                                                   <sap:WorkflowViewStateService.ViewState>
                                                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                                       <av:Point x:Key="ShapeLocation">270,1446.04</av:Point>
@@ -672,7 +672,7 @@
                                                       <av:PointCollection x:Key="ConnectorLocation">370,1512.04 370,1556.5</av:PointCollection>
                                                     </scg:Dictionary>
                                                   </sap:WorkflowViewStateService.ViewState>
-                                                  <Sequence DisplayName="Calculate indicators" sap:VirtualizedContainerService.HintSize="376,204" sap2010:WorkflowViewState.IdRef="Sequence_13">
+                                                  <Sequence DisplayName="Calculate indicators" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_13">
                                                     <sap:WorkflowViewStateService.ViewState>
                                                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -680,31 +680,19 @@
                                                     </sap:WorkflowViewStateService.ViewState>
                                                     <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Finalize indicators" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_20" UnSafe="False" WorkflowFileName="PROCESS\PR_FinalizeIndicators.xaml">
                                                       <ui:InvokeWorkflowFile.Arguments>
-                                                        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Decimal)" x:Key="DictIndicator">
-                                                          <mva:VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Decimal)" ExpressionText="dictIndicator" />
-                                                        </InArgument>
-                                                        <OutArgument x:TypeArguments="x:String" x:Key="PolicyNrHighestIndicator">
-                                                          <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="PolicyNrHighestIndicator" />
-                                                        </OutArgument>
-                                                        <OutArgument x:TypeArguments="x:String" x:Key="IndicatorJsonString">
-                                                          <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="IndicatorJsonString" />
-                                                        </OutArgument>
-                                                        <OutArgument x:TypeArguments="x:Decimal" x:Key="ValueHighestIndicator">
-                                                          <mva:VisualBasicReference x:TypeArguments="x:Decimal" ExpressionText="ValueHighestIndicator" />
-                                                        </OutArgument>
+                                                        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Decimal)" x:Key="DictIndicator">[dictIndicator]</InArgument>
+                                                        <OutArgument x:TypeArguments="x:String" x:Key="PolicyNrHighestIndicator">[PolicyNrHighestIndicator]</OutArgument>
+                                                        <OutArgument x:TypeArguments="x:String" x:Key="IndicatorJsonString">[IndicatorJsonString]</OutArgument>
+                                                        <OutArgument x:TypeArguments="x:Decimal" x:Key="ValueHighestIndicator">[ValueHighestIndicator]</OutArgument>
                                                         <OutArgument x:TypeArguments="x:String" x:Key="PolicyNrOriginalHighestIndicator" />
                                                         <OutArgument x:TypeArguments="x:String" x:Key="PolicyIdHighestIndicator" />
-                                                        <InArgument x:TypeArguments="scg:Dictionary(x:String, scg:List(x:String))" x:Key="DictPolicyNrClearedAndId">
-                                                          <mva:VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, scg:List(x:String))" ExpressionText="DictPolicyNrClearedAndId" />
-                                                        </InArgument>
-                                                        <InArgument x:TypeArguments="scg:Dictionary(x:String, scg:List(x:String))" x:Key="DictPolicyNrClearedAndNr">
-                                                          <mva:VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, scg:List(x:String))" ExpressionText="DictPolicyNrClearedAndNr" />
-                                                        </InArgument>
+                                                        <InArgument x:TypeArguments="scg:Dictionary(x:String, scg:List(x:String))" x:Key="DictPolicyNrClearedAndId">[DictPolicyNrClearedAndId]</InArgument>
+                                                        <InArgument x:TypeArguments="scg:Dictionary(x:String, scg:List(x:String))" x:Key="DictPolicyNrClearedAndNr">[DictPolicyNrClearedAndNr]</InArgument>
                                                       </ui:InvokeWorkflowFile.Arguments>
                                                     </ui:InvokeWorkflowFile>
                                                   </Sequence>
                                                   <FlowStep.Next>
-                                                    <FlowDecision x:Name="__ReferenceID13" Condition="[(CDbl(DictConfig(&quot;IndicatorForwardThreshold&quot;))-ValueHighestIndicator&lt;=CDbl(DictConfig(&quot;ExtraTimeDifferenceThreshold&quot;))) AND (ValueHighestIndicator&lt;CDbl(DictConfig(&quot;IndicatorForwardThreshold&quot;)))]" DisplayName="Extra time?" sap:VirtualizedContainerService.HintSize="70,87" sap2010:WorkflowViewState.IdRef="FlowDecision_2">
+                                                    <FlowDecision x:Name="__ReferenceID14" Condition="[(CDbl(DictConfig(&quot;IndicatorForwardThreshold&quot;))-ValueHighestIndicator&lt;=CDbl(DictConfig(&quot;ExtraTimeDifferenceThreshold&quot;))) AND (ValueHighestIndicator&lt;CDbl(DictConfig(&quot;IndicatorForwardThreshold&quot;)))]" DisplayName="Extra time?" sap:VirtualizedContainerService.HintSize="70,87" sap2010:WorkflowViewState.IdRef="FlowDecision_2">
                                                       <sap:WorkflowViewStateService.ViewState>
                                                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -715,7 +703,7 @@
                                                         </scg:Dictionary>
                                                       </sap:WorkflowViewStateService.ViewState>
                                                       <FlowDecision.True>
-                                                        <FlowStep x:Name="__ReferenceID14" sap2010:WorkflowViewState.IdRef="FlowStep_4">
+                                                        <FlowStep x:Name="__ReferenceID15" sap2010:WorkflowViewState.IdRef="FlowStep_4">
                                                           <sap:WorkflowViewStateService.ViewState>
                                                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                                               <av:Point x:Key="ShapeLocation">170,1667</av:Point>
@@ -747,12 +735,12 @@
                                                             </al:ReportProgressStep>
                                                           </Sequence>
                                                           <FlowStep.Next>
-                                                            <FlowStep x:Name="__ReferenceID0" sap2010:WorkflowViewState.IdRef="FlowStep_14">
+                                                            <FlowStep x:Name="__ReferenceID1" sap2010:WorkflowViewState.IdRef="FlowStep_14">
                                                               <sap:WorkflowViewStateService.ViewState>
                                                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                                                   <av:Point x:Key="ShapeLocation">270,1797</av:Point>
                                                                   <av:Size x:Key="ShapeSize">200,66</av:Size>
-                                                                  <av:PointCollection x:Key="ConnectorLocation">370,1863 370,1902.04</av:PointCollection>
+                                                                  <av:PointCollection x:Key="ConnectorLocation">370,1863 370,1906.5</av:PointCollection>
                                                                 </scg:Dictionary>
                                                               </sap:WorkflowViewStateService.ViewState>
                                                               <Sequence DisplayName="Finalize indicators" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_19">
@@ -775,76 +763,163 @@
                                                                 </ui:InvokeWorkflowFile>
                                                               </Sequence>
                                                               <FlowStep.Next>
-                                                                <FlowStep x:Name="__ReferenceID11" sap2010:WorkflowViewState.IdRef="FlowStep_2">
+                                                                <FlowDecision x:Name="__ReferenceID16" DisplayName="Forward mail?" sap:VirtualizedContainerService.HintSize="80,87" sap2010:WorkflowViewState.IdRef="FlowDecision_3">
+                                                                  <FlowDecision.Condition>
+                                                                    <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="ValueHighestIndicator&gt;=CDBL(DictConfig(&quot;IndicatorForwardThreshold&quot;))" />
+                                                                  </FlowDecision.Condition>
                                                                   <sap:WorkflowViewStateService.ViewState>
                                                                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                                      <av:Point x:Key="ShapeLocation">270,1902.04</av:Point>
-                                                                      <av:Size x:Key="ShapeSize">200,66</av:Size>
+                                                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                                      <av:Point x:Key="ShapeLocation">330,1906.5</av:Point>
+                                                                      <av:Size x:Key="ShapeSize">80,87</av:Size>
+                                                                      <av:PointCollection x:Key="TrueConnector">330,1950 190,1950 190,2267</av:PointCollection>
+                                                                      <av:PointCollection x:Key="FalseConnector">410,1950 480,1950 480,2016.5</av:PointCollection>
                                                                     </scg:Dictionary>
                                                                   </sap:WorkflowViewStateService.ViewState>
-                                                                  <Sequence DisplayName="Forward decision" sap:VirtualizedContainerService.HintSize="839,589" sap2010:WorkflowViewState.IdRef="Sequence_14">
-                                                                    <sap:WorkflowViewStateService.ViewState>
-                                                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                                                      </scg:Dictionary>
-                                                                    </sap:WorkflowViewStateService.ViewState>
-                                                                    <If Condition="[ValueHighestIndicator&gt;=CDBL(DictConfig(&quot;IndicatorForwardThreshold&quot;))]" DisplayName="If treshold exceeded" sap:VirtualizedContainerService.HintSize="797,497" sap2010:WorkflowViewState.IdRef="If_1">
-                                                                      <If.Then>
-                                                                        <Sequence DisplayName="Forward mail" sap:VirtualizedContainerService.HintSize="376,266" sap2010:WorkflowViewState.IdRef="Sequence_20">
+                                                                  <FlowDecision.True>
+                                                                    <FlowStep x:Name="__ReferenceID17">
+                                                                      <sap:WorkflowViewStateService.ViewState>
+                                                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                          <av:Point x:Key="ShapeLocation">90,2267</av:Point>
+                                                                          <av:Size x:Key="ShapeSize">200,66</av:Size>
+                                                                        </scg:Dictionary>
+                                                                      </sap:WorkflowViewStateService.ViewState>
+                                                                      <Sequence DisplayName="Forward mail" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_23">
+                                                                        <sap:WorkflowViewStateService.ViewState>
+                                                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                                          </scg:Dictionary>
+                                                                        </sap:WorkflowViewStateService.ViewState>
+                                                                        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Forward mail" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_30" UnSafe="False" WorkflowFileName="PROCESS\PR_ForwardMail.xaml">
+                                                                          <ui:InvokeWorkflowFile.Arguments>
+                                                                            <InArgument x:TypeArguments="x:String" x:Key="MailTo">[DictConfig("Asset_PolicyIntakeMail")]</InArgument>
+                                                                            <InArgument x:TypeArguments="snm:MailMessage" x:Key="MailMessage">[mailMessage]</InArgument>
+                                                                            <InArgument x:TypeArguments="x:String" x:Key="IndicatorValue">[ValueHighestIndicator.ToString]</InArgument>
+                                                                            <InArgument x:TypeArguments="x:String" x:Key="PathPdfAttachment">[pathPdfAttachmentFile]</InArgument>
+                                                                            <InArgument x:TypeArguments="x:String" x:Key="PathMsgAttachment">[pathMsgEmail]</InArgument>
+                                                                            <InArgument x:TypeArguments="x:String" x:Key="PolicyNumbers">[policyNrOriginalHighestIndicator]</InArgument>
+                                                                            <InArgument x:TypeArguments="x:String" x:Key="PolicyIds">[policyIdHighestIndicator]</InArgument>
+                                                                          </ui:InvokeWorkflowFile.Arguments>
+                                                                        </ui:InvokeWorkflowFile>
+                                                                        <al:ReportProgressStep DisplayName="Report forward" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="ReportProgressStep_14" ProgressStepMessage="Mail to be forwarded" TransactionQueueItem="[TransactionQueueItem]">
                                                                           <sap:WorkflowViewStateService.ViewState>
                                                                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                                                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                                                             </scg:Dictionary>
                                                                           </sap:WorkflowViewStateService.ViewState>
-                                                                          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Forward mail" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_27" UnSafe="False" WorkflowFileName="PROCESS\PR_ForwardMail.xaml">
-                                                                            <ui:InvokeWorkflowFile.Arguments>
-                                                                              <InArgument x:TypeArguments="x:String" x:Key="MailTo">[DictConfig("Asset_PolicyIntakeMail")]</InArgument>
-                                                                              <InArgument x:TypeArguments="snm:MailMessage" x:Key="MailMessage">[mailMessage]</InArgument>
-                                                                              <InArgument x:TypeArguments="x:String" x:Key="IndicatorValue">[ValueHighestIndicator.ToString]</InArgument>
-                                                                              <InArgument x:TypeArguments="x:String" x:Key="PathPdfAttachment">[pathPdfAttachmentFile]</InArgument>
-                                                                              <InArgument x:TypeArguments="x:String" x:Key="PathMsgAttachment">[pathMsgEmail]</InArgument>
-                                                                              <InArgument x:TypeArguments="x:String" x:Key="PolicyNumbers">[policyNrOriginalHighestIndicator]</InArgument>
-                                                                              <InArgument x:TypeArguments="x:String" x:Key="PolicyIds">[policyIdHighestIndicator]</InArgument>
-                                                                            </ui:InvokeWorkflowFile.Arguments>
-                                                                          </ui:InvokeWorkflowFile>
-                                                                          <al:ReportProgressStep DisplayName="Report forward" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="ReportProgressStep_9" ProgressStepMessage="Mail to be forwarded" TransactionQueueItem="[TransactionQueueItem]">
-                                                                            <sap:WorkflowViewStateService.ViewState>
-                                                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                                                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                                                                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                                                                              </scg:Dictionary>
-                                                                            </sap:WorkflowViewStateService.ViewState>
-                                                                          </al:ReportProgressStep>
-                                                                        </Sequence>
-                                                                      </If.Then>
-                                                                      <If.Else>
-                                                                        <Sequence DisplayName="No forward" sap:VirtualizedContainerService.HintSize="376,339" sap2010:WorkflowViewState.IdRef="Sequence_21">
+                                                                        </al:ReportProgressStep>
+                                                                      </Sequence>
+                                                                    </FlowStep>
+                                                                  </FlowDecision.True>
+                                                                  <FlowDecision.False>
+                                                                    <FlowDecision x:Name="__ReferenceID18" DisplayName="Forward potential mail?" sap:VirtualizedContainerService.HintSize="130,87" sap2010:WorkflowViewState.IdRef="FlowDecision_4">
+                                                                      <FlowDecision.Condition>
+                                                                        <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="ValueHighestIndicator&gt;0 OR mailSubjectCleared.ToLower.Contains(&quot;policy&quot;) OR mailAttachmentNameCleared.ToLower.Contains(&quot;policy&quot;)" />
+                                                                      </FlowDecision.Condition>
+                                                                      <sap:WorkflowViewStateService.ViewState>
+                                                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                                          <av:Point x:Key="ShapeLocation">415,2016.5</av:Point>
+                                                                          <av:Size x:Key="ShapeSize">130,87</av:Size>
+                                                                          <av:PointCollection x:Key="TrueConnector">415,2060 340,2060 340,2137</av:PointCollection>
+                                                                          <av:PointCollection x:Key="FalseConnector">545,2060 610,2060 610,2137</av:PointCollection>
+                                                                        </scg:Dictionary>
+                                                                      </sap:WorkflowViewStateService.ViewState>
+                                                                      <FlowDecision.True>
+                                                                        <FlowStep x:Name="__ReferenceID19">
                                                                           <sap:WorkflowViewStateService.ViewState>
                                                                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                                              <av:Point x:Key="ShapeLocation">240,2137</av:Point>
+                                                                              <av:Size x:Key="ShapeSize">200,66</av:Size>
+                                                                              <av:PointCollection x:Key="ConnectorLocation">340,2203 340,2233 480,2233 480,2267</av:PointCollection>
                                                                             </scg:Dictionary>
                                                                           </sap:WorkflowViewStateService.ViewState>
-                                                                          <al:ReportProgressStep DisplayName="Report no forward" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="ReportProgressStep_12" ProgressStepMessage="Mail NOT forwarded" TransactionQueueItem="[TransactionQueueItem]">
+                                                                          <Sequence DisplayName="Potential mail forward" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_24">
                                                                             <sap:WorkflowViewStateService.ViewState>
                                                                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                                                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                                                                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                                                               </scg:Dictionary>
                                                                             </sap:WorkflowViewStateService.ViewState>
-                                                                          </al:ReportProgressStep>
-                                                                          <ae:CreateThrowCustomException DisplayName="[B0048] Item out of scope - too low indicator" ErrorCategory="Item out of scope" ErrorCode="B0048" ErrorDescription="[&quot;Mail attachment not recognized as policy. Calculated indicator : &quot; &amp; ValueHighestIndicator &amp; &quot; is below threshold&quot;]" sap:VirtualizedContainerService.HintSize="334,185" sap2010:WorkflowViewState.IdRef="CreateThrowCustomException_1" />
-                                                                        </Sequence>
-                                                                      </If.Else>
-                                                                    </If>
-                                                                  </Sequence>
-                                                                </FlowStep>
+                                                                            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Forward potential mail" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_31" UnSafe="False" WorkflowFileName="PROCESS\PR_ForwardPotentialMail.xaml">
+                                                                              <ui:InvokeWorkflowFile.Arguments>
+                                                                                <InArgument x:TypeArguments="x:String" x:Key="MailTo">[DictConfig("Asset_PolicyIntakeMail")]</InArgument>
+                                                                                <InArgument x:TypeArguments="snm:MailMessage" x:Key="MailMessage">[mailMessage]</InArgument>
+                                                                                <InArgument x:TypeArguments="x:String" x:Key="IndicatorValue">[ValueHighestIndicator.ToString]</InArgument>
+                                                                                <InArgument x:TypeArguments="x:String" x:Key="PathPdfAttachment">[pathPdfAttachmentFile]</InArgument>
+                                                                                <InArgument x:TypeArguments="x:String" x:Key="PathMsgAttachment">[pathMsgEmail]</InArgument>
+                                                                                <InArgument x:TypeArguments="x:String" x:Key="PolicyNumbers">[policyNrOriginalHighestIndicator]</InArgument>
+                                                                                <InArgument x:TypeArguments="x:String" x:Key="PolicyIds">[policyIdHighestIndicator]</InArgument>
+                                                                              </ui:InvokeWorkflowFile.Arguments>
+                                                                            </ui:InvokeWorkflowFile>
+                                                                            <al:ReportProgressStep DisplayName="Report potential forward" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="ReportProgressStep_15" ProgressStepMessage="Potential mail to be forwarded" TransactionQueueItem="[TransactionQueueItem]">
+                                                                              <sap:WorkflowViewStateService.ViewState>
+                                                                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                                                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                                                </scg:Dictionary>
+                                                                              </sap:WorkflowViewStateService.ViewState>
+                                                                            </al:ReportProgressStep>
+                                                                          </Sequence>
+                                                                          <FlowStep.Next>
+                                                                            <FlowStep x:Name="__ReferenceID0">
+                                                                              <sap:WorkflowViewStateService.ViewState>
+                                                                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                                  <av:Point x:Key="ShapeLocation">380,2267</av:Point>
+                                                                                  <av:Size x:Key="ShapeSize">200,66</av:Size>
+                                                                                </scg:Dictionary>
+                                                                              </sap:WorkflowViewStateService.ViewState>
+                                                                              <Sequence DisplayName="Out of scope" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_25">
+                                                                                <sap:WorkflowViewStateService.ViewState>
+                                                                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                                                  </scg:Dictionary>
+                                                                                </sap:WorkflowViewStateService.ViewState>
+                                                                                <ae:CreateThrowCustomException DisplayName="[B0048] Item out of scope - too low indicator" ErrorCategory="Item out of scope" ErrorCode="B0048" ErrorDescription="[&quot;Mail attachment not recognized as policy. Calculated indicator : &quot; &amp; ValueHighestIndicator &amp; &quot; is below threshold&quot;]" sap:VirtualizedContainerService.HintSize="334,185" sap2010:WorkflowViewState.IdRef="CreateThrowCustomException_2" />
+                                                                              </Sequence>
+                                                                            </FlowStep>
+                                                                          </FlowStep.Next>
+                                                                        </FlowStep>
+                                                                      </FlowDecision.True>
+                                                                      <FlowDecision.False>
+                                                                        <FlowStep x:Name="__ReferenceID12" sap2010:WorkflowViewState.IdRef="FlowStep_2">
+                                                                          <sap:WorkflowViewStateService.ViewState>
+                                                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                              <av:Point x:Key="ShapeLocation">510,2137</av:Point>
+                                                                              <av:Size x:Key="ShapeSize">200,66</av:Size>
+                                                                              <av:PointCollection x:Key="ConnectorLocation">610,2203 610,2233 480,2233 480,2267</av:PointCollection>
+                                                                            </scg:Dictionary>
+                                                                          </sap:WorkflowViewStateService.ViewState>
+                                                                          <Sequence DisplayName="No forward" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_14">
+                                                                            <sap:WorkflowViewStateService.ViewState>
+                                                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                                              </scg:Dictionary>
+                                                                            </sap:WorkflowViewStateService.ViewState>
+                                                                            <al:ReportProgressStep DisplayName="Report no forward" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="ReportProgressStep_16" ProgressStepMessage="Mail NOT forwarded" TransactionQueueItem="[TransactionQueueItem]">
+                                                                              <sap:WorkflowViewStateService.ViewState>
+                                                                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                                                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                                                </scg:Dictionary>
+                                                                              </sap:WorkflowViewStateService.ViewState>
+                                                                            </al:ReportProgressStep>
+                                                                          </Sequence>
+                                                                          <FlowStep.Next>
+                                                                            <x:Reference>__ReferenceID0</x:Reference>
+                                                                          </FlowStep.Next>
+                                                                        </FlowStep>
+                                                                      </FlowDecision.False>
+                                                                    </FlowDecision>
+                                                                  </FlowDecision.False>
+                                                                </FlowDecision>
                                                               </FlowStep.Next>
                                                             </FlowStep>
                                                           </FlowStep.Next>
                                                         </FlowStep>
                                                       </FlowDecision.True>
                                                       <FlowDecision.False>
-                                                        <x:Reference>__ReferenceID0</x:Reference>
+                                                        <x:Reference>__ReferenceID1</x:Reference>
                                                       </FlowDecision.False>
                                                     </FlowDecision>
                                                   </FlowStep.Next>
@@ -853,7 +928,7 @@
                                             </FlowStep>
                                           </FlowDecision.True>
                                           <FlowDecision.False>
-                                            <x:Reference>__ReferenceID1</x:Reference>
+                                            <x:Reference>__ReferenceID2</x:Reference>
                                           </FlowDecision.False>
                                         </FlowDecision>
                                       </FlowStep.Next>
@@ -874,7 +949,6 @@
         </FlowStep>
       </FlowStep.Next>
     </FlowStep>
-    <x:Reference>__ReferenceID2</x:Reference>
     <x:Reference>__ReferenceID3</x:Reference>
     <x:Reference>__ReferenceID4</x:Reference>
     <x:Reference>__ReferenceID5</x:Reference>
@@ -883,11 +957,17 @@
     <x:Reference>__ReferenceID8</x:Reference>
     <x:Reference>__ReferenceID9</x:Reference>
     <x:Reference>__ReferenceID10</x:Reference>
-    <x:Reference>__ReferenceID1</x:Reference>
     <x:Reference>__ReferenceID11</x:Reference>
+    <x:Reference>__ReferenceID2</x:Reference>
     <x:Reference>__ReferenceID12</x:Reference>
     <x:Reference>__ReferenceID13</x:Reference>
     <x:Reference>__ReferenceID14</x:Reference>
+    <x:Reference>__ReferenceID15</x:Reference>
+    <x:Reference>__ReferenceID1</x:Reference>
+    <x:Reference>__ReferenceID16</x:Reference>
+    <x:Reference>__ReferenceID17</x:Reference>
+    <x:Reference>__ReferenceID18</x:Reference>
+    <x:Reference>__ReferenceID19</x:Reference>
     <x:Reference>__ReferenceID0</x:Reference>
   </Flowchart>
 </Activity>
